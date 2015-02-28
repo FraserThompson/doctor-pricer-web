@@ -1,0 +1,86 @@
+angular.module('doctorpricerWebApp')
+	.service('PracticesCollection', function($window, $http, $timeout, $rootScope) {
+			var self = this;
+			var collection = []; //initial fetch
+			this.screenHeight = $window.innerHeight;
+			this.filteredCollection = []; //after filtering out distances over 15
+			this.displayCollection =  []; //after filtering for the users radius
+			this.selectedPractice = 0;
+			this.length = 0;
+
+			// Fetches the data from the JSON 
+			this.fetchData = function(successCallback) {
+				var dataFail = function() {
+					console.log('data fail');
+					// handle this error
+				}
+				var data_timeout = $timeout(dataFail, 10000);
+				var url = "http://fraserthompson.github.io/cheap-practice-finder/data.json.js?callback=JSON_CALLBACK"
+				window.callback = function(data) {
+				    $timeout.cancel(data_timeout);
+				    self.collection = data['practices'];
+				    successCallback();
+				}
+				$http.jsonp(url)
+			}
+
+			// Get the price from each practice for the age
+			var getPrice = function(age, prices) {
+				if (!prices || prices.length == 0){
+					return 1000;
+				}
+				for (var i = 0; i < prices.length - 1; ++i){
+					if (age >= prices[i].age && age < prices[i+1].age){
+						break;
+					}
+				}
+				return prices[i].price;
+				if (prices[i].price == 999){
+					return -1;
+				}
+			};
+
+			// Fires an event when the count is updated so the results view knows
+			var updateCount = function(){
+				self.length = self.displayCollection.length;
+				$rootScope.$broadcast('countUpdated');
+			}
+
+			// Simple comparison function
+			var compare = function(a,b) {
+			  if (a.price < b.price)
+			     return -1;
+			  if (a.price > b.price)
+			    return 1;
+			  return 0;
+			}
+
+			// Public function for filtering to radius
+			this.changeRadius = function(distance) {
+				var okay = [];
+				angular.forEach (self.filteredCollection, function(model, i) {
+					if (model['distance'] <= distance){
+						okay.push(model);
+					}
+				});
+				okay.sort(compare);
+				angular.copy(okay, this.displayCollection);
+				this.selectedPractice = 0;
+				updateCount();
+			};
+
+			// Public function to filter all the 700 or so practices to only ones within 15km
+			this.filterCollection = function(coord, age) {
+				self.filteredCollection = [];
+				angular.forEach(self.collection, function(val, key) {
+					val['start'] = new google.maps.LatLng(coord[0], coord[1]);
+					val['end'] = new google.maps.LatLng(val['coordinates'][0], val['coordinates'][1]);
+					var distance_between = google.maps.geometry.spherical.computeDistanceBetween(val['start'], val['end']);
+					val['distance'] = distance_between/1000;
+					val['price'] = getPrice(age, val['prices']);
+					if (val['distance'] <= 15){
+						self.filteredCollection.push(val);
+					}
+				});
+			}
+		})
