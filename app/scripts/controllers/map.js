@@ -1,9 +1,25 @@
 angular.module('doctorpricerWebApp')
-	.controller('MapController', function($scope, $timeout, leafletData, PracticesCollection) {
+	.controller('MapController', function($scope, $timeout, $rootScope, leafletData, PracticesCollection) {
 		var directionsService = new google.maps.DirectionsService();
+
+	   	$scope.$on('countUpdated', function() {
+			initializeMap(function() {
+				updateMap();
+			});
+		});
+
+		$scope.$on('changePractice', function() {
+			updateMap();
+		});
+
+	    $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+	    	if (args.markerName == "start") { return; }
+	    	$scope.navPractice(args.leafletEvent.target.options.id);
+        });
 
 	    /* Initializes the map with all the markers and sets the size properly */
 		var initializeMap = function(callback) {
+			if (PracticesCollection.displayCollection.length == 0) {return;}
 			$scope.markers = {
 	            start: {
 	            	title: "You",
@@ -12,9 +28,8 @@ angular.module('doctorpricerWebApp')
 	            	lng: PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D,
 	            }
 		   	}
-
 	        $timeout(function() {
-	            var mapHeight = (PracticesCollection.screenHeight - 300) + 'px';
+	            var mapHeight = (PracticesCollection.screenHeight - 252) + 'px';
 	                document.getElementById("leaflet_map").style.height = mapHeight;
 	                document.getElementById("map_canvas").style.maxHeight = mapHeight;
 	                leafletData.getMap().then(function(map) {
@@ -24,6 +39,7 @@ angular.module('doctorpricerWebApp')
 							title: value.name,
 							message: value.name,
 							draggable: false,
+							id: key,
 							lat: value.end.k,
 							lng: value.end.D,
 							icon: local_icons.markerRed
@@ -31,16 +47,17 @@ angular.module('doctorpricerWebApp')
 					});
 	                callback();
 	            });
-	        }, 100);
+	        }, 500);
 	    }
 
 	    /* Updates the map with the current route and bounds to fit it in */
 	    var updateMap = function() {
+	    	if (PracticesCollection.displayCollection.length == 0) {return;}
 			setDirections(function() {
 				var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.D], [PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D])
 				leafletData.getMap().then(function(map) {
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split("-").join('')].focus = true;
-					map.fitBounds(bounds, {padding: [50, 50]});
+					map.fitBounds(bounds, {padding: [100, 100]});
 	            });
 	        })
 		}
@@ -111,14 +128,4 @@ angular.module('doctorpricerWebApp')
 	            markerColor: 'red'
 	    	}
 	   	}
-
-	   	$scope.$on('countUpdated', function() {
-			initializeMap(function() {
-				updateMap();
-			});
-		})
-
-		$scope.$on('changePractice', function() {
-			updateMap();
-		})
 	});

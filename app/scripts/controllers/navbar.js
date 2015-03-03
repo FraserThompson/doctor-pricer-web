@@ -1,6 +1,5 @@
 angular.module('doctorpricerWebApp')
   .controller('NavbarCtrl', function ($scope, $rootScope, $location, $timeout, ngDialog, SearchModel) {
-  	$scope.navbarThings = 0;
   	$scope.age = SearchModel.age;
   	$scope.autocomplete = SearchModel.displayAddress;
   	$scope.options = {
@@ -10,14 +9,15 @@ angular.module('doctorpricerWebApp')
     $scope.details.geometry = {}
     $scope.details.geometry.location = {}
 
-	$rootScope.$on("$locationChangeStart", function(event, next, current) {
-		//This could be better
-		if (next.indexOf('result') > -1) {
-			$scope.navbarThings = 1;
-		} else {
-			$scope.navbarThings = 0;
-		}
-	});
+    /* Used to decide whether navbarThings should be displayed based on the route*/
+  	$rootScope.$on("$locationChangeStart", function(event, next, current) {
+  		//This could be better
+  		if (next.indexOf('result') > -1) {
+  			$scope.navbarThings = 1;
+  		} else {
+  			$scope.navbarThings = 0;
+  		}
+  	});
 
     /* Associate the details found with the text submitted so input validation is easier */
     $scope.$watch('details', function() {
@@ -27,25 +27,26 @@ angular.module('doctorpricerWebApp')
     })
   	
   	/* When there's a new search update the values in the search box */
-  	$scope.$on('newSearch', function() {
+  	$scope.$on('geolocatedAddress', function() {
   		$scope.age = SearchModel.age;
   		$scope.autocomplete = SearchModel.displayAddress;
   		$scope.details.geometry.location.k = SearchModel.coords[0];
   		$scope.details.geometry.location.D = SearchModel.coords[1];
   		$scope.details.autocomplete = $scope.autocomplete
-  		$scope.navbarThings = 1;
   	});
 
+  	/* Opens the modal */
   	$scope.openDialog = function() {
       ngDialog.open({ template: 'views/info.html'});
     }
 
-
-  	/* Used for the navbar search submit button */
+  	/* Update searchmodel and addressbar location, don't trigger route change */
   	$scope.next = function() {
-      $scope.$broadcast('show-errors-check-validity');
-      if ($scope.headerForm.$invalid) { return; }
-      $location.path('result/' + $scope.details.geometry.location.k + ',' + $scope.details.geometry.location.D + '/' + $scope.age);
+  		$scope.$broadcast('show-errors-check-validity');
+  		if ($scope.headerForm.$invalid) { return; }
+  		SearchModel.age = $scope.age;
+  		SearchModel.coords = [$scope.details.geometry.location.k, $scope.details.geometry.location.D];
+  		$rootScope.$broadcast('newSearch')
+  		$location.path('result/' + $scope.details.geometry.location.k + ',' + $scope.details.geometry.location.D + '/' + $scope.age, false);
     }
-
   });

@@ -15,7 +15,7 @@ angular.module('doctorpricerWebApp')
 				if (status == google.maps.GeocoderStatus.OK) {
 					self.address = results[0].address_components[0]['short_name'] + " " + results[0].address_components[1]['short_name'] + ", " + results[0].address_components[2]['short_name'];
 					self.displayAddress = results[0].address_components[0]['short_name'] + " " + results[0].address_components[1]['short_name'];
-					$rootScope.$broadcast('newSearch');
+					$rootScope.$broadcast('geolocatedAddress');
 					successCallback();
 				} else {
 					failCallback("Error geocoding input address.");

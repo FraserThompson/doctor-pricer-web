@@ -35,6 +35,7 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-show-errors/src/showErrors.js',
       'bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'bower_components/ngDialog/js/ngDialog.js',
+      'bower_components/angular-scroll/angular-scroll.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

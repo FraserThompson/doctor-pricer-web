@@ -8,7 +8,7 @@ angular.module('doctorpricerWebApp')
 			this.selectedPractice = 0;
 			this.length = 0;
 
-			// Fetches the data from the JSON 
+			/* Fetches the data from the JSON */
 			this.fetchData = function(successCallback) {
 				var dataFail = function() {
 					console.log('data fail');
@@ -24,7 +24,7 @@ angular.module('doctorpricerWebApp')
 				$http.jsonp(url)
 			}
 
-			// Get the price from each practice for the age
+			/* Get the price from each practice for the age */
 			var getPrice = function(age, prices) {
 				if (!prices || prices.length == 0){
 					return 1000;
@@ -40,13 +40,15 @@ angular.module('doctorpricerWebApp')
 				}
 			};
 
-			// Fires an event when the count is updated so the results view knows
+			/* Fires an event when the count is updated so everyone knows */
 			var updateCount = function(){
 				self.length = self.displayCollection.length;
-				$rootScope.$broadcast('countUpdated');
+				$timeout(function() {
+					$rootScope.$broadcast('countUpdated');
+				}, 250)
 			}
 
-			// Simple comparison function
+			/* Simple comparison function */
 			var compare = function(a,b) {
 			  if (a.price < b.price)
 			     return -1;
@@ -55,7 +57,7 @@ angular.module('doctorpricerWebApp')
 			  return 0;
 			}
 
-			// Public function for filtering to radius
+			/* Public function for filtering to radius */
 			this.changeRadius = function(distance) {
 				var okay = [];
 				angular.forEach (self.filteredCollection, function(model, i) {
@@ -69,8 +71,8 @@ angular.module('doctorpricerWebApp')
 				updateCount();
 			};
 
-			// Public function to filter all the 700 or so practices to only ones within 15km
-			this.filterCollection = function(coord, age) {
+			/* Public function to filter all the 700 or so practices to only ones within 15km */
+			this.filterCollection = function(coord, age, callback) {
 				self.filteredCollection = [];
 				angular.forEach(self.collection, function(val, key) {
 					val['start'] = new google.maps.LatLng(coord[0], coord[1]);
@@ -82,5 +84,6 @@ angular.module('doctorpricerWebApp')
 						self.filteredCollection.push(val);
 					}
 				});
+				callback();
 			}
 		})

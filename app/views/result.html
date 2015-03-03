@@ -1,22 +1,22 @@
-<div class="container-fluid skipheader">
+<div class="container-fluid no-left-right-padding" id="result-page">
 	<div class="row">
 		<div class="col-md-5">
-			<h2><small>Displaying {{practiceCount}} practices within
+			<h3><small>Found {{practiceCount}} practices within
 				<select ng-model="selectedItem" ng-init="selectedItem = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
-			</small></h2>
+			</small></h3>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-5">
-			<div class="list-group scrollable">
+		<div class="col-xs-4 no-left-right-padding">
+			<div class="list-group scrollable" auto-scroll>
 				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index)" ng-repeat="practice in practices">
 					<div class="row">
-						<div class="col-sm-2">
-							<h3 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h3>
+						<div class="col-sm-2 price-col">
+							<h4 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h4>
 							<p class="list-group-item-text">{{practice.distance | number : 1}}km away</p>
 					  	</div>
 					  	<div class="col-sm-10">
-					  		<h3 class="list-group-item-heading">{{practice.name}}</h3>
+					  		<h4 class="list-group-item-heading">{{practice.name}}</h4>
 		   					<p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{practice.address}}</p>
 		   					<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> {{practice.phone}}</p>
 						</div>
@@ -24,20 +24,24 @@
 				</a>
 			</div>
 		</div>
-		<div class="col-md-7">
+		<div class="col-xs-8 no-left-right-padding">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">{{thisPractice.name}}</h3>
+					<div ng-hide="noPractices" class="pull-right">
+						<a class="btn btn-primary" href='{{thisPractice.url}}' target="_blank">Website</a>
+						<a class="btn btn-primary" href="http://maps.apple.com/?saddr={{userAddress}}&daddr={{thisPractice.address}}" target="_blank">Directions</a>
+					</div>
+					<h5 class="text-left">{{thisPractice.name}}</h5>
+				    <h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
 				</div>
-				<div class="panel-body">
-					<a style="float:right;"class="btn btn-primary" href='{{thisPractice.url}}' target="_blank">Website</a> 
-				    <p><strong>{{thisPractice.pho}}</strong></p>
-				    <p>No further information supplied.</p>
+				<div class="panel-body" ng-hide="noPractices">
 				 	<div id="map_canvas" ng-controller="MapController">
 		  				<leaflet id="leaflet_map" markers="markers" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
 		  			</div>
-		  			<p class="text-centre"><strong>Fees apply to enrolled patients only.</strong></p>
-				 </div>
+				</div>
+				<div class="panel-footer" ng-hide="noPractices">
+		  			<p class="text-centre">Fees apply to enrolled patients only.</p>
+		  		</div>
 			</div>
 		</div>
 	</div>

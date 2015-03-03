@@ -17,16 +17,16 @@ a {
 }
 .text-centre {
   text-align: center;
-}
-
-.skipheader {
-  position: absolute;
-  top: 50px;
-  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .ngdialog {
   top: -100px !important;
+}
+
+.panel-body {
+  padding: 0;
 }
 
 /* Get rid of ugly number input spinner in chrome and ff*/
@@ -69,11 +69,6 @@ input[type=number] {
   padding-right: 15px;
 }
 
-/* Custom page header */
-.header {
-  margin-bottom: 10px;
-}
-
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -84,10 +79,11 @@ input[type=number] {
 
 /* Navbar brand stuff */
 .navbar {
-  height: 50px;
+/*  height: 50px;*/
 }
 .navbar-default {
   font-size: 18px;
+  margin-bottom: 0px;
 }
 .navbar-header a:link{
   color: white;
@@ -113,6 +109,9 @@ input[type=number] {
     width: 250px;
     text-align: center;
 }
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #28A15D;
+}
 
 .btn-primary {
   background-color: #28A15D;
@@ -124,7 +123,6 @@ input[type=number] {
   -webkit-transition-duration: 0.4s;
   -moz-transition-duration: 0.4s;
 }
-
 
 .navbar>.container .navbar-brand-centred, 
 .navbar>.container-fluid .navbar-brand-centred {
@@ -144,12 +142,17 @@ input[type=number] {
   width: 100%;
   padding-top: 19px;
   text-align: center;
-/*  border-top: 1px solid #e5e5e5;*/
+}
+
+.price-col {
+  min-width: 55px;
 }
 
 .container-narrow > hr {
   margin: 30px 0;
 }
+
+@grid-float-breakpoint
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -169,7 +172,15 @@ input[type=number] {
   }
 }
 
+.no-left-right-padding {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
 /* Google Autocomplete stuff */
+.pac-container {
+  min-width: 350px;
+}
 .pac-item {
   height: 50px;
   font-size: 18px;
@@ -194,9 +205,6 @@ input[type=number] {
 }
 
 /* View transition stuff */
-.view-animate {
-  padding:10px;
-}
 .view-animate.ng-enter, .view-animate.ng-leave {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
@@ -207,7 +215,8 @@ input[type=number] {
   left:0;
   right:0;
   bottom:0;
-  padding:10px;
+  padding: 10px;
+  padding-top:52px;
 }
 .view-animate.ng-enter {
   left:100%;
@@ -222,6 +231,8 @@ input[type=number] {
 #map_canvas {
   max-height: 0;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
   -webkit-transition: max-height 0.5s;
   -moz-transition: max-height 0.5s;
   transition: max-height 0.5s;
