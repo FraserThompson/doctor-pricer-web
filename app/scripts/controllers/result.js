@@ -69,10 +69,12 @@ angular.module('doctorpricerWebApp')
 	};
 
 	/* Changes the selected practice and updates the map when user does that */
-	$scope.navPractice = function(id) {
+	$scope.navPractice = function(id, eventBroadcast) {
 		PracticesCollection.selectedPractice = id;
-		$rootScope.$broadcast('changePractice');
 		$scope.thisPractice = PracticesCollection.displayCollection[PracticesCollection.selectedPractice]
+		if (eventBroadcast) {
+			$rootScope.$broadcast('changePractice');
+		}
 	};
 
 	/* Used to determine if an item is active */

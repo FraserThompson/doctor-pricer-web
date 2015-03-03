@@ -118,7 +118,7 @@ input[type=number] {
 }
 
 .active {
-  background-color: #28A15D !important;
+/*  background-color: #28A15D !important;*/
   transition: background .4s linear;
   -webkit-transition-duration: 0.4s;
   -moz-transition-duration: 0.4s;

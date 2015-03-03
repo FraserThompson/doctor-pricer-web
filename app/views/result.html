@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-xs-4 no-left-right-padding">
 			<div class="list-group scrollable" auto-scroll>
-				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index)" ng-repeat="practice in practices">
+				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices">
 					<div class="row">
 						<div class="col-sm-2 price-col">
 							<h4 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h4>
@@ -26,15 +26,21 @@
 		</div>
 		<div class="col-xs-8 no-left-right-padding">
 			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading nopadding">
 					<div ng-hide="noPractices" class="pull-right">
-						<a class="btn btn-primary" href='{{thisPractice.url}}' target="_blank">Website</a>
-						<a class="btn btn-primary" href="http://maps.apple.com/?saddr={{userAddress}}&daddr={{thisPractice.address}}" target="_blank">Directions</a>
+						<div class="btn-group" role="group" aria-label="links">
+							<a class="btn btn-primary" href='{{thisPractice.url}}' target="_blank">Website</a>
+							<a class="btn btn-primary" href="http://maps.apple.com/?saddr={{userAddress}}&daddr={{thisPractice.address}}" target="_blank">Directions</a>
+						</div>
 					</div>
-					<h5 class="text-left">{{thisPractice.name}}</h5>
+					<h4 class="text-left">{{thisPractice.name}} <small>{{thisPractice.pho}}</small></h4>
 				    <h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
+				    <ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="">Map</a></li>
+						<li><a href="">Info</a></li>
+					</ul>
 				</div>
-				<div class="panel-body" ng-hide="noPractices">
+				<div class="panel-body tab-content" ng-hide="noPractices">
 				 	<div id="map_canvas" ng-controller="MapController">
 		  				<leaflet id="leaflet_map" markers="markers" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
 		  			</div>

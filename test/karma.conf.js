@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/angular-scroll/angular-scroll.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

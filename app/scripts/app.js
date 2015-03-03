@@ -11,16 +11,15 @@
 angular
   .module('doctorpricerWebApp', [
     'ngAnimate',
-    'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize',
     'ngTouch',
     'ngAutocomplete',
     'leaflet-directive',
     'ui.bootstrap.showErrors',
     'ngDialog',
-    'duScroll'
+    'duScroll',
+    'ui.router'
   ])
   .run(function($route, $rootScope, $location) {
     // Someone else wrote this stuff

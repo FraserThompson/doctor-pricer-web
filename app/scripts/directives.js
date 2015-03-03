@@ -21,7 +21,7 @@ angular.module('doctorpricerWebApp')
 		return {
 			restrict: 'A',
 			link: function(scope, element, attributes, controller) {
-				scope.$on('changePractice', function() {
+				scope.$on('updateScroll', function() {
 					var el = angular.element(element[0]);
 					el.duScrollTo(0, PracticesCollection.selectedPractice * 115, 250);
 				});

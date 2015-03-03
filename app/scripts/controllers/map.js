@@ -2,19 +2,24 @@ angular.module('doctorpricerWebApp')
 	.controller('MapController', function($scope, $timeout, $rootScope, leafletData, PracticesCollection) {
 		var directionsService = new google.maps.DirectionsService();
 
+		/* When there are new practices to put on the map */
 	   	$scope.$on('countUpdated', function() {
 			initializeMap(function() {
-				updateMap();
+				updateMap(true);
 			});
 		});
 
+	   	/* When the user selects a different practice on the list */
 		$scope.$on('changePractice', function() {
-			updateMap();
+			updateMap(true);
 		});
 
+		/* When the user clicks a marker */
 	    $scope.$on('leafletDirectiveMarker.click', function(e, args) {
 	    	if (args.markerName == "start") { return; }
-	    	$scope.navPractice(args.leafletEvent.target.options.id);
+	    	$scope.navPractice(args.leafletEvent.target.options.id, false);
+	    	$rootScope.$broadcast('updateScroll');
+	    	updateMap(false);
         });
 
 	    /* Initializes the map with all the markers and sets the size properly */
@@ -51,13 +56,15 @@ angular.module('doctorpricerWebApp')
 	    }
 
 	    /* Updates the map with the current route and bounds to fit it in */
-	    var updateMap = function() {
+	    var updateMap = function(fitBounds) {
 	    	if (PracticesCollection.displayCollection.length == 0) {return;}
 			setDirections(function() {
 				var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.D], [PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D])
 				leafletData.getMap().then(function(map) {
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split("-").join('')].focus = true;
-					map.fitBounds(bounds, {padding: [100, 100]});
+					if (fitBounds) {
+						map.fitBounds(bounds, {padding: [100, 100]});
+					}
 	            });
 	        })
 		}
