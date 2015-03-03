@@ -52,7 +52,7 @@ angular.module('doctorpricerWebApp')
 					});
 	                callback();
 	            });
-	        }, 500);
+	        }, 250);
 	    }
 
 	    /* Updates the map with the current route and bounds to fit it in */

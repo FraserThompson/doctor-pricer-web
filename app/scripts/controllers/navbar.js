@@ -10,9 +10,8 @@ angular.module('doctorpricerWebApp')
     $scope.details.geometry.location = {}
 
     /* Used to decide whether navbarThings should be displayed based on the route*/
-  	$rootScope.$on("$locationChangeStart", function(event, next, current) {
-  		//This could be better
-  		if (next.indexOf('result') > -1) {
+  	$scope.$on("$stateChangeStart", function(event, next, current) {
+  		if (next.name == "result") {
   			$scope.navbarThings = 1;
   		} else {
   			$scope.navbarThings = 0;

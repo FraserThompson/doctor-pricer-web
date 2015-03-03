@@ -8,7 +8,7 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $location, $timeout, PracticesCollection) {
+  .controller('MainCtrl', function ($scope, $rootScope, $state, $timeout, PracticesCollection) {
     var self = this;
     $rootScope.title = "DoctorPricer";
   	$scope.options = {
@@ -28,6 +28,6 @@ angular.module('doctorpricerWebApp')
       $scope.$broadcast('show-errors-check-validity');
       if (!$scope.details.geometry) { return; }
       if ($scope.form.$invalid) { return; }
-      $location.path('result/' + $scope.details.geometry.location.k + ',' + $scope.details.geometry.location.D + '/' + $scope.age, true);
+      $state.go('result', {'age': $scope.age, 'lat':$scope.details.geometry.location.k, 'lng':  $scope.details.geometry.location.D});
     }
   });

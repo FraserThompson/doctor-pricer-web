@@ -21,32 +21,28 @@ angular
     'duScroll',
     'ui.router'
   ])
-  .run(function($route, $rootScope, $location) {
-    // Someone else wrote this stuff
-    var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
-    };
-  })
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        title: 'Doctor Pricer',
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('home', {
+        url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/result/:lat,:lng/:age', {
+      .state('result', {
+        url: '/:lat,:lng/:age/:rad/:selected/',
+        params: {'lat': undefined, 'lng': undefined, 'age': undefined, 'rad': undefined, 'selected': undefined},
         templateUrl: 'views/result.html',
-        controller: 'ResultCtrl'
+        controller: 'ResultCtrl',
+        resolve: {
+          practices: function(PracticesCollection) {
+            return PracticesCollection.fetchData(function(){});
+          }
+        },
+        onEnter: function($stateParams, SearchModel) {
+          SearchModel.coords = [$stateParams.lat, $stateParams.lng];
+          SearchModel.age = $stateParams.age;
+        }
       })
-      .otherwise({
-        redirectTo: '/'
-      });
   });

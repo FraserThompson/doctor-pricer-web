@@ -1,5 +1,5 @@
 angular.module('doctorpricerWebApp')
-	.service('PracticesCollection', function($window, $http, $timeout, $rootScope) {
+	.service('PracticesCollection', function($window, $q, $http, $timeout, $rootScope) {
 			var self = this;
 			var collection = []; //initial fetch
 			this.screenHeight = $window.innerHeight;
@@ -8,20 +8,24 @@ angular.module('doctorpricerWebApp')
 			this.selectedPractice = 0;
 			this.length = 0;
 
-			/* Fetches the data from the JSON */
+			/* Fetches the data from the JSON via a promise*/
 			this.fetchData = function(successCallback) {
+				var defer = $q.defer();
+				// After 10 seconds the data fails
 				var dataFail = function() {
 					console.log('data fail');
-					// handle this error
+					defer.reject();
 				}
 				var data_timeout = $timeout(dataFail, 10000);
 				var url = "http://fraserthompson.github.io/cheap-practice-finder/data.json.js?callback=JSON_CALLBACK"
+				// Succesfull callback returns a good promise and fills the collection
 				window.callback = function(data) {
 				    $timeout.cancel(data_timeout);
 				    self.collection = data['practices'];
-				    successCallback();
+				    defer.resolve();
 				}
-				$http.jsonp(url)
+				$http.jsonp(url);
+				return defer.promise;
 			}
 
 			/* Get the price from each practice for the age */

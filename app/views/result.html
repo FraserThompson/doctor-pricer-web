@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-5">
 			<h3><small>Found {{practiceCount}} practices within
-				<select ng-model="selectedItem" ng-init="selectedItem = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
+				<select ng-model="selectedItem" ng-init="selectedItem = radiuses[selectedRadius]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
 			</small></h3>
 		</div>
 	</div>

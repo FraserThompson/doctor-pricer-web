@@ -8,12 +8,9 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $routeParams, $rootScope, leafletData, PracticesCollection, SearchModel) {
-  	// Update SearchModel stuff upon into it
-  	SearchModel.coords = [$routeParams.lat, $routeParams.lng];
-  	SearchModel.age = $routeParams.age;
-
+  .controller('ResultCtrl', function ($scope, $stateParams, $rootScope, leafletData, PracticesCollection, SearchModel) {
   	// $scope variables
+  	$scope.selectedRadius = $stateParams.rad;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.userAddress = SearchModel.address;
@@ -34,20 +31,11 @@ angular.module('doctorpricerWebApp')
 	});
 
 	$scope.$on('newSearch', function() {
-    	// If there's no collection fetch it, else just filter the existing one
-    	if(PracticesCollection.displayCollection.length == 0) {
-    		PracticesCollection.fetchData(function() {
-    			PracticesCollection.filterCollection(SearchModel.coords, SearchModel.age, function() {
-					PracticesCollection.changeRadius(2);
-					$scope.thisPractice = PracticesCollection.displayCollection[0];
-    			});
-    		});
-    	} else {
-			PracticesCollection.filterCollection(SearchModel.coords, SearchModel.age, function() {
-				PracticesCollection.changeRadius(2);
-				$scope.thisPractice = PracticesCollection.displayCollection[0];
-			});
-		};
+		PracticesCollection.filterCollection(SearchModel.coords, SearchModel.age, function() {
+			PracticesCollection.changeRadius($scope.radiuses[$scope.selectedRadius].id);
+			$scope.thisPractice = PracticesCollection.displayCollection[$scope.selected];
+			PracticesCollection.selectedPractice = $stateParams.selected;
+		});
 
 		SearchModel.calculateAddress(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
 			$rootScope.$apply(function() {
