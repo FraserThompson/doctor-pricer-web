@@ -28,6 +28,10 @@ angular.module('doctorpricerWebApp')
       $scope.$broadcast('show-errors-check-validity');
       if (!$scope.details.geometry) { return; }
       if ($scope.form.$invalid) { return; }
-      $state.go('result', {'age': $scope.age, 'lat':$scope.details.geometry.location.k, 'lng':  $scope.details.geometry.location.D});
+      $state.go('result', {
+        'age': $scope.age, 
+        'lat':$scope.details.geometry.location.k, 
+        'lng':  $scope.details.geometry.location.D,
+      });
     }
   });

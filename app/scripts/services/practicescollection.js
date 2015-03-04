@@ -5,11 +5,10 @@ angular.module('doctorpricerWebApp')
 			this.screenHeight = $window.innerHeight;
 			this.filteredCollection = []; //after filtering out distances over 15
 			this.displayCollection =  []; //after filtering for the users radius
-			this.selectedPractice = 0;
 			this.length = 0;
 
 			/* Fetches the data from the JSON via a promise*/
-			this.fetchData = function(successCallback) {
+			this.fetchData = function() {
 				var defer = $q.defer();
 				// After 10 seconds the data fails
 				var dataFail = function() {
@@ -71,7 +70,6 @@ angular.module('doctorpricerWebApp')
 				});
 				okay.sort(compare);
 				angular.copy(okay, this.displayCollection);
-				this.selectedPractice = 0;
 				updateCount();
 			};
 

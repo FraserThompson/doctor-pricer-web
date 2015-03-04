@@ -1,5 +1,5 @@
 angular.module('doctorpricerWebApp')
-  .controller('NavbarCtrl', function ($scope, $rootScope, $location, $timeout, ngDialog, SearchModel) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location, $state, $timeout, ngDialog, SearchModel) {
   	$scope.age = SearchModel.age;
   	$scope.autocomplete = SearchModel.displayAddress;
   	$scope.options = {
@@ -9,8 +9,8 @@ angular.module('doctorpricerWebApp')
     $scope.details.geometry = {}
     $scope.details.geometry.location = {}
 
-    /* Used to decide whether navbarThings should be displayed based on the route*/
-  	$scope.$on("$stateChangeStart", function(event, next, current) {
+    /* Used to decide whether navbarThings should be displayed based on the state*/
+  	$scope.$on("$stateChangeSuccess", function(event, next, current) {
   		if (next.name == "result") {
   			$scope.navbarThings = 1;
   		} else {
@@ -39,13 +39,17 @@ angular.module('doctorpricerWebApp')
       ngDialog.open({ template: 'views/info.html'});
     }
 
-  	/* Update searchmodel and addressbar location, don't trigger route change */
+  	/* Update searchmodel and addressbar location, don't trigger state change */
   	$scope.next = function() {
   		$scope.$broadcast('show-errors-check-validity');
   		if ($scope.headerForm.$invalid) { return; }
   		SearchModel.age = $scope.age;
   		SearchModel.coords = [$scope.details.geometry.location.k, $scope.details.geometry.location.D];
   		$rootScope.$broadcast('newSearch')
-  		$location.path('result/' + $scope.details.geometry.location.k + ',' + $scope.details.geometry.location.D + '/' + $scope.age, false);
+      $state.transitionTo('result', {
+        'age': $scope.age, 
+        'lat':$scope.details.geometry.location.k, 
+        'lng':  $scope.details.geometry.location.D,
+      }, {location: true, inherit: true, notify: false});
     }
   });

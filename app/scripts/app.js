@@ -19,7 +19,8 @@ angular
     'ui.bootstrap.showErrors',
     'ngDialog',
     'duScroll',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -31,8 +32,7 @@ angular
         controller: 'MainCtrl'
       })
       .state('result', {
-        url: '/:lat,:lng/:age/:rad/:selected/',
-        params: {'lat': undefined, 'lng': undefined, 'age': undefined, 'rad': undefined, 'selected': undefined},
+        url: '/:lat,:lng/:age/',
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
         resolve: {

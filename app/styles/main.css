@@ -55,7 +55,16 @@ input[type=number] {
    padding: 0 !important;
    margin: 0 !important;
 }
-
+.no-left-right-padding {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+.no-up-down-padding {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 /* Makes the list scrollable */
 .scrollable {
   overflow: auto;
@@ -170,11 +179,6 @@ input[type=number] {
   .header {
     margin-bottom: 30px;
   }
-}
-
-.no-left-right-padding {
-  padding-right: 0 !important;
-  padding-left: 0 !important;
 }
 
 /* Google Autocomplete stuff */

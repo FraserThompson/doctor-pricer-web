@@ -8,9 +8,8 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $stateParams, $rootScope, leafletData, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', function ($scope, $stateParams, $rootScope, $state, leafletData, PracticesCollection, SearchModel) {
   	// $scope variables
-  	$scope.selectedRadius = $stateParams.rad;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.userAddress = SearchModel.address;
@@ -32,9 +31,7 @@ angular.module('doctorpricerWebApp')
 
 	$scope.$on('newSearch', function() {
 		PracticesCollection.filterCollection(SearchModel.coords, SearchModel.age, function() {
-			PracticesCollection.changeRadius($scope.radiuses[$scope.selectedRadius].id);
-			$scope.thisPractice = PracticesCollection.displayCollection[$scope.selected];
-			PracticesCollection.selectedPractice = $stateParams.selected;
+			PracticesCollection.changeRadius(2);
 		});
 
 		SearchModel.calculateAddress(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
