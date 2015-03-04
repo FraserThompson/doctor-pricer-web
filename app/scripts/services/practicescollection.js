@@ -25,7 +25,7 @@ angular.module('doctorpricerWebApp')
 					defer.reject();
 				};
 				var dataTimeout = $timeout(dataFail, 10000);
-				var url = 'http://fraserthompson.github.io/cheap-practice-finder/data.json.js?callback=JSON_CALLBACK';
+				var url = 'https://fraserthompson.github.io/cheap-practice-finder/data.json.js?callback=JSON_CALLBACK';
 				// Succesfull callback returns a good promise and fills the collection
 				window.callback = function(data) {
 				    $timeout.cancel(dataTimeout);
