@@ -71,12 +71,13 @@ angular.module('doctorpricerWebApp')
 	    /* Updates the map with all of the practices and bounds to fit them */
 	    var updateMap = function() {
 	    	if (PracticesCollection.displayCollection.length === 0) {return;}
-	    	// $scope.paths = {};
+	    	$scope.paths = {};
 			var bounds = L.latLngBounds($scope.latLngs);
 			leafletData.getMap().then(function(map) {
 				map.fitBounds(bounds, {padding: [100, 100]});
             });
 		};
+		
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {

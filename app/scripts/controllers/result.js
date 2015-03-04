@@ -51,6 +51,8 @@ angular.module('doctorpricerWebApp')
 	/* Calls the changeRadius method from the collection when user does that */
 	$scope.changeRadius = function(distance) {
 		PracticesCollection.changeRadius(distance);
+		PracticesCollection.selectedPractice = -1;
+		$scope.thisPractice = {};
 	};
 
 	/* Changes the selected practice and updates the map when user does that */
