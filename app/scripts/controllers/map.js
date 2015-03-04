@@ -14,9 +14,7 @@ angular.module('doctorpricerWebApp')
 
 		/* When there are new practices to put on the map */
 	   	$scope.$on('countUpdated', function() {
-			initializeMap(function() {
-				updateMap();
-			});
+			initializeMap();
 		});
 
 	   	/* When the user selects a different practice on the list */
@@ -33,9 +31,10 @@ angular.module('doctorpricerWebApp')
         });
 
 	    /* Initializes the map with all the markers and sets the size properly */
-		var initializeMap = function(callback) {
+		var initializeMap = function() {
 			if (PracticesCollection.displayCollection.length === 0) {return;}
-			$scope.latLngs = [];
+			var latLngs = [];
+			$scope.paths = {};
 			$scope.markers = {
 	            start: {
 	            	title: 'You',
@@ -44,40 +43,33 @@ angular.module('doctorpricerWebApp')
 	            	lng: PracticesCollection.displayCollection[0].start.D,
 	            }
 		   	};
-		   	$scope.latLngs.push([PracticesCollection.displayCollection[0].start.k, PracticesCollection.displayCollection[0].start.D]);
-	        $timeout(function() {
+		   	latLngs.push([PracticesCollection.displayCollection[0].start.k, PracticesCollection.displayCollection[0].start.D]);
+		   // Make a marker for each practice
+	        angular.forEach(PracticesCollection.displayCollection, function(value, key) {
+				latLngs.push([value.end.k, value.end.D]);
+				$scope.markers[value.name.split('-').join('')] = {
+					title: value.name,
+					message: value.name,
+					draggable: false,
+					id: key,
+					lat: value.end.k,
+					lng: value.end.D,
+					icon: localIcons.markerRed
+				};
+			});
+			var bounds = L.latLngBounds(latLngs);
+			// Wait for animation to finish then expand size of map
+		   	$timeout(function() {
 	            var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
                 document.getElementById('leaflet_map').style.height = mapHeight;
                 document.getElementById('map_canvas').style.maxHeight = mapHeight;
-	            leafletData.getMap().then(function(map) {
-                    map.invalidateSize();
-                    angular.forEach(PracticesCollection.displayCollection, function(value, key) {
-						$scope.latLngs.push([value.end.k, value.end.D]);
-						$scope.markers[value.name.split('-').join('')] = {
-							title: value.name,
-							message: value.name,
-							draggable: false,
-							id: key,
-							lat: value.end.k,
-							lng: value.end.D,
-							icon: localIcons.markerRed
-						};
-					});
-                callback();
-	            });
-	        }, 250);
+                leafletData.getMap().then(function(map) {
+                	map.invalidateSize();
+					map.fitBounds(bounds, {padding: [100, 100]});
+            	});
+	        }, 300);
 	    };
 
-	    /* Updates the map with all of the practices and bounds to fit them */
-	    var updateMap = function() {
-	    	if (PracticesCollection.displayCollection.length === 0) {return;}
-	    	$scope.paths = {};
-			var bounds = L.latLngBounds($scope.latLngs);
-			leafletData.getMap().then(function(map) {
-				map.fitBounds(bounds, {padding: [100, 100]});
-            });
-		};
-		
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {

@@ -39,7 +39,7 @@
           <ul class="nav navbar-nav">
             <li><a href="" ng-click="openDialog()"><span class="glyphicon glyphicon-info-sign"></span></a></li>
           </ul>
-          <form class="navbar-form navbar-right" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()">
+          <form class="navbar-form navbar-right" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()" ng-cloak>
             <div class="form-group" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty }" show-errors='{showSuccess: true}'>
               <label class="sr-only" for="address">Address</label>
               <input name="address" ng-model-options="{ debounce: 250 }" type="text" class="form-control" ng-model="autocomplete" options="options" details="details" placeholder="Address" address-validation required ng-autocomplete></input>

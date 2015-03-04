@@ -37,7 +37,7 @@ angular
         controller: 'ResultCtrl',
         resolve: {
           practices: function(PracticesCollection) {
-            return PracticesCollection.fetchData(function(){});
+            return PracticesCollection.fetchData();
           }
         },
         onEnter: function($stateParams, SearchModel) {

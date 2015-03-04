@@ -16,7 +16,7 @@ angular.module('doctorpricerWebApp')
 		this.age = 0;
 		this.coords = [];
 
-		this.calculateAddress = function(lat, lng, age, successCallback, failCallback) {
+		this.initalizeModel = function(lat, lng, age, successCallback, failCallback) {
 			this.age = age;
 			this.coords = [lat, lng];
 			var geocoder = new google.maps.Geocoder();
