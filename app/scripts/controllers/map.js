@@ -1,3 +1,13 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name doctorpricerWebApp.controller:MapCtrl
+ * @description
+ * # MapCtrl
+ * Controller for displaying stuff on the map.
+ */
+
 angular.module('doctorpricerWebApp')
 	.controller('MapCtrl', function($scope, $timeout, $rootScope, leafletData, PracticesCollection) {
 		var directionsService = new google.maps.DirectionsService();
@@ -16,7 +26,7 @@ angular.module('doctorpricerWebApp')
 
 		/* When the user clicks a marker */
 	    $scope.$on('leafletDirectiveMarker.click', function(e, args) {
-	    	if (args.markerName == "start") { return; }
+	    	if (args.markerName === 'start') { return; }
 	    	$scope.navPractice(args.leafletEvent.target.options.id, false);
 	    	$rootScope.$broadcast('updateScroll');
 	    	selectMapItem(false);
@@ -24,61 +34,61 @@ angular.module('doctorpricerWebApp')
 
 	    /* Initializes the map with all the markers and sets the size properly */
 		var initializeMap = function(callback) {
-			if (PracticesCollection.displayCollection.length == 0) {return;}
+			if (PracticesCollection.displayCollection.length === 0) {return;}
 			$scope.latLngs = [];
 			$scope.markers = {
 	            start: {
-	            	title: "You",
-	            	icon: local_icons.markerBlue,
+	            	title: 'You',
+	            	icon: localIcons.markerBlue,
 	            	lat: PracticesCollection.displayCollection[0].start.k,
 	            	lng: PracticesCollection.displayCollection[0].start.D,
 	            }
-		   	}
+		   	};
 		   	$scope.latLngs.push([PracticesCollection.displayCollection[0].start.k, PracticesCollection.displayCollection[0].start.D]);
 	        $timeout(function() {
 	            var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
-                document.getElementById("leaflet_map").style.height = mapHeight;
-                document.getElementById("map_canvas").style.maxHeight = mapHeight;
+                document.getElementById('leaflet_map').style.height = mapHeight;
+                document.getElementById('map_canvas').style.maxHeight = mapHeight;
 	            leafletData.getMap().then(function(map) {
                     map.invalidateSize();
                     angular.forEach(PracticesCollection.displayCollection, function(value, key) {
-						$scope.latLngs.push([value.end.k, value.end.D])
-						$scope.markers[value.name.split("-").join('')] = {
+						$scope.latLngs.push([value.end.k, value.end.D]);
+						$scope.markers[value.name.split('-').join('')] = {
 							title: value.name,
 							message: value.name,
 							draggable: false,
 							id: key,
 							lat: value.end.k,
 							lng: value.end.D,
-							icon: local_icons.markerRed
-						}
+							icon: localIcons.markerRed
+						};
 					});
                 callback();
 	            });
 	        }, 250);
-	    }
+	    };
 
 	    /* Updates the map with all of the practices and bounds to fit them */
 	    var updateMap = function() {
-	    	if (PracticesCollection.displayCollection.length == 0) {return;}
+	    	if (PracticesCollection.displayCollection.length === 0) {return;}
 	    	// $scope.paths = {};
 			var bounds = L.latLngBounds($scope.latLngs);
 			leafletData.getMap().then(function(map) {
 				map.fitBounds(bounds, {padding: [100, 100]});
             });
-		}
+		};
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {
 				leafletData.getMap().then(function(map) {
-					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split("-").join('')].focus = true;		
+					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.D], [PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D]);
 						map.fitBounds(bounds, {padding: [100, 100]});
 					}
 		        });
 		    });
-		}
+		};
 
 	    /* Puts the route on the map */
 		var setDirections = function (callback) {
@@ -98,14 +108,14 @@ angular.module('doctorpricerWebApp')
 	            		weight: 6,
 	            		latlngs: latlngs,
 	            		type: 'polyline'
-	            	}
+	            	};
 	            	callback();
 	            } else {
 	            	// Handle this error
 	            	console.log('Error when fetching route: ' + status);
 	            }
 	        });
-	    }
+	    };
 
 	    /* Stuff to initialize the map with */
 	    angular.extend($scope, {
@@ -132,7 +142,7 @@ angular.module('doctorpricerWebApp')
 	    });
 
 	    /* Icons for markers */
-	   	var local_icons = {
+	   	var localIcons = {
 	        markerBlue: {
 	        	type: 'awesomeMarker',
 	        	icon: 'glyphicon-home',
@@ -145,5 +155,5 @@ angular.module('doctorpricerWebApp')
 	            icon: 'fa-user-md',
 	            markerColor: 'red'
 	    	}
-	   	}
+	   	};
 	});

@@ -247,15 +247,18 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
+    cssmin: {
+      options: {
+        rebase: false
+      },
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
     // uglify: {
     //   dist: {
     //     files: {
@@ -353,8 +356,20 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
+          src: ['fonts/*.*'],
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/font-awesome',
+          src: ['fonts/*.*'],
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/Leaflet.awesome-markers/dist',
+          src: ['images/*.*'],
+          dest: '<%= yeoman.dist %>/styles'
         }]
       },
       styles: {
@@ -364,6 +379,7 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
+
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {

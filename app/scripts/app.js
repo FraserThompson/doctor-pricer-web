@@ -44,5 +44,5 @@ angular
           SearchModel.coords = [$stateParams.lat, $stateParams.lng];
           SearchModel.age = $stateParams.age;
         }
-      })
+      });
   });
