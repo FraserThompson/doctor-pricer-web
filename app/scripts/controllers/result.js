@@ -8,8 +8,9 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $stateParams, $rootScope, $state, leafletData, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $state, leafletData, PracticesCollection, SearchModel) {
   	// $scope variables
+  	$scope.sidebar = 1;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.userAddress = SearchModel.address;
@@ -19,6 +20,12 @@ angular.module('doctorpricerWebApp')
 		{id: 10, name: '10km'},
 		{id: 15, name: '15km'},
 	];
+
+	/* Sets the height of the list since using vh in CSS didn't do it right...*/
+	$timeout(function() {
+	   	var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+	    document.getElementById('practice-list').style.height = mapHeight;
+	})
 
 	$scope.$on('countUpdated', function() {
 		$scope.practiceCount = PracticesCollection.length;
@@ -48,6 +55,11 @@ angular.module('doctorpricerWebApp')
 
     // Upon into the view we should do that
     $rootScope.$broadcast('newSearch');
+
+    /* Inverses the sidebar variable which determines whether the sidebar is active*/
+    $scope.toggleSidebar = function() {
+    	$scope.sidebar = !$scope.sidebar;
+    }
 
 	/* Calls the changeRadius method from the collection when user does that */
 	$scope.changeRadius = function(distance) {

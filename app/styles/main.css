@@ -14,9 +14,14 @@ html, body {
   height: 100%;
 }
 
-a {
+.footer {
+  bottom: 40px !important;
+}
+
+a, button {
   outline: 0 !important;
 }
+
 .text-centre {
   text-align: center;
   margin: 0;
@@ -25,10 +30,6 @@ a {
 
 .ngdialog {
   top: -100px !important;
-}
-
-.panel-body {
-  padding: 0;
 }
 
 /* Get rid of ugly number input spinner in chrome and ff*/
@@ -73,21 +74,6 @@ input[type=number] {
   height: 85vh;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
 /* Navbar brand stuff */
 .navbar {
 /*  height: 50px;*/
@@ -95,10 +81,6 @@ input[type=number] {
 .navbar-default {
   font-size: 18px;
   margin-bottom: 0px;
-}
-.navbar-header a:link{
-  color: white;
-  font-size: 36px;
 }
 .navbar-default a:visited{
   color: white !important;
@@ -119,9 +101,11 @@ input[type=number] {
     display: block;
     width: 250px;
     text-align: center;
+    color: white;
+    font-size: 36px;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #28A15D;
+  background-color: white;
 }
 
 .btn-primary {
@@ -155,31 +139,14 @@ input[type=number] {
   text-align: center;
 }
 
-.price-col {
-  min-width: 55px;
-}
-
 .container-narrow > hr {
   margin: 30px 0;
 }
-
-@grid-float-breakpoint
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
   }
 }
 
@@ -189,7 +156,7 @@ input[type=number] {
 }
 .pac-item {
   height: 50px;
-  font-size: 18px;
+  font-size: 16px;
 }
 .pac-item-query {
   font-size: 18px;
@@ -212,8 +179,11 @@ input[type=number] {
 
 /* View transition stuff */
 .view-animate.ng-enter, .view-animate.ng-leave {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
   display:block;
   width:100%;
   position:absolute;
@@ -240,5 +210,59 @@ input[type=number] {
   padding: 0;
   -webkit-transition: max-height 0.5s;
   -moz-transition: max-height 0.5s;
+  -ms-transition: max-height 0.5s;
+  -o-transition: max-height 0.5s;
   transition: max-height 0.5s;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+  }
+  .navbar-nav {
+    margin-left: 3px;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -90%; /* 6 columns */
+    width: 80%;
+    margin-left: 30px;
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 90%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
 }

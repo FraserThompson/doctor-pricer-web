@@ -65,7 +65,7 @@ angular.module('doctorpricerWebApp')
                 document.getElementById('map_canvas').style.maxHeight = mapHeight;
                 leafletData.getMap().then(function(map) {
                 	map.invalidateSize();
-					map.fitBounds(bounds, {padding: [100, 100]});
+					map.fitBounds(bounds, {padding: [80, 80]});
             	});
 	        }, 300);
 	    };
@@ -77,7 +77,7 @@ angular.module('doctorpricerWebApp')
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.D], [PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D]);
-						map.fitBounds(bounds, {padding: [100, 100]});
+						map.fitBounds(bounds, {padding: [80, 80]});
 					}
 		        });
 		    });

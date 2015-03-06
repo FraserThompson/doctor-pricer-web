@@ -1,6 +1,6 @@
 <div class="container-fluid no-left-right-padding" id="result-page">
-	<div class="row">
-		<div class="col-xs-4 no-left-right-padding">
+	<div class="row row-offcanvas row-offcanvas-left"  ng-class="{'active': sidebar}">
+		<div class="col-sm-4 col-md-3 no-left-right-padding sidebar-offcanvas" id="sidebar">
 			<div class="row" style="padding-left: 15px;">
 				<div class="col-md-12">
 					<h3><small>Found {{practiceCount}} practices within
@@ -8,14 +8,14 @@
 					</small></h3>
 				</div>
 			</div>
-			<div class="list-group scrollable nopadding" auto-scroll>
+			<div class="list-group scrollable nopadding" id="practice-list" auto-scroll>
 				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices">
 					<div class="row">
-						<div class="col-sm-2 price-col">
+						<div class="col-md-3 col-xs-3">
 							<h4 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h4>
 							<p class="list-group-item-text">{{practice.distance | number : 1}}km away</p>
 					  	</div>
-					  	<div class="col-sm-10">
+					  	<div class="col-md-9 col-xs-9">
 					  		<h4 class="list-group-item-heading">{{practice.name}}</h4>
 		   					<p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{practice.address}}</p>
 		   					<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> {{practice.phone}}</p>
@@ -25,7 +25,10 @@
 			</div>
 			<h3 class="no-up-down-padding" style="padding-left: 15px;"><small>Fees apply to enrolled patients only.</small></h3>
 		</div>
-		<div class="col-xs-8 no-left-right-padding">
+		<div class="col-sm-8 col-md-9 no-left-right-padding">
+			<p class="pull-left visible-xs" style="padding-top: 15px; margin-bottom: 0px;">
+            	<a type="button" class="btn btn-default btn-lg" ng-click="toggleSidebar()"><span class="glyphicon glyphicon-list"></span></a>
+          	</p>
 			<tabset style="padding-top: 15px;">
 				<tab heading="Map">
 					<div id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
@@ -33,7 +36,7 @@
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
 				</tab>
-				<tab heading="{{thisPractice.name}}" ng-show="thisPractice.name">
+				<tab heading="Info - {{thisPractice.name}}" ng-show="thisPractice.name">
 					<div style="padding: 15px;">
 						<div ng-hide="noPractices" class="pull-right">
 							<div class="btn-group" role="group" aria-label="links">
