@@ -8,8 +8,8 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $state, leafletData, PracticesCollection, SearchModel) {
-  	// $scope variables
+  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $window, $state, leafletData, PracticesCollection, SearchModel) {
+  	/* $scope variables */
   	$scope.sidebar = 1;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
@@ -21,10 +21,21 @@ angular.module('doctorpricerWebApp')
 		{id: 15, name: '15km'},
 	];
 
-	/* Sets the height of the list since using vh in CSS didn't do it right...*/
-	$timeout(function() {
-	   	var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
-	    document.getElementById('practice-list').style.height = mapHeight;
+    var setHeight = function() {
+      $timeout(function() {
+          var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+          document.getElementById('practice-list').style.height = mapHeight;
+          document.getElementById('leaflet_map').style.height = mapHeight;
+          document.getElementById('map_canvas').style.maxHeight = mapHeight;
+      });
+    };
+
+	/* Listeners */
+	// Sets the height of the map and list when window is resized
+	var w = angular.element($window)
+	w.bind('resize', function() {
+		PracticesCollection.screenHeight = $window.innerHeight;
+		setHeight();
 	})
 
 	$scope.$on('countUpdated', function() {
@@ -54,6 +65,7 @@ angular.module('doctorpricerWebApp')
     });
 
     // Upon into the view we should do that
+    setHeight();
     $rootScope.$broadcast('newSearch');
 
     /* Inverses the sidebar variable which determines whether the sidebar is active*/
@@ -81,5 +93,4 @@ angular.module('doctorpricerWebApp')
 	$scope.isActive = function(id) {
     	return id === PracticesCollection.selectedPractice;
     };
-
   });

@@ -58,17 +58,18 @@ angular.module('doctorpricerWebApp')
 				};
 			});
 			var bounds = L.latLngBounds(latLngs);
-			// Wait for animation to finish then expand size of map
+			// Wait for animation to finish then get the map and touch it with your magic fingers
 		   	$timeout(function() {
-	            var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
-                document.getElementById('leaflet_map').style.height = mapHeight;
-                document.getElementById('map_canvas').style.maxHeight = mapHeight;
                 leafletData.getMap().then(function(map) {
                 	map.invalidateSize();
 					map.fitBounds(bounds, {padding: [80, 80]});
             	});
 	        }, 300);
 	    };
+
+	    var setHeight = function() {
+
+	    }
 
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {

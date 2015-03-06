@@ -194,13 +194,36 @@ input[type=number] {
   padding-top:52px;
 }
 .view-animate.ng-enter {
+  top: 0;
   left:100%;
 }
 .view-animate.ng-enter.ng-enter-active {
+  top: 0;
   left:0;
 }
 .view-animate.ng-leave.ng-leave-active {
+  top: 0;
   left:-100%;
+}
+
+/* Expand to full height */
+.animate-expand {
+  line-height: 25px;
+  overflow: hidden;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.animate-expand.ng-hide-add,
+.animate-expand.ng-hide-remove {
+  display: block !important;
+  line-height: 0px;
+}
+.animate-expand.ng-hide-remove.ng-hide-remove-active {
+  line-height: 25px;
+}
+.animate-expand.ng-hide-add {
+  line-height: 25px;
 }
 
 #map_canvas {
@@ -213,6 +236,12 @@ input[type=number] {
   -ms-transition: max-height 0.5s;
   -o-transition: max-height 0.5s;
   transition: max-height 0.5s;
+}
+
+@media screen and (max-width: 991px) {
+ .navbar-nav {
+    margin-left: 3px;
+  }
 }
 
 /*
@@ -228,10 +257,6 @@ input[type=number] {
     -o-transition: all .25s ease-out;
     transition: all .25s ease-out;
   }
-  .navbar-nav {
-    margin-left: 3px;
-  }
-
   .row-offcanvas-right {
     right: 0;
   }
@@ -239,27 +264,22 @@ input[type=number] {
   .row-offcanvas-left {
     left: 0;
   }
-
   .row-offcanvas-right
   .sidebar-offcanvas {
     right: -50%; /* 6 columns */
   }
-
   .row-offcanvas-left
   .sidebar-offcanvas {
     left: -90%; /* 6 columns */
     width: 80%;
     margin-left: 30px;
   }
-
   .row-offcanvas-right.active {
     right: 50%; /* 6 columns */
   }
-
   .row-offcanvas-left.active {
     left: 90%; /* 6 columns */
   }
-
   .sidebar-offcanvas {
     position: absolute;
     top: 0;

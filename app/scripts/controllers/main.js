@@ -9,7 +9,6 @@
  */
 angular.module('doctorpricerWebApp')
   .controller('MainCtrl', function ($scope, $rootScope, $state, $timeout) {
-    $rootScope.title = 'DoctorPricer';
   	$scope.options = {
   		country: 'nz'
   	};
@@ -25,8 +24,9 @@ angular.module('doctorpricerWebApp')
     /* Used for the submit button */
   	$scope.next = function() {
       $scope.$broadcast('show-errors-check-validity');
-      if (!$scope.details.geometry) { return; }
-      if ($scope.form.$invalid) { return; }
+      if (!$scope.details.geometry || $scope.form.$invalid) {
+        return; 
+      }
       $state.go('result', {
         'age': $scope.age, 
         'lat':$scope.details.geometry.location.k, 
