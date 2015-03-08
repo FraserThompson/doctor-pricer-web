@@ -108,8 +108,25 @@ input[type=number] {
   background-color: white;
 }
 
-.btn-primary {
+.btn-cool {
   background-color: #28A15D;
+  border-color: #036D31;
+  color: white;
+}
+.btn-cool:visited {
+  background-color: #28A15D;
+  color: white;
+}
+.btn-cool:hover {
+  background-color: #118945;
+  color: white;
+}
+.btn-cool:active {
+  color: white;
+}
+.btn-cool:focus {
+  background-color: #118945;
+  color: white;
 }
 
 .active {
@@ -182,11 +199,9 @@ input[type=number] {
 /* View transition stuff */
 .view-animate.ng-enter, .view-animate.ng-leave {
   -webkit-transform-style: preserve-3d;
-  -webkit-transition: all 500ms ease-in-out;
-  -moz-transition: all 500ms ease-in-out;
-  -ms-transition: all 500ms ease-in-out;
-  -o-transition: all 500ms ease-in-out;
-  transition: all 500ms ease-in-out;
+  transition: transform 500ms ease;
+  -moz-transition: transform 500ms ease;
+  -webkit-transition: transform 500ms ease;
   display:block;
   width:100%;
   position:absolute;
@@ -194,22 +209,30 @@ input[type=number] {
   left:0;
   right:0;
   bottom:0;
+  padding: 0;
+  margin: 0;
+  padding-left:15px;
   padding-top:52px;
 }
-.view-animate.ng-enter {
-  top: 0;
-  bottom: 0;
-  left:100%;
+.view-animate.ng-enter{
+  transform: translate3d(100%, 0, 0);
+  -moz-transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
 }
-.view-animate.ng-enter.ng-enter-active {
-  top: 0;
-  bottom: 0;
-  left:0;
+.view-animate.ng-leave{
+  transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
 }
 .view-animate.ng-leave.ng-leave-active {
-  top: 0;
-  bottom: 0;
-  left:-100%;
+  transform: translate3d(-100%, 0, 0);
+  -moz-transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
+}
+.view-animate.ng-enter.ng-enter-active {
+  transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
 }
 
 /* Expand to full height */

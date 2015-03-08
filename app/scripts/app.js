@@ -15,11 +15,11 @@ angular
     'ngRoute',
     'ngTouch',
     'ngAutocomplete',
-    'leaflet-directive',
-    'ui.bootstrap.showErrors',
     'ngDialog',
+    'leaflet-directive',
     'duScroll',
     'ui.router',
+    'ui.bootstrap.showErrors',
     'ui.bootstrap'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {

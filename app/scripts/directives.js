@@ -37,4 +37,3 @@ angular.module('doctorpricerWebApp')
 			}
 		};
 	});
-	
