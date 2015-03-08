@@ -297,23 +297,23 @@ input[type=number] {
   }
   .row-offcanvas-right
   .sidebar-offcanvas {
-    right: -50%; /* 6 columns */
+    right: -50%;
   }
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -90%; /* 6 columns */
+    left: -90%;
     width: 80%;
     margin-left: 30px;
   }
   .row-offcanvas-right.active {
-    right: 50%; /* 6 columns */
+    right: 50%; 
   }
   .row-offcanvas-left.active {
-    left: 90%; /* 6 columns */
+    left: 90%; 
   }
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 50%; /* 6 columns */
+    width: 50%;
   }
 }

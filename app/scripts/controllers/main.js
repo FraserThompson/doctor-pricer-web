@@ -8,12 +8,17 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $state, $timeout) {
+  .controller('MainCtrl', function ($scope, $rootScope, $window, $state, $timeout) {
   	$scope.options = {
   		country: 'nz'
   	};
     $scope.details = {};
-
+    
+    if ($window.innerWidth > 545) {
+      $scope.addressPlaceholder = "Start typing an address"
+    } else {
+      $scope.addressPlaceholder = "Address"
+    }
     /* Associate the details found with the text submitted so input validation is easier */
     $scope.$watch('details', function() {
       $timeout(function() {
