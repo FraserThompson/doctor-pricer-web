@@ -1,6 +1,6 @@
-<div class="container-fluid no-left-right-padding" id="result-page">
+<div class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
 	<div class="row row-offcanvas row-offcanvas-left"  ng-class="{'active': sidebar}">
-		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" ng-swipe-left="toggleSidebar()">
+		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" >
 			<div class="row" style="padding-left: 15px;">
 				<div class="col-md-12">
 					<h3><small>Found {{practiceCount}} practices within
@@ -25,7 +25,7 @@
 			</div>
 			<h3 class="no-up-down-padding" style="padding-left: 15px;"><small>Fees apply to enrolled patients only.</small></h3>
 		</div>
-		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" ng-swipe-right="toggleSidebar()">
+		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" >
 			<p class="pull-left visible-xs" style="padding-top: 15px; margin-bottom: 0px;">
             	<a type="button" class="btn btn-default btn-lg" ng-click="toggleSidebar()"><span class="glyphicon glyphicon-list"></span></a>
           	</p>

@@ -14,7 +14,7 @@ angular.module('doctorpricerWebApp')
   	};
     $scope.details = {};
     
-    if ($window.innerWidth > 545) {
+    if ($window.outerWidth > 545) {
       $scope.addressPlaceholder = "Start typing an address"
     } else {
       $scope.addressPlaceholder = "Address"
