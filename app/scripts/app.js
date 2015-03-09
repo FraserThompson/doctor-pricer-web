@@ -36,12 +36,12 @@ angular
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
         resolve: {
-          practices: function(PracticesCollection) {
-            return PracticesCollection.fetchData();
+          practices: function($stateParams, PracticesCollection) {
+            return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
           }
         },
-        onEnter: function($stateParams, SearchModel) {
-          SearchModel.coords = [$stateParams.lat, $stateParams.lng];
+        onEnter: function($stateParams, SearchModel, PracticesCollection) {
+          SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
         }
       });

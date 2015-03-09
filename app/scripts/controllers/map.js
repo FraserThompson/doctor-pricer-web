@@ -9,7 +9,7 @@
  */
 
 angular.module('doctorpricerWebApp')
-	.controller('MapCtrl', function($scope, $timeout, $rootScope, leafletData, PracticesCollection) {
+	.controller('MapCtrl', function($scope, $timeout, $rootScope, leafletData, PracticesCollection, SearchModel) {
 		var directionsService = new google.maps.DirectionsService();
 
 		/* When there are new practices to put on the map */
@@ -39,21 +39,21 @@ angular.module('doctorpricerWebApp')
 	            start: {
 	            	title: 'You',
 	            	icon: localIcons.markerBlue,
-	            	lat: PracticesCollection.displayCollection[0].start.k,
-	            	lng: PracticesCollection.displayCollection[0].start.D,
+	            	lat: SearchModel.coords[0],
+	            	lng: SearchModel.coords[1],
 	            }
 		   	};
-		   	latLngs.push([PracticesCollection.displayCollection[0].start.k, PracticesCollection.displayCollection[0].start.D]);
+		   	latLngs.push(SearchModel.coords[0], SearchModel.coords[1]);
 		   // Make a marker for each practice
 	        angular.forEach(PracticesCollection.displayCollection, function(value, key) {
-				latLngs.push([value.end.k, value.end.D]);
+				latLngs.push([value.coords[0], value.coords[1]]);
 				$scope.markers[value.name.split('-').join('')] = {
 					title: value.name,
 					message: value.name,
 					draggable: false,
 					id: key,
-					lat: value.end.k,
-					lng: value.end.D,
+					lat: value.coords[0],
+					lng: value.coords[1],
 					icon: localIcons.markerRed
 				};
 			});
@@ -67,17 +67,13 @@ angular.module('doctorpricerWebApp')
 	        }, 300);
 	    };
 
-	    var setHeight = function() {
-
-	    }
-
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {
 				leafletData.getMap().then(function(map) {
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
-						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end.D], [PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.k, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start.D]);
+						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[0], PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[1]], [SearchModel.coords[0], SearchModel.coords[1]]);
 						map.fitBounds(bounds, {padding: [80, 80]});
 					}
 		        });
@@ -86,9 +82,11 @@ angular.module('doctorpricerWebApp')
 
 	    /* Puts the route on the map */
 		var setDirections = function (callback) {
+			var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[0], PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[1]);
+			var origin = new google.maps.LatLng(SearchModel.coords[0], SearchModel.coords[1]);
 	        var request = {
-	            origin: PracticesCollection.displayCollection[PracticesCollection.selectedPractice].start,
-	            destination: PracticesCollection.displayCollection[PracticesCollection.selectedPractice].end,
+	            origin: origin,
+	            destination: destination,
 	            travelMode: google.maps.TravelMode.DRIVING,
 	            unitSystem: google.maps.UnitSystem.METRIC,
 	            optimizeWaypoints: true

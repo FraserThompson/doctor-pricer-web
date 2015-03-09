@@ -48,11 +48,9 @@ angular.module('doctorpricerWebApp')
 	});
 
 	$scope.$on('newSearch', function() {
-		PracticesCollection.filterCollection(SearchModel.coords, SearchModel.age, function() {
-			PracticesCollection.changeRadius(2);
-			//countUpdated gets triggered here
-		});
-
+		PracticesCollection.selectedPractice = -1;
+		$scope.thisPractice = {};
+		PracticesCollection.changeRadius(2);
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
 			$rootScope.$apply(function() {
 				$rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
