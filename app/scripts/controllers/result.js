@@ -22,12 +22,10 @@ angular.module('doctorpricerWebApp')
 	];
 
     var setHeight = function() {
-      $timeout(function() {
+		$timeout(function() {
           var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
-          document.getElementById('practice-list').style.height = mapHeight;
-          document.getElementById('leaflet_map').style.height = mapHeight;
-          document.getElementById('map_canvas').style.maxHeight = mapHeight;
-      }, 300);
+          document.getElementById('practice-list').style.maxHeight = mapHeight;
+      	}, 300);
     };
 
 	/* Listeners */
@@ -35,10 +33,7 @@ angular.module('doctorpricerWebApp')
 	var w = angular.element($window)
 	w.bind('resize', function() {
 		PracticesCollection.screenHeight = $window.innerHeight;
-		$timeout(function() {
-          var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
-          document.getElementById('practice-list').style.height = mapHeight;
-      	}, 300);
+		setHeight();
 	})
 
 	$scope.$on('countUpdated', function() {

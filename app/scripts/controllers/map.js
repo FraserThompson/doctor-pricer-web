@@ -15,13 +15,17 @@ angular.module('doctorpricerWebApp')
 		/* Listeners */
 		/* Sets the height of the map when window is resized */
 		var w = angular.element($window)
-		w.bind('resize', function() {
+		var setHeight = function() {
 			 $timeout(function() {
 		        var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
 		        document.getElementById('leaflet_map').style.height = mapHeight;
 		        document.getElementById('map_canvas').style.maxHeight = mapHeight;
 		     }, 300);
-		})
+		};
+
+		w.bind('resize', function() {
+			setHeight();
+		});
 
 		/* When there are new practices to put on the map */
 	   	$scope.$on('countUpdated', function() {
@@ -44,6 +48,7 @@ angular.module('doctorpricerWebApp')
 	    /* Initializes the map with all the markers and sets the size properly */
 		var initializeMap = function() {
 			if (PracticesCollection.displayCollection.length === 0) {return;}
+			setHeight();
 			var latLngs = [];
 			$scope.paths = {};
 			$scope.markers = {
