@@ -9,8 +9,19 @@
  */
 
 angular.module('doctorpricerWebApp')
-	.controller('MapCtrl', function($scope, $timeout, $rootScope, leafletData, PracticesCollection, SearchModel) {
+	.controller('MapCtrl', function($scope, $timeout, $rootScope, $window, leafletData, PracticesCollection, SearchModel) {
 		var directionsService = new google.maps.DirectionsService();
+
+		/* Listeners */
+		/* Sets the height of the map when window is resized */
+		var w = angular.element($window)
+		w.bind('resize', function() {
+			 $timeout(function() {
+		        var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+		        document.getElementById('leaflet_map').style.height = mapHeight;
+		        document.getElementById('map_canvas').style.maxHeight = mapHeight;
+		     }, 300);
+		})
 
 		/* When there are new practices to put on the map */
 	   	$scope.$on('countUpdated', function() {

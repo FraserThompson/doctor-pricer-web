@@ -31,11 +31,14 @@ angular.module('doctorpricerWebApp')
     };
 
 	/* Listeners */
-	// Sets the height of the map and list when window is resized
+	// Sets the height of the list when window is resized
 	var w = angular.element($window)
 	w.bind('resize', function() {
 		PracticesCollection.screenHeight = $window.innerHeight;
-		setHeight();
+		$timeout(function() {
+          var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+          document.getElementById('practice-list').style.height = mapHeight;
+      	}, 300);
 	})
 
 	$scope.$on('countUpdated', function() {
