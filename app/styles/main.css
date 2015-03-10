@@ -64,10 +64,6 @@ input[type=number] {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
-/* Makes the list scrollable */
-.scrollable {
-  overflow: auto;
-}
 
 /* Navbar brand stuff */
 .navbar-default {
@@ -128,7 +124,7 @@ input[type=number] {
 
 #practice-list {
   max-height: 0;
-  overflow: hidden;
+  overflow: auto;
   margin: 0;
   padding: 0;
   -webkit-transform-style: preserve-3d;
