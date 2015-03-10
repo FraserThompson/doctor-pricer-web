@@ -311,3 +311,17 @@ input[type=number] {
     width: 50%;
   }
 }
+
+/* Font size on smaller screens*/
+@media screen and (max-width: 481px) {
+  .navbar-brand-centred {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+}
