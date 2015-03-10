@@ -18,6 +18,7 @@ angular.module('doctorpricerWebApp')
     $scope.details = {};
     $scope.details.geometry = {};
     $scope.details.geometry.location = {};
+        $scope.isCollapsed = 1;
 
     /* Used to decide whether navbarThings should be displayed based on the state*/
   	$scope.$on('$stateChangeSuccess', function(event, next) {
