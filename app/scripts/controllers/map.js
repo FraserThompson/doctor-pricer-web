@@ -35,6 +35,7 @@ angular.module('doctorpricerWebApp')
 	   	/* When the user selects a different practice on the list */
 		$scope.$on('changePractice', function() {
 			selectMapItem(true);
+			$scope.toggleSidebar();
 		});
 
 		/* When the user clicks a marker */
