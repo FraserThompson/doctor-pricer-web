@@ -27,7 +27,7 @@ angular.module('doctorpricerWebApp')
           document.getElementById('practice-list').style.height = mapHeight;
           document.getElementById('leaflet_map').style.height = mapHeight;
           document.getElementById('map_canvas').style.maxHeight = mapHeight;
-      });
+      }, 250);
     };
 
 	/* Listeners */

@@ -14,10 +14,6 @@ html, body {
   height: 100%;
 }
 
-.footer {
-  bottom: 40px !important;
-}
-
 a, button {
   outline: 0 !important;
 }
@@ -148,13 +144,11 @@ input[type=number] {
 
 /* Custom page footer */
 .footer {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
+  position: relative;
   height: 50px;
-  width: 100%;
-  padding-top: 19px;
+  margin-top: -50px;
   text-align: center;
+  clear: both;
 }
 
 .container-narrow > hr {
@@ -170,7 +164,7 @@ input[type=number] {
 
 /* Google Autocomplete stuff */
 .pac-container {
-  min-width: 350px;
+  width: 40% !important;
 }
 .pac-item {
   height: 50px;

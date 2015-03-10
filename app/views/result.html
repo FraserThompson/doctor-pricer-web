@@ -27,7 +27,7 @@
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" >
 			<p class="pull-left visible-xs" style="padding-top: 15px; margin-bottom: 0px;">
-            	<a type="button" class="btn btn-default btn-lg" ng-click="toggleSidebar()"><span class="glyphicon glyphicon-list"></span></a>
+            	<a type="button" class="btn btn-default btn-lg" ng-click="toggleSidebar()"><span ng-class="(sidebar==1) ? 'glyphicon-menu-left' : 'glyphicon-menu-right'" class="glyphicon"></span></a>
           	</p>
 			<tabset style="padding-top: 15px;">
 				<tab heading="Map">
