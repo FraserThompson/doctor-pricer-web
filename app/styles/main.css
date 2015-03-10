@@ -312,8 +312,13 @@ input[type=number] {
   }
 }
 
-/* Font size on smaller screens*/
+/* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
+  .pac-container {
+      width: 100% !important;
+      left: 0px !important;
+    }
+  }
   .navbar-brand-centred {
     font-size: 28px;
   }
@@ -324,4 +329,3 @@ input[type=number] {
   h4 {
     font-size: 16px;
   }
-}

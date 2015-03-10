@@ -74,7 +74,7 @@ angular.module('doctorpricerWebApp')
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[0], PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[1]], [SearchModel.coords[0], SearchModel.coords[1]]);
-						map.fitBounds(bounds, {padding: [80, 80]});
+						map.fitBounds(bounds, {padding: [60, 60]});
 					}
 		        });
 		    });
