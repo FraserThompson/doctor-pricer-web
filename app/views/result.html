@@ -8,7 +8,7 @@
 					</small></h3>
 				</div>
 			</div>
-			<div class="list-group scrollable nopadding" id="practice-list" auto-scroll>
+			<div class="list-group scrollable nopadding animate-expand-down" id="practice-list" auto-scroll>
 				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
@@ -31,7 +31,7 @@
           	</p>
 			<tabset style="padding-top: 15px;">
 				<tab heading="Map">
-					<div id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
+					<div class="animate-expand-down" id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
 						<leaflet id="leaflet_map" markers="markers" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>

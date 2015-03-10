@@ -21,6 +21,32 @@ angular.module('doctorpricerWebApp')
 		{id: 15, name: '15km'},
 	];
 
+	  /* Inverses the sidebar variable which determines whether the sidebar is active*/
+    $scope.toggleSidebar = function() {
+    	$scope.sidebar = !$scope.sidebar;
+    }
+
+	/* Calls the changeRadius method from the collection when user does that */
+	$scope.changeRadius = function(distance) {
+		PracticesCollection.changeRadius(distance);
+		PracticesCollection.selectedPractice = -1;
+		$scope.thisPractice = {};
+	};
+
+	/* Changes the selected practice and updates the map when user does that */
+	$scope.navPractice = function(id, eventBroadcast) {
+		PracticesCollection.selectedPractice = id;
+		$scope.thisPractice = PracticesCollection.displayCollection[PracticesCollection.selectedPractice];
+		if (eventBroadcast) {
+			$rootScope.$broadcast('changePractice');
+		}
+	};
+
+	/* Used to determine if an item is active */
+	$scope.isActive = function(id) {
+    	return id === PracticesCollection.selectedPractice;
+    };
+
     var setHeight = function() {
 		$timeout(function() {
           var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
@@ -46,14 +72,14 @@ angular.module('doctorpricerWebApp')
 	});
 
 	$scope.$on('newSearch', function() {
-		PracticesCollection.selectedPractice = -1;
-		$scope.thisPractice = {};
-		PracticesCollection.changeRadius(2);
+		$scope.changeRadius(2);
+		$scope.selectedItem = $scope.radiuses[0];
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
 			$rootScope.$apply(function() {
 				$rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
 			});
 			$scope.userAddress = SearchModel.address;
+			setHeight();
 		}, function() {
 			console.log('calculating address failed');
 			// handle this error
@@ -63,30 +89,4 @@ angular.module('doctorpricerWebApp')
     // Upon into the view we should do that
     setHeight();
     $rootScope.$broadcast('newSearch');
-
-    /* Inverses the sidebar variable which determines whether the sidebar is active*/
-    $scope.toggleSidebar = function() {
-    	$scope.sidebar = !$scope.sidebar;
-    }
-
-	/* Calls the changeRadius method from the collection when user does that */
-	$scope.changeRadius = function(distance) {
-		PracticesCollection.changeRadius(distance);
-		PracticesCollection.selectedPractice = -1;
-		$scope.thisPractice = {};
-	};
-
-	/* Changes the selected practice and updates the map when user does that */
-	$scope.navPractice = function(id, eventBroadcast) {
-		PracticesCollection.selectedPractice = id;
-		$scope.thisPractice = PracticesCollection.displayCollection[PracticesCollection.selectedPractice];
-		if (eventBroadcast) {
-			$rootScope.$broadcast('changePractice');
-		}
-	};
-
-	/* Used to determine if an item is active */
-	$scope.isActive = function(id) {
-    	return id === PracticesCollection.selectedPractice;
-    };
   });

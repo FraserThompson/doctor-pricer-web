@@ -54,9 +54,7 @@ angular.module('doctorpricerWebApp')
   	$scope.next = function() {
   		$scope.$broadcast('show-errors-check-validity');
   		if ($scope.headerForm.$invalid) { return; }
-  		SearchModel.age = $scope.age;
-  		SearchModel.coords = [$scope.details.geometry.location.k, $scope.details.geometry.location.D];
-  		$rootScope.$broadcast('newSearch');
+      document.getElementById('practice-list').style.maxHeight = 0;
       $state.transitionTo('result', {
         'age': $scope.age, 
         'lat':$scope.details.geometry.location.k, 

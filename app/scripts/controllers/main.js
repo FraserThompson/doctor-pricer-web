@@ -29,9 +29,7 @@ angular.module('doctorpricerWebApp')
     /* Used for the submit button */
   	$scope.next = function() {
       $scope.$broadcast('show-errors-check-validity');
-      if (!$scope.details.geometry || $scope.form.$invalid) {
-        return; 
-      }
+      if (!$scope.details.geometry || $scope.form.$invalid) {return;}
       $state.go('result', {
         'age': $scope.age, 
         'lat':$scope.details.geometry.location.k, 

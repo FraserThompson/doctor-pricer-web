@@ -40,9 +40,10 @@ angular
             return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
           }
         },
-        onEnter: function($stateParams, SearchModel, PracticesCollection) {
+        onEnter: function($stateParams, $rootScope, SearchModel, PracticesCollection) {
           SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
+          $rootScope.$broadcast('newSearch');
         }
       });
   });
