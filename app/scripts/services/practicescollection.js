@@ -11,7 +11,6 @@
 angular.module('doctorpricerWebApp')
 	.service('PracticesCollection', function($window, $q, $http, $timeout, $rootScope) {
 		var self = this;
-		this.screenHeight = $window.innerHeight;
 		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
 

@@ -49,7 +49,7 @@ angular.module('doctorpricerWebApp')
 
     var setHeight = function() {
 		$timeout(function() {
-          var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+          var mapHeight = ($window.innerHeight - 148) + 'px';
           document.getElementById('practice-list').style.maxHeight = mapHeight;
       	}, 300);
     };

@@ -17,7 +17,7 @@ angular.module('doctorpricerWebApp')
 		var w = angular.element($window)
 		var setHeight = function() {
 			 $timeout(function() {
-		        var mapHeight = (PracticesCollection.screenHeight - 148) + 'px';
+		        var mapHeight = ($window.innerHeight - 148) + 'px';
 		        document.getElementById('leaflet_map').style.height = mapHeight;
 		        document.getElementById('map_canvas').style.maxHeight = mapHeight;
 		     }, 300);
