@@ -1,5 +1,12 @@
 [ng\:cloak],[ng-cloak],.ng-cloak{display:none !important}
 
+.appLink {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  z-index: 1;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -71,6 +78,7 @@ input[type=number] {
 .navbar-default {
   font-size: 18px;
   margin-bottom: 0px;
+  z-index: 0;
 }
 .navbar-default a:visited{
   color: white !important;
@@ -320,10 +328,13 @@ input[type=number] {
 
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
+  .appLink {
+    top: 65px;
+  }
   .pac-container {
       width: 100% !important;
       left: 0px !important;
-    }
+  }
   .navbar-brand-centred {
     font-size: 28px;
     width: 170px;
