@@ -9,7 +9,7 @@
     "angular-route": "^1.3.0",
     "angular-touch": "^1.3.0",
     "ngAutocomplete": "~1.0.0",
-    "angular-leaflet-directive": "~0.7.11",
+    "angular-leaflet-directive": "*",
     "angular-bootstrap-show-errors": "~2.3.0",
     "Leaflet.awesome-markers": "~2.0.2",
     "ngDialog": "~0.3.11",
