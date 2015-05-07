@@ -40,8 +40,8 @@ angular.module('doctorpricerWebApp')
   	$scope.$on('geolocatedAddress', function() {
   		$scope.age = SearchModel.age;
   		$scope.autocomplete = SearchModel.displayAddress;
-  		$scope.details.geometry.location.k = SearchModel.coords[0];
-  		$scope.details.geometry.location.D = SearchModel.coords[1];
+  		$scope.details.geometry.location.A = SearchModel.coords[0];
+  		$scope.details.geometry.location.F = SearchModel.coords[1];
   		$scope.details.autocomplete = $scope.autocomplete;
   	});
 
@@ -57,8 +57,8 @@ angular.module('doctorpricerWebApp')
       document.getElementById('practice-list').style.maxHeight = 0;
       $state.transitionTo('result', {
         'age': $scope.age, 
-        'lat':$scope.details.geometry.location.k, 
-        'lng':  $scope.details.geometry.location.D,
+        'lat':$scope.details.geometry.location.lat(), 
+        'lng':  $scope.details.geometry.location.lng(),
       }, {location: true, inherit: true, notify: false});
     };
   });
