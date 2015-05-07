@@ -71,6 +71,7 @@ angular.module('doctorpricerWebApp')
 		/* Public function for filtering to radius */
 		this.changeRadius = function(distance) {
 			var okay = [];
+			var distance = distance/1000
 			angular.forEach (self.collection, function(model) {
 				if (model.distance <= distance){
 					okay.push(model);
