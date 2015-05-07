@@ -13,7 +13,7 @@
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
 							<h4 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h4>
-							<p class="list-group-item-text">{{practice.distance | number : 1}}km away</p>
+							<p class="list-group-item-text">{{practice.distance/1000 | number : 1}}km away</p>
 					  	</div>
 					  	<div class="col-md-9 col-xs-9">
 					  		<h4 class="list-group-item-heading">{{practice.name}}</h4>

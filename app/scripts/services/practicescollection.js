@@ -17,17 +17,19 @@ angular.module('doctorpricerWebApp')
 		/* Fetches the data from the JSON via a promise*/
 		this.fetchData = function(lat, lng, age) {
 			var defer = $q.defer();
-			$http.get('https://young-ocean-1948.herokuapp.com/practices/' + lat + ',' + lng + '/' + age)
+			$http.get('https://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+			// $http.get('https://young-ocean-1948.herokuapp.com/practices/' + lat + ',' + lng + '/' + age)
 				.success(function(data) {
 					self.collection = data;
 					defer.resolve();
 				})
-				.error(function(data, status) {
+				.error(function() {
 					defer.reject();
-				})
+				});
 			return defer.promise;
 		};
 
+		/* Fetching data the old way */
 		this.fetchDataFallback = function() {
 			var defer = $q.defer();
 			// After 10 seconds the data fails
@@ -46,19 +48,6 @@ angular.module('doctorpricerWebApp')
 			$http.jsonp(url);
 			return defer.promise;
 		};
-
-		/* Get the price from each practice for the age */
-		// var getPrice = function(age, prices) {
-		// 	if (!prices || prices.length === 0){
-		// 		return 1000;
-		// 	}
-		// 	for (var i = 0; i < prices.length - 1; ++i){
-		// 		if (age >= prices[i].age && age < prices[i+1].age){
-		// 			break;
-		// 		}
-		// 	}
-		// 	return prices[i].price;
-		// };
 
 		/* Fires an event when the count is updated so everyone knows */
 		var updateCount = function(){

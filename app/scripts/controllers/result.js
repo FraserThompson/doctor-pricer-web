@@ -15,10 +15,10 @@ angular.module('doctorpricerWebApp')
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.userAddress = SearchModel.address;
   	$scope.radiuses = [
-		{id: 2, name: '2km'},
-		{id: 5, name: '5km'},
-		{id: 10, name: '10km'},
-		{id: 15, name: '15km'},
+		{id: 2000, name: '2km'},
+		{id: 5000, name: '5km'},
+		{id: 10000, name: '10km'},
+		{id: 15000, name: '15km'},
 	];
 
 	  /* Inverses the sidebar variable which determines whether the sidebar is active*/
@@ -72,7 +72,7 @@ angular.module('doctorpricerWebApp')
 	});
 
 	$scope.$on('newSearch', function() {
-		$scope.changeRadius(2);
+		$scope.changeRadius(2000);
 		$scope.selectedItem = $scope.radiuses[0];
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
 			$rootScope.$apply(function() {
