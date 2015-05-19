@@ -30,7 +30,7 @@ angular.module('doctorpricerWebApp')
   	$scope.next = function() {
       console.log($scope.details);
       $scope.$broadcast('show-errors-check-validity');
-      if (!$scope.details.geometry || $scope.form.$invalid) {return;}
+      if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $state.go('result', {
         'age': $scope.age, 
         'lat': $scope.details.geometry.location.A, 

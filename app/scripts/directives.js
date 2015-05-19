@@ -36,4 +36,26 @@ angular.module('doctorpricerWebApp')
 				});
 			}
 		};
+	})
+	.directive('loadingButton', function($timeout) {
+		return {
+			replace: 'true',
+			require: '^form',
+			template: '<span><span ng-hide="!isLoading"><i style="margin-top: 13px;"class="fa fa-spinner fa-spin fa-lg"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
+			link: function(scope, elem, attributes, form) {
+				scope.btnSize = attributes.btnSize;
+
+				scope.$on('newSearch', function() {
+          			scope.isLoading = false;
+				});
+
+				elem.bind('click', function() {
+				    if(!form.$invalid) {
+				       scope.isLoading = true;
+				    } else {
+				    	scope.isLoading = false;
+				    }
+				});
+			}
+		}
 	});
