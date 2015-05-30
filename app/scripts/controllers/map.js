@@ -63,14 +63,14 @@ angular.module('doctorpricerWebApp')
 		   	latLngs.push(SearchModel.coords[0], SearchModel.coords[1]);
 		   // Make a marker for each practice
 	        angular.forEach(PracticesCollection.displayCollection, function(value, key) {
-				latLngs.push([value.coords[0], value.coords[1]]);
+				latLngs.push([value.lat, value.lng]);
 				$scope.markers[value.name.split('-').join('')] = {
 					title: value.name,
 					message: value.name,
 					draggable: false,
 					id: key,
-					lat: parseFloat(value.coords[0]),
-					lng: parseFloat(value.coords[1]),
+					lat: parseFloat(value.lat),
+					lng: parseFloat(value.lng),
 					icon: localIcons.markerRed
 				};
 			});
@@ -90,7 +90,7 @@ angular.module('doctorpricerWebApp')
 				leafletData.getMap().then(function(map) {
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
-						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[0], PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[1]], [SearchModel.coords[0], SearchModel.coords[1]]);
+						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng], [SearchModel.coords[0], SearchModel.coords[1]]);
 						map.fitBounds(bounds, {padding: [60, 60]});
 					}
 		        });
@@ -99,7 +99,7 @@ angular.module('doctorpricerWebApp')
 
 	    /* Puts the route on the map */
 		var setDirections = function (callback) {
-			var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[0], PracticesCollection.displayCollection[PracticesCollection.selectedPractice].coords[1]);
+			var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng);
 			var origin = new google.maps.LatLng(SearchModel.coords[0], SearchModel.coords[1]);
 	        var request = {
 	            origin: origin,

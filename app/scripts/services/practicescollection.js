@@ -17,8 +17,8 @@ angular.module('doctorpricerWebApp')
 		/* Fetches the data from the JSON via a promise*/
 		this.fetchData = function(lat, lng, age) {
 			var defer = $q.defer();
-			// $http.get('https://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
-			$http.get('https://young-ocean-1948.herokuapp.com/practices/' + lat + ',' + lng + '/' + age)
+			$http.get('http://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+			// $http.get('https://young-ocean-1948.herokuapp.com/practices/' + lat + ',' + lng + '/' + age)
 				.success(function(data) {
 					self.collection = data;
 					defer.resolve();
@@ -71,7 +71,6 @@ angular.module('doctorpricerWebApp')
 		/* Public function for filtering to radius */
 		this.changeRadius = function(distance) {
 			var okay = [];
-			var distance = distance/1000
 			angular.forEach (self.collection, function(model) {
 				if (model.distance <= distance){
 					okay.push(model);
