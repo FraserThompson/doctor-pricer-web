@@ -12,7 +12,9 @@
 				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
-							<h4 ng-if="practice.price != 1000"><strong>${{practice.price | number: 2}}</strong></h4>
+							<h4 ng-if="practice.price < 999"><strong>${{practice.price | number: 2}}</strong></h4>
+							<h5 ng-if="practice.price == 1000"><strong>No price info</strong></h5>
+							<h5 ng-if="practice.price == 999"><strong>Ineligible</strong></h5>
 							<p class="list-group-item-text">{{practice.distance/1000 | number : 1}}km away</p>
 					  	</div>
 					  	<div class="col-md-9 col-xs-9">
