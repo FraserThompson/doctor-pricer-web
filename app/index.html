@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=330542075246";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
   <body>
     <!--[if lte IE 9]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -36,6 +44,7 @@
           <a class="navbar-brand navbar-brand-centred" href="#/">DoctorPricer</a>
           <ul class="nav navbar-nav">
             <li style="width:30px;"><a href="" ng-click="openDialog()"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+            <li><span class="fb-like" data-href="https://www.facebook.com/doctorpricer" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></span></li>
           </ul>
         </div>
         <div collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">

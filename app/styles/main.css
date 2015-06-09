@@ -276,9 +276,12 @@ input[type=number] {
   line-height: 25px;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1050px) {
  .navbar-nav {
     margin-left: 3px;
+  }
+  .fb-like{
+    display: none !important;
   }
 }
 
@@ -349,4 +352,9 @@ input[type=number] {
   h4 {
     font-size: 16px;
   }
+}
+
+.fb-like{
+  margin-top: 10px !important;
+  margin-left: 30px !important;
 }
