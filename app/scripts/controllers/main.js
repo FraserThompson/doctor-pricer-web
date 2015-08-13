@@ -33,8 +33,8 @@ angular.module('doctorpricerWebApp')
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $state.go('result', {
         'age': $scope.age, 
-        'lat': $scope.details.geometry.location.A, 
-        'lng': $scope.details.geometry.location.F
+        'lat': $scope.details.geometry.location.G, 
+        'lng': $scope.details.geometry.location.K
       });
     };
   });
