@@ -7,6 +7,10 @@
   z-index: 1;
 }
 
+.fa-star, .fa-star-o {
+  color: orange !important;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -46,6 +50,19 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
+/* Fade hiding animation in ng-repeat*/
+.repeat-animate.ng-enter
+{ 
+ -webkit-transition: opacity cubic-bezier(0.250, 0.250, 0.750, 0.750) 0.3s;
+  transition: opacity cubic-bezier(0.250, 0.250, 0.750, 0.750) 0.3s;
+  opacity: 0;
+} 
+
+.repeat-animate.ng-enter-active {
+    opacity: 1;
+}
+
 
 /* Container which centers content vertically and horizontally*/
 .centre-content {
@@ -187,18 +204,6 @@ input[type=number] {
   .container {
     max-width: 730px;
   }
-}
-
-/* Google Autocomplete stuff */
-.pac-container {
-  width: 40% !important;
-}
-.pac-item {
-  height: 50px;
-  font-size: 16px;
-}
-.pac-item-query {
-  font-size: 18px;
 }
 
 /* Navbar search stuff */

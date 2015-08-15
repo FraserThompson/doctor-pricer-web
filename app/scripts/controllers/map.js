@@ -88,11 +88,11 @@ angular.module('doctorpricerWebApp')
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {
 				leafletData.getMap().then(function(map) {
-					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 					if (fitBounds) {
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng], [SearchModel.coords[0], SearchModel.coords[1]]);
 						map.fitBounds(bounds, {padding: [60, 60]});
 					}
+					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 		        });
 		    });
 		};

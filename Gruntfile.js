@@ -343,7 +343,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '.htaccess',
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
@@ -359,7 +358,20 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: ['fonts/*.*'],
           dest: '<%= yeoman.dist %>'
-        }, {
+        },
+        {
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles-conditional',
+          src: ['autocomplete-big.css'],
+          dest: '<%= yeoman.dist %>/styles-conditional'
+        },
+        {
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles-conditional',
+          src: ['autocomplete-small.css'],
+          dest: '<%= yeoman.dist %>/styles-conditional'
+        },
+        {
           expand: true,
           dot: true,
           cwd: 'bower_components/font-awesome',

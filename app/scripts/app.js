@@ -29,7 +29,10 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        onEnter: function($rootScope) {
+          $rootScope.autocompleteSize = "big"; // dynamically load the css to size the Google Autocomplete box
+        }
       })
       .state('result', {
         url: '/:lat,:lng/:age/',
@@ -44,6 +47,7 @@ angular
           SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
           $rootScope.$broadcast('newSearch');
+          $rootScope.autocompleteSize = "small"; // dynamically load the css to size the Google Autocomplete box
         }
       });
   });

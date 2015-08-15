@@ -14,11 +14,41 @@ angular.module('doctorpricerWebApp')
 		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
 
+		this.getGoogle = function() {
+			var defer = $q.defer();
+			var name = self.displayCollection[self.selectedPractice]['name'];
+			var lat = self.displayCollection[self.selectedPractice]['lat'];
+			var lng = self.displayCollection[self.selectedPractice]['lng'];
+			var service = new google.maps.places.PlacesService(document.createElement('div'));
+
+			var request = 	{	
+								'query': name,
+								'radius': 0.5,
+								'location': new google.maps.LatLng(lat, lng)
+							}
+			service.textSearch(request, function(result, status) {
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					service.getDetails({'placeId': result[0].place_id}, function(result2) {
+						if (status == google.maps.places.PlacesServiceStatus.OK) {
+							defer.resolve(result2);
+						} else {
+							console.log('error fetching place details');
+							defer.reject();
+						}
+					});
+				} else {
+					console.log('error finding place');
+					defer.reject();
+				}
+			});
+
+			return defer.promise;
+		}
+
 		/* Fetches the data from the JSON via a promise*/
 		this.fetchData = function(lat, lng, age) {
 			var defer = $q.defer();
 			$http.get('http://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
-			// $http.get('https://young-ocean-1948.herokuapp.com/practices/' + lat + ',' + lng + '/' + age)
 				.success(function(data) {
 					self.collection = data;
 					defer.resolve();
@@ -80,20 +110,4 @@ angular.module('doctorpricerWebApp')
 			angular.copy(okay, this.displayCollection);
 			updateCount();
 		};
-
-		/* Public function to filter all the 700 or so practices to only ones within 15km */
-		// this.filterCollection = function(coord, age, callback) {
-		// 	self.filteredCollection = [];
-		// 	angular.forEach(self.collection, function(val) {
-		// 		val.start = new google.maps.LatLng(coord[0], coord[1]);
-		// 		val.end = new google.maps.LatLng(val.coordinates[0], val.coordinates[1]);
-		// 		var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(val.start, val.end);
-		// 		val.distance = distanceBetween/1000;
-		// 		val.price = getPrice(age, val.prices);
-		// 		if (val.distance <= 15){
-		// 			self.filteredCollection.push(val);
-		// 		}
-		// 	});
-		// 	callback();
-		// };
 	});

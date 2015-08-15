@@ -28,13 +28,12 @@ angular.module('doctorpricerWebApp')
 
     /* Used for the submit button */
   	$scope.next = function() {
-      console.log($scope.details);
       $scope.$broadcast('show-errors-check-validity');
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $state.go('result', {
         'age': $scope.age, 
-        'lat': $scope.details.geometry.location.G, 
-        'lng': $scope.details.geometry.location.K
+        'lat': $scope.details.geometry.location.lat(), 
+        'lng': $scope.details.geometry.location.lng()
       });
     };
   });

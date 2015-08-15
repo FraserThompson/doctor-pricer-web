@@ -16,9 +16,7 @@ angular.module('doctorpricerWebApp')
   		country: 'nz'
   	};
     $scope.details = {};
-    $scope.details.geometry = {};
-    $scope.details.geometry.location = {};
-        $scope.isCollapsed = 1;
+    $scope.isCollapsed = 1;
 
     /* Used to decide whether navbarThings should be displayed based on the state*/
   	$scope.$on('$stateChangeSuccess', function(event, next) {
@@ -40,8 +38,6 @@ angular.module('doctorpricerWebApp')
   	$scope.$on('geolocatedAddress', function() {
   		$scope.age = SearchModel.age;
   		$scope.autocomplete = SearchModel.displayAddress;
-  		$scope.details.geometry.location.A = SearchModel.coords[0];
-  		$scope.details.geometry.location.F = SearchModel.coords[1];
   		$scope.details.autocomplete = $scope.autocomplete;
   	});
 
@@ -57,8 +53,8 @@ angular.module('doctorpricerWebApp')
       document.getElementById('practice-list').style.maxHeight = 0;
       $state.transitionTo('result', {
         'age': $scope.age, 
-        'lat':$scope.details.geometry.location.A, 
-        'lng':  $scope.details.geometry.location.F,
+        'lat':$scope.details.geometry.location.lat(), 
+        'lng':  $scope.details.geometry.location.lng(),
       }, {location: true, inherit: true, notify: false});
     };
   });

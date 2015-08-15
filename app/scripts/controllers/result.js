@@ -14,6 +14,7 @@ angular.module('doctorpricerWebApp')
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.userAddress = SearchModel.address;
+  	$scope.map = {'active': true};
   	$scope.radiuses = [
 		{id: 2000, name: '2km'},
 		{id: 5000, name: '5km'},
@@ -21,7 +22,7 @@ angular.module('doctorpricerWebApp')
 		{id: 15000, name: '15km'},
 	];
 
-	  /* Inverses the sidebar variable which determines whether the sidebar is active*/
+	/* Inverses the sidebar variable which determines whether the sidebar is active*/
     $scope.toggleSidebar = function() {
     	$scope.sidebar = !$scope.sidebar;
     }
@@ -33,12 +34,23 @@ angular.module('doctorpricerWebApp')
 		$scope.thisPractice = {};
 	};
 
+	/* When leaving the reviews tab we need to do things to the map */
+	$scope.reloadMap = function() {
+		$rootScope.$broadcast('changePractice');
+	}
+
 	/* Changes the selected practice and updates the map when user does that */
 	$scope.navPractice = function(id, eventBroadcast) {
 		PracticesCollection.selectedPractice = id;
 		$scope.thisPractice = PracticesCollection.displayCollection[PracticesCollection.selectedPractice];
-		if (eventBroadcast) {
+		if ($scope.map.active && eventBroadcast) {
 			$rootScope.$broadcast('changePractice');
+		}
+		if (!$scope.thisPractice.google) {
+			PracticesCollection.getGoogle()
+				.then(function(result) {
+					$scope.thisPractice.google = result;
+				})
 		}
 	};
 
@@ -72,6 +84,7 @@ angular.module('doctorpricerWebApp')
 	});
 
 	$scope.$on('newSearch', function() {
+		$scope.map.active = true;
 		$scope.changeRadius(2000);
 		$scope.selectedItem = $scope.radiuses[0];
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
