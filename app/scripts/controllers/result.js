@@ -32,6 +32,8 @@ angular.module('doctorpricerWebApp')
 		PracticesCollection.changeRadius(distance);
 		PracticesCollection.selectedPractice = -1;
 		$scope.thisPractice = {};
+		$scope.map.active = true;
+		$scope.reloadMap();
 	};
 
 	/* When leaving the reviews tab we need to do things to the map */
