@@ -10,22 +10,24 @@
 
 angular.module('doctorpricerWebApp')
 	.service('PracticesCollection', function($window, $q, $http, $timeout, $rootScope) {
+		var service = new google.maps.places.PlacesService(document.createElement('div'));
 		var self = this;
 		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
 
-		this.getGoogle = function() {
+		this.getGoogle = function(id) {
 			var defer = $q.defer();
-			var name = self.displayCollection[self.selectedPractice]['name'];
-			var lat = self.displayCollection[self.selectedPractice]['lat'];
-			var lng = self.displayCollection[self.selectedPractice]['lng'];
-			var service = new google.maps.places.PlacesService(document.createElement('div'));
+			var name = self.displayCollection[id]['name'];
+			var lat = self.displayCollection[id]['lat'];
+			var lng = self.displayCollection[id]['lng'];
 
-			var request = 	{	
-								'query': name,
-								'radius': 0.5,
-								'location': new google.maps.LatLng(lat, lng)
-							}
+			var request = 	
+			{	
+				'query': name,
+				'radius': 0.5,
+				'location': new google.maps.LatLng(lat, lng)
+			}
+
 			service.textSearch(request, function(result, status) {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
 					service.getDetails({'placeId': result[0].place_id}, function(result2) {
