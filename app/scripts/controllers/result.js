@@ -31,6 +31,7 @@ angular.module('doctorpricerWebApp')
 	$scope.changeRadius = function(distance) {
 		PracticesCollection.changeRadius(distance);
 		PracticesCollection.selectedPractice = -1;
+		PracticesCollection.lastPractice = -1;
 		$scope.thisPractice = {};
 		$scope.map.active = true;
 		$scope.reloadMap();
