@@ -43,6 +43,7 @@ angular.module('doctorpricerWebApp')
 
 	/* Changes the selected practice and updates the map when user does that */
 	$scope.navPractice = function(id, eventBroadcast) {
+		PracticesCollection.lastPractice = PracticesCollection.selectedPractice;
 		PracticesCollection.selectedPractice = id;
 		$scope.thisPractice = PracticesCollection.displayCollection[id];
 		if ($scope.map.active && eventBroadcast) {

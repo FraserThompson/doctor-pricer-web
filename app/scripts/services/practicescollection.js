@@ -14,6 +14,7 @@ angular.module('doctorpricerWebApp')
 		var self = this;
 		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
+		this.lastPractice = -1;
 
 		this.getGoogle = function(id) {
 			var defer = $q.defer();

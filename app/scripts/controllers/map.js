@@ -84,6 +84,10 @@ angular.module('doctorpricerWebApp')
 	        }, 300);
 	    };
 
+	    var defocusMapItem = function(item){
+	    	$scope.markers[item].focus = false;	
+	    }
+
 		/* Focuses on an item  and calculates a route*/
 		var selectMapItem = function(fitBounds) {
 			setDirections(function() {
@@ -91,6 +95,9 @@ angular.module('doctorpricerWebApp')
 					if (fitBounds) {
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng], [SearchModel.coords[0], SearchModel.coords[1]]);
 						map.fitBounds(bounds, {padding: [60, 60]});
+					}
+					if (PracticesCollection.lastPractice != -1) {
+						$scope.markers[PracticesCollection.displayCollection[PracticesCollection.lastPractice].name.split('-').join('')].focus = false; // fixes bug
 					}
 					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
 		        });
