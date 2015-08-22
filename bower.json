@@ -12,6 +12,7 @@
     "angular-bootstrap-show-errors": "~2.3.0",
     "Leaflet.awesome-markers": "~2.0.2",
     "ngDialog": "~0.3.11",
+    "leaflet": "*",
     "angular-scroll": "~0.6.5",
     "angular-ui-router": "~0.2.13",
     "font-awesome": "~4.3.0"

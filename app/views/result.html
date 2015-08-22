@@ -34,7 +34,7 @@
 			<tabset style="padding-top: 15px;">
 				<tab heading="Map" active="map.active">
 					<div class="animate-expand-down" id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
-						<leaflet id="leaflet_map" markers="markers" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
+						<leaflet id="leaflet_map" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
 					<h4 class="text-left" ng-show="christchurch">Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></h4>

@@ -35,7 +35,7 @@ angular.module('doctorpricerWebApp')
 		$scope.map.active = true;
 	};
 
-	/* When leaving the reviews tab we need to do things to the map */
+	/* When leaving the reviews tab we need to recalculate all the maps things */
 	$scope.reloadMap = function() {
 		if (PracticesCollection.selectedPractice !== undefined){
 			$rootScope.$broadcast('changePractice');
@@ -44,12 +44,14 @@ angular.module('doctorpricerWebApp')
 
 	/* Changes the selected practice and updates the map when user does that */
 	$scope.navPractice = function(id, eventBroadcast) {
-		PracticesCollection.lastPractice = PracticesCollection.selectedPractice;
 		PracticesCollection.selectedPractice = id;
 		$scope.thisPractice = PracticesCollection.displayCollection[id];
+
+		// Update the map stuff if it's active and we want to
 		if ($scope.map.active && eventBroadcast) {
 			$rootScope.$broadcast('changePractice');
 		}
+
 		if (!$scope.thisPractice.google) {
 			PracticesCollection.getGoogle(id)
 				.then(function(result) {
@@ -89,7 +91,6 @@ angular.module('doctorpricerWebApp')
 
 	$scope.$on('newSearch', function() {
 		$scope.map.active = true;
-		$scope.changeRadius(2000);
 		$scope.selectedItem = $scope.radiuses[0];
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
 			$rootScope.$apply(function() {
@@ -97,6 +98,7 @@ angular.module('doctorpricerWebApp')
 			});
 			$scope.christchurch = SearchModel.christchurch;
 			$scope.userAddress = SearchModel.address;
+			$scope.changeRadius(2000);
 			setHeight();
 		}, function() {
 			console.log('calculating address failed');
