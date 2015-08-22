@@ -51,9 +51,9 @@ angular.module('doctorpricerWebApp')
 		/* Fetches the data from the JSON via a promise*/
 		this.fetchData = function(lat, lng, age) {
 			var defer = $q.defer();
-			$http.get('http://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
 				.success(function(data) {
-					self.collection = data;
+					self.collection = data.rows;
 					defer.resolve();
 				})
 				.error(function() {
