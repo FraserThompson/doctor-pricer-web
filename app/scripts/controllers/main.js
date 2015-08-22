@@ -12,6 +12,7 @@ angular.module('doctorpricerWebApp')
   	$scope.options = {
   		country: 'nz'
   	};
+    $scope.error = "";
     $scope.details = {};
     
     if ($window.outerWidth > 545) {
@@ -30,10 +31,15 @@ angular.module('doctorpricerWebApp')
   	$scope.next = function() {
       $scope.$broadcast('show-errors-check-validity');
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
+      $scope.error = "";
       $state.go('result', {
         'age': $scope.age, 
         'lat': $scope.details.geometry.location.lat(), 
         'lng': $scope.details.geometry.location.lng()
+      })
+      .then(function() {}, function() {
+        $scope.error = "Server under heavy load right now, please try again later.";
+        $scope.isLoading = false;
       });
     };
   });

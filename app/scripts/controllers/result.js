@@ -13,6 +13,7 @@ angular.module('doctorpricerWebApp')
   	$scope.sidebar = 1;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
+  	$scope.christchurch = SearchModel.christchurch;
   	$scope.userAddress = SearchModel.address;
   	$scope.map = {'active': true};
   	$scope.radiuses = [
@@ -94,6 +95,7 @@ angular.module('doctorpricerWebApp')
 			$rootScope.$apply(function() {
 				$rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
 			});
+			$scope.christchurch = SearchModel.christchurch;
 			$scope.userAddress = SearchModel.address;
 			setHeight();
 		}, function() {

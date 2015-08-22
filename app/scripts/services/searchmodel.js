@@ -23,6 +23,9 @@ angular.module('doctorpricerWebApp')
 			var coordsObj = new google.maps.LatLng(lat, lng);
 			var geocoderProper = geocoder.geocode({'latLng': coordsObj}, function (results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
+					if (results[0].formatted_address.indexOf("Christchurch") > -1) {
+				        self.christchurch = true;
+				    }
 					self.address = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name + ', ' + results[0].address_components[2].short_name;
 					self.displayAddress = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name;
 					$rootScope.$broadcast('geolocatedAddress');
