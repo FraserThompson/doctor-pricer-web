@@ -30,16 +30,15 @@ angular.module('doctorpricerWebApp')
 	/* Calls the changeRadius method from the collection when user does that */
 	$scope.changeRadius = function(distance) {
 		PracticesCollection.changeRadius(distance);
-		PracticesCollection.selectedPractice = -1;
-		PracticesCollection.lastPractice = -1;
 		$scope.thisPractice = {};
 		$scope.map.active = true;
-		$scope.reloadMap();
 	};
 
 	/* When leaving the reviews tab we need to do things to the map */
 	$scope.reloadMap = function() {
-		$rootScope.$broadcast('changePractice');
+		if (PracticesCollection.selectedPractice !== undefined){
+			$rootScope.$broadcast('changePractice');
+		}
 	}
 
 	/* Changes the selected practice and updates the map when user does that */

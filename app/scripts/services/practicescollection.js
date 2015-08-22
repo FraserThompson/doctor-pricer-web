@@ -14,7 +14,7 @@ angular.module('doctorpricerWebApp')
 		var self = this;
 		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
-		this.lastPractice = -1;
+		this.lastPractice = undefined;
 
 		this.getGoogle = function(id) {
 			var defer = $q.defer();
@@ -51,9 +51,12 @@ angular.module('doctorpricerWebApp')
 		/* Fetches the data from the JSON via a promise*/
 		this.fetchData = function(lat, lng, age) {
 			var defer = $q.defer();
+
 			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+			// $http.get('http://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
 				.success(function(data) {
 					self.collection = data.rows;
+					// self.collection = data;
 					defer.resolve();
 				})
 				.error(function() {
@@ -112,5 +115,7 @@ angular.module('doctorpricerWebApp')
 			okay.sort(compare);
 			angular.copy(okay, this.displayCollection);
 			updateCount();
+			self.selectedPractice = undefined;
+			self.lastPractice = undefined;
 		};
 	});

@@ -96,10 +96,10 @@ angular.module('doctorpricerWebApp')
 						var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng], [SearchModel.coords[0], SearchModel.coords[1]]);
 						map.fitBounds(bounds, {padding: [60, 60]});
 					}
-					if (PracticesCollection.lastPractice != -1) {
+					if (PracticesCollection.lastPractice !== undefined) {
 						$scope.markers[PracticesCollection.displayCollection[PracticesCollection.lastPractice].name.split('-').join('')].focus = false; // fixes bug
 					}
-					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;		
+					$scope.markers[PracticesCollection.displayCollection[PracticesCollection.selectedPractice].name.split('-').join('')].focus = true;
 		        });
 		    });
 		};
