@@ -7,6 +7,10 @@
   z-index: 1;
 }
 
+.leaflet-control-layers {
+  visibility: hidden !important;
+}
+
 .fa-star, .fa-star-o {
   color: orange !important;
 }
