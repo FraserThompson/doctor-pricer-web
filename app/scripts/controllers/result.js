@@ -21,6 +21,7 @@ angular.module('doctorpricerWebApp')
 		{id: 5000, name: '5km'},
 		{id: 10000, name: '10km'},
 		{id: 15000, name: '15km'},
+		{id: 30000, name: '30km'},
 	];
 
 	/* Inverses the sidebar variable which determines whether the sidebar is active*/
