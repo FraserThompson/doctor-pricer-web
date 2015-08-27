@@ -59,15 +59,16 @@ angular.module('doctorpricerWebApp')
 			}, 15000)
 
 
-			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=60000')
 				.success(function(data) {
 					self.collection = data.rows;
 					defer.resolve();
 				})
 				.error(function() {
-					$http.get('http://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=15000')
+					$http.get('http://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=60000')
 						.success(function(data) {
 							self.collection = data;
+							console.log(data.length);
 							defer.resolve();
 						})
 						.error(function() {
