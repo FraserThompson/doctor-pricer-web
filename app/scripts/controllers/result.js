@@ -8,7 +8,7 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $window, $state, leafletData, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $window, $state, ngDialog, leafletData, PracticesCollection, SearchModel) {
   	/* $scope variables */
   	$scope.sidebar = 1;
   	$scope.practices = PracticesCollection.displayCollection;
@@ -22,7 +22,32 @@ angular.module('doctorpricerWebApp')
 		{id: 10000, name: '10km'},
 		{id: 15000, name: '15km'},
 		{id: 30000, name: '30km'},
+		{id: 60000, name: '60km'}
 	];
+
+	$scope.reportModal = function() {
+		ngDialog.open({ template: 'views/report.html',
+		controller: ['$scope', "$http",  function($scope, $http) {
+				$scope.status = null;
+				$scope.sending = false;
+				$scope.submitForm = function(){
+					$scope.sending = true;
+					$scope.status = "Sending...";
+					$http.get('https://api.doctorpricer.co.nz/contact', {
+						'params': $scope.form
+					})
+					.success(function() {
+						$scope.status = "Message sent.";
+						console.log('good');
+					})
+					.error(function() {
+						$scope.status = "Error sending message, try emailing doctorpricernz@gmail.com.";
+						console.log('bad');
+					});
+				}
+	    	}]
+		});
+	}
 
 	/* Inverses the sidebar variable which determines whether the sidebar is active*/
     $scope.toggleSidebar = function() {

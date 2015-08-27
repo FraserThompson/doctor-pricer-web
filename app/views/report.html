@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <form ng-submit="submitForm()">
+    <div class="form-group">
+      <label for="inputEmail">Email address (optional)</label>
+      <input ng-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="inputWhich">What's incorrect?</label>
+      <textarea ng-model="form.text" id="inputWhich" cols="40" rows="5"></textarea>
+    </div>
+    <button ng-hide="sending" type="submit" class="btn btn-default">Submit</button>
+    <h4>{{status}}</h4>
+  </form>
+</div>

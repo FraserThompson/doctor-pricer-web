@@ -22,6 +22,9 @@ angular
     'ui.bootstrap.showErrors',
     'ui.bootstrap'
   ])
+  .run(function() {
+    FastClick.attach(document.body);
+  })
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
