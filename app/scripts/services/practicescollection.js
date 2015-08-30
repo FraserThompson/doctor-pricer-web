@@ -46,7 +46,6 @@ angular.module('doctorpricerWebApp')
 					defer.reject();
 				}
 			});
-
 			return defer.promise;
 		}
 
@@ -58,43 +57,14 @@ angular.module('doctorpricerWebApp')
 				defer.reject();
 			}, 15000)
 
-
 			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=60000')
 				.success(function(data) {
 					self.collection = data.rows;
 					defer.resolve();
 				})
 				.error(function() {
-					$http.get('http://morning-sea-4894.herokuapp.com/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=60000')
-						.success(function(data) {
-							self.collection = data;
-							console.log(data.length);
-							defer.resolve();
-						})
-						.error(function() {
-							defer.reject();
-						});
+					defer.reject();
 				});
-			return defer.promise;
-		};
-
-		/* Fetching data the old way */
-		this.fetchDataFallback = function() {
-			var defer = $q.defer();
-			// After 10 seconds the data fails
-			var dataFail = function() {
-				console.log('data fail');
-				defer.reject();
-			};
-			var dataTimeout = $timeout(dataFail, 10000);
-			var url = 'https://fraserthompson.github.io/cheap-practice-finder/data.json.js?callback=JSON_CALLBACK';
-			// Succesfull callback returns a good promise and fills the collection
-			window.callback = function(data) {
-			    $timeout.cancel(dataTimeout);
-			    self.collection = data.practices;
-			    defer.resolve();
-			};
-			$http.jsonp(url);
 			return defer.promise;
 		};
 

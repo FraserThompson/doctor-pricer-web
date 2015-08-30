@@ -9,7 +9,7 @@
 				</div>
 			</div>
 			<div class="list-group scrollable nopadding animate-expand-down" id="practice-list" auto-scroll>
-				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices">
+				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices track by $index">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
 							<h4 ng-if="practice.price < 999"><strong>${{practice.price | number: 2}}</strong></h4>
@@ -57,7 +57,7 @@
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-lg-6 repeat-animate" ng-repeat="review in thisPractice.google.reviews">
+							<div class="col-lg-6 repeat-animate" ng-repeat="review in thisPractice.google.reviews track by $index">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h4 class="panel-title">{{review.author_name}}

@@ -38,11 +38,9 @@ angular.module('doctorpricerWebApp')
 					})
 					.success(function() {
 						$scope.status = "Message sent.";
-						console.log('good');
 					})
 					.error(function() {
-						$scope.status = "Error sending message, try emailing doctorpricernz@gmail.com.";
-						console.log('bad');
+						$scope.status = "Error sending message, try emailing doctorpricernz@gmail.com instead.";
 					});
 				}
 	    	}]
