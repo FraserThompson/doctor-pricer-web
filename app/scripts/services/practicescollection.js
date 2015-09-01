@@ -18,6 +18,7 @@ angular.module('doctorpricerWebApp')
 		this.selectedPractice = undefined;
 		this.christchurch = false;
 
+		/* Gets google reviews for a place */
 		this.getGoogle = function(id) {
 			var defer = $q.defer();
 			var name = self.displayCollection[id]['name'];
@@ -57,9 +58,9 @@ angular.module('doctorpricerWebApp')
 				defer.reject();
 			}, 15000)
 
-			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&radius=60000')
+			$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
 				.success(function(data) {
-					self.collection = data.rows;
+					self.collection = data;
 					defer.resolve();
 				})
 				.error(function() {
@@ -86,17 +87,17 @@ angular.module('doctorpricerWebApp')
 		};
 
 		/* Public function for filtering to radius */
-		this.changeRadius = function(distance) {
+		this.changeRadius = function(index) {
 			var okay = [];
-			angular.forEach (self.collection, function(model) {
-				if (model.distance <= distance){
-					okay.push(model);
-				}
-			});
+			var i = 0;
+			do {
+				okay = okay.concat.apply(okay, self.collection[i].data);
+				i++;
+			} while (i <= index);
 			okay.sort(compare);
 			angular.copy(okay, this.displayCollection);
+			updateCount();
 			self.selectedPractice = undefined;
 			self.lastPractice = undefined;
-			updateCount();
 		};
 	});

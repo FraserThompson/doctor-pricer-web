@@ -4,7 +4,7 @@
 			<div class="row" style="padding-left: 15px;">
 				<div class="col-md-12">
 					<h3><small>Found {{practiceCount}} practices within
-						<select ng-model="selectedItem" ng-init="selectedItem = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
+						<select ng-disabled="radiuses.length === 1" ng-model="selectedItem" ng-init="selectedItem = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
 					</small></h3>
 				</div>
 			</div>
@@ -43,12 +43,6 @@
 					<div style="padding: 0px 15px 15px 15px;">
 						<div class="row">
 							<div class="col-lg-12">
-								<div ng-hide="noPractices" class="pull-right">
-									<div class="btn-group" style="padding-top: 15px;" role="group" aria-label="links">
-										<a class="btn btn-cool" href='{{thisPractice.url}}' target="_blank">Website</a>
-										<a class="btn btn-cool" href="http://maps.apple.com/?saddr={{userAddress}}&daddr={{thisPractice.google.formatted_address}}" target="_blank">Directions</a>
-									</div>
-								</div>
 								<h3>{{thisPractice.name}} <small>{{thisPractice.pho}}</small></h3>
 								<rating ng-show="thisPractice.google.rating" ng-model="thisPractice.google.rating" max="5" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></rating>
 								<a ng-hide="thisPractice.google.rating || thisPractice.google.reviews" href="{{thisPractice.google.url}}">Be the first to post a review on Google Plus</a>
@@ -81,6 +75,6 @@
 				</tab>
 			</tabset>
 		</div>
-		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-click="reportModal()" href="">Incorrect information?<a></small></h3>
+		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-show="map.active" ng-click="reportModal()" href="">Incorrect information or missing practices?<a></small></h3>
 	</div>
 </div>

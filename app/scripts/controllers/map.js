@@ -40,9 +40,8 @@ angular.module('doctorpricerWebApp')
 			$scope.toggleSidebar();
 		});
 
-		/* Opens popup and puts route on map when user clicks marker*/
+		/* Puts route on map when user clicks marker*/
 		var markerClick = function(marker, id) {
-	    	marker.openPopup(); 
 	    	$scope.navPractice(id, false);
 			setDirections(function(){});
 	    	$rootScope.$broadcast('updateScroll');
@@ -62,7 +61,7 @@ angular.module('doctorpricerWebApp')
             });
 
 			markers.push(start);
-		   	latLngs.push(SearchModel.coords[0], SearchModel.coords[1]);
+		   	latLngs.push([SearchModel.coords[0], SearchModel.coords[1]]);
 
 		   // Make a marker for each practice
 	        angular.forEach(PracticesCollection.displayCollection, function(value, key) {
@@ -71,14 +70,13 @@ angular.module('doctorpricerWebApp')
 					'title': value.name,
 					'icon': localIcons.markerRed
 				});
-				marker.bindPopup('<p>' + value.name + '<p>')
+				marker.bindPopup('<h5><a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.pho + '</small></h5>')
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);
 			});
 
 			var bounds = L.latLngBounds(latLngs);
-
 			// Wait for animation to finish then get the map and touch it with your magic fingers
 		   	$timeout(function() {
                 leafletData.getMap().then(function(map) {

@@ -16,15 +16,9 @@ angular.module('doctorpricerWebApp')
   	$scope.christchurch = SearchModel.christchurch;
   	$scope.userAddress = SearchModel.address;
   	$scope.map = {'active': true};
-  	$scope.radiuses = [
-		{id: 2000, name: '2km'},
-		{id: 5000, name: '5km'},
-		{id: 10000, name: '10km'},
-		{id: 15000, name: '15km'},
-		{id: 30000, name: '30km'},
-		{id: 60000, name: '60km'}
-	];
+  	$scope.radiuses = [];
 
+	/* Pops up the modal for reporting badthings */
 	$scope.reportModal = function() {
 		ngDialog.open({ template: 'views/report.html',
 		controller: ['$scope', "$http",  function($scope, $http) {
@@ -50,11 +44,11 @@ angular.module('doctorpricerWebApp')
 	/* Inverses the sidebar variable which determines whether the sidebar is active*/
     $scope.toggleSidebar = function() {
     	$scope.sidebar = !$scope.sidebar;
-    }
+    };
 
 	/* Calls the changeRadius method from the collection when user does that */
-	$scope.changeRadius = function(distance) {
-		PracticesCollection.changeRadius(distance);
+	$scope.changeRadius = function(index) {
+		PracticesCollection.changeRadius(index);
 		$scope.thisPractice = {};
 		$scope.map.active = true;
 	};
@@ -64,7 +58,7 @@ angular.module('doctorpricerWebApp')
 		if (PracticesCollection.selectedPractice !== undefined){
 			$rootScope.$broadcast('changePractice');
 		}
-	}
+	};
 
 	/* Changes the selected practice and updates the map when user does that */
 	$scope.navPractice = function(id, eventBroadcast) {
@@ -76,6 +70,7 @@ angular.module('doctorpricerWebApp')
 			$rootScope.$broadcast('changePractice');
 		}
 
+		// Get reviews from Google if not there
 		if (!$scope.thisPractice.google) {
 			PracticesCollection.getGoogle(id)
 				.then(function(result) {
@@ -102,27 +97,32 @@ angular.module('doctorpricerWebApp')
 	w.bind('resize', function() {
 		PracticesCollection.screenHeight = $window.innerHeight;
 		setHeight();
-	})
-
-	$scope.$on('countUpdated', function() {
-		$scope.practiceCount = PracticesCollection.length;
-		if (PracticesCollection.displayCollection.length === 0) {
-			$scope.noPractices = 1;
-		} else {
-			$scope.noPractices = 0;
-		}
 	});
 
+	// Fired whenever the radius is changed to update the displayed count
+	$scope.$on('countUpdated', function() {
+		$scope.practiceCount = PracticesCollection.length;
+		$scope.noPractices = PracticesCollection.displayCollection.length === 0 ? 1 : 0;
+	});
+
+	// Fired whenever a new search is made
 	$scope.$on('newSearch', function() {
 		$scope.map.active = true;
+
+		// Add the radius options from what the server returned
+		$scope.radiuses = [];
+		for (var i = 0; i < PracticesCollection.collection.length; i++){
+  			$scope.radiuses.push({id: i, name: PracticesCollection.collection[i].value/1000 + 'km'})
+  		}
+
 		$scope.selectedItem = $scope.radiuses[0];
 		SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
+			$scope.changeRadius(0);
 			$rootScope.$apply(function() {
 				$rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
 			});
 			$scope.christchurch = SearchModel.christchurch;
 			$scope.userAddress = SearchModel.address;
-			$scope.changeRadius(2000);
 			setHeight();
 		}, function() {
 			console.log('calculating address failed');
