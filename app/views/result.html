@@ -39,7 +39,7 @@
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
 					<h4 class="text-left" ng-show="christchurch">Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></h4>
 				</tab>
-				<tab heading="Reviews" ng-show="thisPractice.name" deselect="reloadMap()">
+				<tab heading="Reviews ({{thisPractice.google.reviewCount || 0}})" ng-show="thisPractice.google" deselect="reloadMap()" class="animate-show">
 					<div style="padding: 0px 15px 15px 15px;">
 						<div class="row">
 							<div class="col-lg-12">

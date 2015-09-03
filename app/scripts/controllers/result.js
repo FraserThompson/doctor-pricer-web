@@ -11,6 +11,7 @@ angular.module('doctorpricerWebApp')
   .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $window, $state, ngDialog, leafletData, PracticesCollection, SearchModel) {
   	/* $scope variables */
   	$scope.sidebar = 1;
+  	$scope.reviewCount = 0;
   	$scope.practices = PracticesCollection.displayCollection;
   	$scope.practiceCount = PracticesCollection.length;
   	$scope.christchurch = SearchModel.christchurch;
@@ -74,8 +75,9 @@ angular.module('doctorpricerWebApp')
 		if (!$scope.thisPractice.google) {
 			PracticesCollection.getGoogle(id)
 				.then(function(result) {
-					 PracticesCollection.displayCollection[id]['google'] = result;
-				})
+					PracticesCollection.displayCollection[id]['google'] = result;
+					PracticesCollection.displayCollection[id]['google']['reviewCount'] = result.reviews ? result.reviews.length : 0;
+				});
 		}
 	};
 
