@@ -35,15 +35,17 @@ angular.module('doctorpricerWebApp')
 
 	   	/* Do things to the map for a practice change */
 		$scope.$on('changePractice', function() {
-			PracticesCollection.displayCollection[PracticesCollection.selectedPractice].marker.openPopup(); 
-			setDirections(function() { fitBounds(); });
+			setDirections();
+			fitBounds(function() {
+				PracticesCollection.displayCollection[PracticesCollection.selectedPractice].marker.openPopup(); 
+			});
 			$scope.toggleSidebar();
 		});
 
 		/* Puts route on map when user clicks marker*/
 		var markerClick = function(marker, id) {
 	    	$scope.navPractice(id, false);
-			setDirections(function(){});
+			setDirections();
 	    	$rootScope.$broadcast('updateScroll');
 		}
 
@@ -90,16 +92,17 @@ angular.module('doctorpricerWebApp')
 	    };
 
 		/* Fits the maps to specified bounds */
-		var fitBounds = function() {
+		var fitBounds = function(callback) {
 			leafletData.getMap().then(function(map) {
 				var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng],
 					[SearchModel.coords[0], SearchModel.coords[1]]);
 				map.fitBounds(bounds, {padding: [60, 60]});
+				callback();
 			});
 		}
 
 	    /* Puts the route on the map */
-		var setDirections = function (callback) {
+		var setDirections = function () {
 			var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng);
 			var origin = new google.maps.LatLng(SearchModel.coords[0], SearchModel.coords[1]);
 	        var request = {
@@ -119,7 +122,6 @@ angular.module('doctorpricerWebApp')
 	            		latlngs: latlngs,
 	            		type: 'polyline'
 	            	};
-	            	callback();
 	            } else {
 	            	// Handle this error
 	            	console.log('Error when fetching route: ' + status);
