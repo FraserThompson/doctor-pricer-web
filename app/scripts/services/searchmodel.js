@@ -25,6 +25,8 @@ angular.module('doctorpricerWebApp')
 				if (status === google.maps.GeocoderStatus.OK) {
 					if (results[0].formatted_address.indexOf("Christchurch") > -1) {
 				        self.christchurch = true;
+				    } else {
+				    	self.christchurch = false;
 				    }
 					self.address = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name + ', ' + results[0].address_components[2].short_name;
 					self.displayAddress = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name;
