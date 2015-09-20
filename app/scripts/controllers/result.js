@@ -8,7 +8,8 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $stateParams, $timeout, $rootScope, $window, $state, ngDialog, leafletData, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', function ($scope, $timeout, $rootScope, $window, $state, practices, ngDialog, leafletData, PracticesCollection, SearchModel) {
+  	if (practices === 0){$state.go('home');}
   	/* $scope variables */
   	$scope.sidebar = 1;
   	$scope.reviewCount = 0;

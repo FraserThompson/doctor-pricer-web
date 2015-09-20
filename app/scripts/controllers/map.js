@@ -142,11 +142,11 @@ angular.module('doctorpricerWebApp')
 	        layers: {
 	        	baselayers: {
 	        		osm: {
-	        			name: 'OSM',
-	        			url: 'http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
+	        			name: 'MapBox',
+	        			url: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZnJhc2VydGhvbXBzb24iLCJhIjoiY2llcnF2ZXlhMDF0cncwa21yY2tyZjB5aCJ9.iVxJbdbZiWVfHItWtZfKPQ',
 	        			type: 'xyz',
 	        			layerOptions: {
-	                        attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_system">MapQuest</a>',
+	                    	attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
 	                    }
 	        		}
 	        	}

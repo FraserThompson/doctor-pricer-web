@@ -42,8 +42,12 @@ angular
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
         resolve: {
-          practices: function($stateParams, PracticesCollection) {
-            return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
+          practices: function($state, $stateParams, PracticesCollection) {
+            if (!isNaN(parseFloat($stateParams.lat)) && !isNaN(parseFloat($stateParams.lng)) && !isNaN(parseInt($stateParams.age))){
+              return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
+            } else {
+              return 0;
+            }
           }
         },
         onEnter: function($stateParams, $rootScope, SearchModel, PracticesCollection) {
