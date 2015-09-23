@@ -257,9 +257,9 @@ input[type=number] {
 
 /* View transition stuff */
 .view-animate.ng-enter, .view-animate.ng-leave {
-  transition: transform 500ms ease 1s;
-  -moz-transition: transform 500ms ease 1s;
-  -webkit-transition: transform 500ms ease 1s;
+  transition: transform 500ms ease;
+  -moz-transition: transform 500ms ease;
+  -webkit-transition: transform 500ms ease;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
   display:block;
@@ -397,7 +397,7 @@ input[type=number] {
     margin-left: -80px !important;
   }
   h3 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   ::-webkit-input-placeholder { font-size: 85%; }
