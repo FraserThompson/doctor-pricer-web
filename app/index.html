@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <link rel="stylesheet" href="styles-conditional/autocomplete-{{autocompleteSize}}.css">
   </head>
   <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -79,6 +78,7 @@
 	  ga('create', 'UA-58125171-1', 'auto');
 	  ga('send', 'pageview');
 	</script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -97,7 +97,6 @@
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&sensor=false"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/directives.js"></script>
@@ -111,5 +110,7 @@
         <script src="scripts-thirdparty/ui-bootstrap-custom-0.13.3.js"></script>
         <script src="scripts-thirdparty/ui-bootstrap-custom-tpls-0.13.3.js"></script>
         <!-- endbuild -->
+
+    <link rel="stylesheet" href="styles-conditional/autocomplete-{{autocompleteSize}}.css">
 </body>
 </html>
