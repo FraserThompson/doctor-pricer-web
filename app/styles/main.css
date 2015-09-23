@@ -221,17 +221,15 @@ input[type=number] {
 }
 .fb-like{
   position: absolute !important;
-  z-index: 1000;
+  z-index: 1;
+  top: 15px;
+  left: 65px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
-  }
-  .fb-like{
-    top: 15px;
-    left: 65px;
   }
 
   .appLink {
@@ -337,7 +335,8 @@ input[type=number] {
   }
 
   .fb-like{
-    margin-left: 10px !important;
+    left: 10px !important;
+    top: auto;
     bottom: 15px;
   }
   .row-offcanvas {
