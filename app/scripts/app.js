@@ -34,6 +34,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         onEnter: function($rootScope) {
+          $rootScope.hideFb = false;
           $rootScope.autocompleteSize = "big"; // dynamically load the css to size the Google Autocomplete box
         }
       })
@@ -51,6 +52,10 @@ angular
           }
         },
         onEnter: function($stateParams, $rootScope, SearchModel, PracticesCollection) {
+          // Hide facebook like if we're on mobile
+          if (window.innerWidth <= 481){
+            $rootScope.hideFb = true;
+          }
           SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
           $rootScope.$broadcast('newSearch');
