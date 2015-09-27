@@ -131,6 +131,10 @@ input[type=number] {
   background-color: #0089CC;
   color: white;
 }
+
+.navbar-brand {
+    color: white !important;
+}
 .navbar-brand-centred {
     position: absolute;
     left: 50%;
@@ -138,7 +142,6 @@ input[type=number] {
     padding-left: 0px;
     padding-right: 0px;
     width: 210px;
-    color: white;
     text-align: center;
     font-size: 36px;
 }
