@@ -77,7 +77,7 @@ angular.module('doctorpricerWebApp')
 			PracticesCollection.getGoogle(id)
 				.then(function(result) {
 					PracticesCollection.displayCollection[id]['google'] = result;
-					PracticesCollection.displayCollection[id]['google']['reviewCount'] = result.reviews ? result.reviews.length : 0;
+					PracticesCollection.displayCollection[id]['reviewCount'] = "(" + (result.reviews ? result.reviews.length : 0).toString() + ")";
 				});
 		}
 	};
