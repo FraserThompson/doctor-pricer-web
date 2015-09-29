@@ -32,7 +32,8 @@ angular.module('doctorpricerWebApp')
 			link: function(scope, element) {
 				scope.$on('updateScroll', function() {
 					var el = angular.element(element[0]);
-					el.duScrollTo(0, PracticesCollection.selectedPractice * 115, 250);
+					var practice = angular.element(document.getElementById('practice_' + PracticesCollection.selectedPractice));
+					el.duScrollTo(practice, 0, 250);
 				});
 			}
 		};
