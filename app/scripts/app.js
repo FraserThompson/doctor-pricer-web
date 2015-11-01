@@ -22,8 +22,9 @@ angular
     'ui.bootstrap.showErrors',
     'ui.bootstrap'
   ])
-  .run(function() {
+  .run(function($rootScope) {
     FastClick.attach(document.body);
+    $rootScope.title = "DoctorPricer";
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
