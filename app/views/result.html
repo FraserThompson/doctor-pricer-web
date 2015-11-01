@@ -44,7 +44,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<h3>{{thisPractice.name}} <small>{{thisPractice.pho}}</small></h3>
-								<rating ng-show="thisPractice.google.rating" ng-model="thisPractice.google.rating" max="5" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></rating>
+								<uib-rating ng-show="thisPractice.google.rating" ng-model="thisPractice.google.rating" max="5" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></uib-rating>
 								<a ng-hide="thisPractice.google.rating || thisPractice.google.reviews" href="{{thisPractice.google.url}}">Be the first to post a review on Google Plus</a>
 								</p>
 							</div>
@@ -55,7 +55,7 @@
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h4 class="panel-title">{{review.author_name}}
-										<rating style="float: right;" ng-model="review.rating" max="5" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></rating></h4>
+										<uib-rating style="float: right;" ng-model="review.rating" max="5" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></uib-rating></h4>
 									</div>
 									<div class="panel-body">
 										<span>{{review.text}}</span>
@@ -68,7 +68,7 @@
 							<div class="col-lg-12">
 								<a href="{{thisPractice.google.url}}" target="_blank">Read all reviews on Google Plus</a>
 								<br>
-								<img src="images/powered-by-google-on-white.png">
+								<img src="images/powered_by_google_on_white.png">
 							</div>
 						</div>
 					</div>
