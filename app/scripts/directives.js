@@ -59,4 +59,15 @@ angular.module('doctorpricerWebApp')
 				});
 			}
 		}
+	})
+	.directive('disableTap', function($timeout) {
+		return {
+			link: function() {
+				$timeout(function() {
+					var container = document.getElementsByClassName('pac-container');
+					// disable ionic data tap
+					angular.element(container).attr('data-tap-disabled', 'true');
+				},500);
+			}
+		};
 	});
