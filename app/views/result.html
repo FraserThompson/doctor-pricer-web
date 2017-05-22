@@ -33,7 +33,7 @@
           	</p>
 			<uib-tabset style="padding-top: 15px;">
 				<uib-tab heading="Map" active="map.active">
-					<div class="animate-expand-down" id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl" data-tap-disabled="true">
+					<div class="animate-expand-down" id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
 						<leaflet id="leaflet_map" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
