@@ -47,7 +47,7 @@ angular
         controller: 'MainCtrl',
         onEnter: function($rootScope) {
           $rootScope.hideFb = false;
-          $rootScope.autocompleteSize = "big"; // dynamically load the css to size the Google Autocomplete box
+          $rootScope.autocompleteSize = "big-autocomplete"; // dynamically load the css to size the Google Autocomplete box
         }
       })
       .state('result', {
@@ -71,7 +71,7 @@ angular
           SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
           $rootScope.$broadcast('newSearch');
-          $rootScope.autocompleteSize = "small"; // dynamically load the css to size the Google Autocomplete box
+          $rootScope.autocompleteSize = "small-autocomplete"; // dynamically load the css to size the Google Autocomplete box
         }
       });
   });

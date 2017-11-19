@@ -112,6 +112,7 @@ angular.module('doctorpricerWebApp')
 	// Fired whenever a new search is made
 	$scope.$on('newSearch', function() {
 		$scope.map.active = true;
+		ga('send', 'pageview', '/results.php?address=' + SearchModel.address + '&age=' + SearchModel.age);
 
 		// Add the radius options from what the server returned
 		$scope.radiuses = [];

@@ -3,12 +3,12 @@
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.11.1.
 
-This will soon replace the ugly old Backbone.js version over at doctorpricer.co.nz. It offers a number of usability and performance improvements and looks much prettier.
+## Dev
 
-## Build & development
+Run `npm run serve` for preview. It'll be served at port `9001`.
 
-Run `grunt` for building and `grunt serve` for preview.
+If you want to change the API URL to something local then the place to do that is `app/scripts/services/practicescollection.js` at line 82.
 
-## Testing
+## Production
 
-Running `grunt test` will run the unit tests with karma.
+Run `npm run build` to build it. Currently we deploy this by checking out gh-pages then committing the dist folder, which is a bit rubbish so we'll look at improving this in the future.

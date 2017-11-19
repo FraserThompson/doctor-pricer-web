@@ -411,3 +411,20 @@ input[type=number] {
     font-size: 16px;
   }
 }
+
+
+/* Google Autocomplete stuff */
+.big-autocomplete .pac-container {
+  width: 40% !important;
+}
+.big-autocomplete .pac-item {
+  height: 50px !important;
+  font-size: 16px !important;
+}
+.big-autocomplete .pac-item-query {
+  font-size: 18px !important;
+}
+
+.small-autocomplete .pac-container {
+  width: 24em !important;
+}

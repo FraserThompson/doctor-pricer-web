@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title ng-bind="title">DoctorPricer</title>
-    <meta name="description" content="Compare the fees of practices in NZ. Find the cheapest doctor for you and your family!">
+    <meta name="description" content="Don't pay more than you should for a doctors visit! Compare NZ doctor fees from over 900 practices across New Zealand with this free tool. ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -21,7 +21,7 @@
     <!-- endbuild -->
   </head>
 
-  <body>
+  <body class="{{autocompleteSize}}">
     <script>
       var host = "doctorpricer.co.nz";
       if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -55,7 +55,7 @@
 
           </ul>
         </div>
-        <div collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">
+        <div uib-collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">
           <form class="navbar-form navbar-right" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()" ng-cloak>
             <div class="form-group" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty }" show-errors='{showSuccess: true}'>
               <label class="sr-only" for="address">Address</label>
@@ -119,7 +119,5 @@
         <script src="scripts/services/practicescollection.js"></script>
         <script src="scripts/services/searchmodel.js"></script>
         <!-- endbuild -->
-
-    <link rel="stylesheet" href="styles-conditional/autocomplete-{{autocompleteSize}}.css">
 </body>
 </html>
