@@ -12,9 +12,9 @@ angular.module('doctorpricerWebApp')
 	.service('PracticesCollection', function($window, $q, $http, $timeout, $rootScope) {
 		var service = new google.maps.places.PlacesService(document.createElement('div'));
 		var self = this;
-		this.displayCollection =  []; //after filtering for the users radius
 		this.length = 0;
 		this.lastPractice = undefined;
+		this.displayCollection = [];
 		this.selectedPractice = undefined;
 		this.christchurch = false;
 
@@ -82,7 +82,6 @@ angular.module('doctorpricerWebApp')
 			$http.get('https://localhost:8443/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
 			//$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
 				.success(function(data) {
-					console.log(data);
 					self.collection = data;
 					defer.resolve();
 				})
@@ -90,12 +89,6 @@ angular.module('doctorpricerWebApp')
 					defer.reject();
 				});
 			return defer.promise;
-		};
-
-		/* Fires an event when the count is updated so everyone knows */
-		var updateCount = function(){
-			self.length = self.displayCollection.length;
-			$rootScope.$broadcast('countUpdated');
 		};
 
 		/* Simple comparison function */
@@ -109,18 +102,4 @@ angular.module('doctorpricerWebApp')
 		  return 0;
 		};
 
-		/* Public function for filtering to radius */
-		this.changeRadius = function(index) {
-			var okay = [];
-			var i = 0;
-			do {
-				okay = okay.concat.apply(okay, self.collection[i].data);
-				i++;
-			} while (i <= index);
-			okay.sort(compare);
-			angular.copy(okay, this.displayCollection);
-			updateCount();
-			self.selectedPractice = undefined;
-			self.lastPractice = undefined;
-		};
 	});

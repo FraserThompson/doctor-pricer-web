@@ -3,8 +3,8 @@
 		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" >
 			<div class="row" style="padding-left: 15px;">
 				<div class="col-md-12">
-					<h3><small>Found {{practiceCount}} practices within
-						<select ng-disabled="radiuses.length === 1" ng-model="selectedItem" ng-init="selectedItem = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedItem.id)"></select>
+					<h3><small>Found {{practices.length}} practices within
+						<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedRadius.key)"></select>
 					</small></h3>
 				</div>
 			</div>

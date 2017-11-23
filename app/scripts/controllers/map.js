@@ -30,6 +30,7 @@ angular.module('doctorpricerWebApp')
 
 		/* When there are new practices to put on the map */
 	   	$scope.$on('countUpdated', function() {
+			console.log('count updated');
 			initializeMap();
 		});
 
