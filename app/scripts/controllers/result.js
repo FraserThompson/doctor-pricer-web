@@ -28,7 +28,7 @@ angular.module('doctorpricerWebApp')
                 $scope.submitForm = function(){
                     $scope.sending = true;
                     $scope.status = "Sending...";
-                    $http.get('https://api.doctorpricer.co.nz/contact', {
+                    $http.get($rootScope.apiUrl + '/contact', {
                         'params': $scope.form
                     })
                     .success(function() {

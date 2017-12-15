@@ -79,8 +79,7 @@ angular.module('doctorpricerWebApp')
 				defer.reject();
 			}, 15000)
 
-			$http.get('https://localhost:8443/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
-			//$http.get('https://api.doctorpricer.co.nz/api/dp/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
+			$http.get($rootScope.apiUrl + '/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
 				.success(function(data) {
 					self.collection = data;
 					defer.resolve();
