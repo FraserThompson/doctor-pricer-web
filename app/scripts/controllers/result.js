@@ -153,16 +153,14 @@ angular.module('doctorpricerWebApp')
             for (var i = 0; i < $scope.radiuses.length; i++){
 
                 var curr_radius_distance = $scope.radiuses[i].distance;
-                var next_radius_distance = i + 1 < $scope.radiuses.length ? $scope.radiuses[i + 1].distance : 60000
 
                 for (var j = 0; j < PracticesCollection.collection.length; j++){
                     
                     var practice_distance = PracticesCollection.collection[j].distance;
 
-                    if (practice_distance > next_radius_distance) {
+                    if (practice_distance > curr_radius_distance) {
                         break;
                     }
-        
                     $scope.radiuses[i]["practices"].push(PracticesCollection.collection[j]);
                 }
             }

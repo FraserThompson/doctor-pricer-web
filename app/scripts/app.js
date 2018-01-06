@@ -37,7 +37,7 @@ angular
 
       FastClick.attach(document.body);
       $rootScope.title = "DoctorPricer";
-      $rootScope.apiUrl = "https://localhost:8443";
+      $rootScope.apiUrl = "https://api2.doctorpricer.co.nz";
     })
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
