@@ -298,6 +298,7 @@ module.exports = function (grunt) {
             'CNAME',
             'views/{,*/}*.html',
             'images/{,*/}*.{png,jpg,gif,svg}',
+            'styles/images/{,*/}*.{png,jpg,gif,svg}',
             'fonts/{,*/}*.*'
           ]
         }, {
