@@ -41,11 +41,6 @@ angular.module('doctorpricerWebApp')
   		$scope.details.autocomplete = $scope.autocomplete;
   	});
 
-  	/* Opens the modal */
-  	$scope.openDialog = function() {
-      ngDialog.open({ template: 'views/info.html'});
-    };
-
   	/* Update searchmodel and addressbar location, don't trigger state change */
   	$scope.next = function() {
       // Don't bother validating if nothing is changed

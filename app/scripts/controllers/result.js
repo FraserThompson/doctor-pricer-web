@@ -9,7 +9,7 @@
  */
 angular.module('doctorpricerWebApp')
   .controller('ResultCtrl', function ($scope, $timeout, $rootScope, $window, $state, practices, ngDialog, leafletData, PracticesCollection, SearchModel) {
-      if (practices === 0){$state.go('home');}
+      if (practices === 0) $state.go('home');
       /* $scope variables */
       $scope.sidebar = 1;
       $scope.reviewCount = 0;
@@ -116,62 +116,58 @@ angular.module('doctorpricerWebApp')
 
         // Add the radius options from what the server returned
         $scope.radiuses = 
-            [	
-                {
-                    "key": 0,
-                    "name": "2km", 
-                    "distance": 2000, 
-                    "practices": []
-                },
-                {	
-                    "key": 1,
-                    "name": "5km", 
-                    "distance": 5000, 
-                    "practices":[]
-                }, 
-                {
-                    "key": 2,
-                    "name": "10km", 
-                    "distance": 10000, 
-                    "practices": []
-                }, 
-                {	
-                    "key": 3,
-                    "name": "30km", 
-                    "distance": 30000, 
-                    "practices": []
-                }, 
-                {	
-                    "key": 4,
-                    "name": "60km", 
-                    "distance": 60000, 
-                    "practices": []
-                }
-            ];
-
-            // sort into radius buckets
-            for (var i = 0; i < $scope.radiuses.length; i++){
-
-                var curr_radius_distance = $scope.radiuses[i].distance;
-
-                for (var j = 0; j < PracticesCollection.collection.length; j++){
-                    
-                    var practice_distance = PracticesCollection.collection[j].distance;
-
-                    if (practice_distance > curr_radius_distance) {
-                        break;
-                    }
-                    $scope.radiuses[i]["practices"].push(PracticesCollection.collection[j]);
-                }
+        [	
+            {
+                "key": 0,
+                "name": "2km", 
+                "distance": 2000, 
+                "practices": []
+            },
+            {	
+                "key": 1,
+                "name": "5km", 
+                "distance": 5000, 
+                "practices":[]
+            }, 
+            {
+                "key": 2,
+                "name": "10km", 
+                "distance": 10000, 
+                "practices": []
+            }, 
+            {	
+                "key": 3,
+                "name": "30km", 
+                "distance": 30000, 
+                "practices": []
+            }, 
+            {	
+                "key": 4,
+                "name": "60km", 
+                "distance": 60000, 
+                "practices": []
             }
+        ];
 
-            // a second for loop to remove empty ones and duplicates (this sucks)
-            for (var i = $scope.radiuses.length - 1; i >= 0; i--){
+        // sort into radius buckets
+        for (var i = 0; i < $scope.radiuses.length; i++){
 
-                if ($scope.radiuses[i].practices.length === 0 || (i > 0 && $scope.radiuses[i].practices.length === $scope.radiuses[i - 1].practices.length)){
-                    $scope.radiuses.splice(i, 1);
-                }
+            var curr_radius_distance = $scope.radiuses[i].distance;
+
+            for (var j = 0; j < PracticesCollection.collection.length; j++){
+                
+                var practice_distance = PracticesCollection.collection[j].distance;
+
+                if (practice_distance > curr_radius_distance) break;
+
+                $scope.radiuses[i]["practices"].push(PracticesCollection.collection[j]);
             }
+        }
+
+        // a second for loop to remove empty ones and duplicates (this sucks)
+        for (var i = $scope.radiuses.length - 1; i >= 0; i--){
+            if ($scope.radiuses[i].practices.length === 0 || (i > 0 && $scope.radiuses[i].practices.length === $scope.radiuses[i - 1].practices.length)) $scope.radiuses.splice(i, 1);
+        }
 
         $scope.selectedRadius = $scope.radiuses[0];
 

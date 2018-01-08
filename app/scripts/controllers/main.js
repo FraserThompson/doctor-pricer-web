@@ -38,7 +38,7 @@ angular.module('doctorpricerWebApp')
         'lng': $scope.details.geometry.location.lng()
       })
       .then(function() {}, function() {
-        $scope.error = "Server under heavy load right now, please try again later.";
+        $scope.error = "Something's broken :( Try again later.";
         $scope.isLoading = false;
       });
     };

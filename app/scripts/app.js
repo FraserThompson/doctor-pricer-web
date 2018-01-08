@@ -22,7 +22,7 @@ angular
     'ui.bootstrap.showErrors',
     'ui.bootstrap'
   ])
-  .run(function($rootScope) {
+  .run(function($rootScope, ngDialog) {
       var needsClick = FastClick.prototype.needsClick;
 
       FastClick.prototype.needsClick = function(target) { 
@@ -38,6 +38,10 @@ angular
       FastClick.attach(document.body);
       $rootScope.title = "DoctorPricer";
       $rootScope.apiUrl = "https://api2.doctorpricer.co.nz";
+      /* Opens the modal */
+      $rootScope.openDialog = function() {
+        ngDialog.open({ template: 'views/info.html'});
+      };
     })
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
