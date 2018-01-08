@@ -30,7 +30,13 @@ angular.module('doctorpricerWebApp')
 				    }
 					self.address = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name + ', ' + results[0].address_components[2].short_name;
 					self.displayAddress = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name;
+
 					$rootScope.$broadcast('geolocatedAddress');
+
+ 					// take out specific address then send it to analytics
+					var anonymousAddress = results[3].formatted_address;
+					ga('send', 'pageview', '/results.php?address=' + anonymousAddress + '&age=' + self.age);
+
 					successCallback();
 				} else {
 					failCallback('Error geocoding input address.');

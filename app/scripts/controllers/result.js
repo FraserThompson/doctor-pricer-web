@@ -50,6 +50,18 @@ angular.module('doctorpricerWebApp')
     /* Changes the radius when user does that */
     $scope.changeRadius = function(index) {
         PracticesCollection.displayCollection = $scope.radiuses[index]["practices"];
+
+        // sort that shit by price
+        PracticesCollection.displayCollection.sort(function(a, b){
+            var keyA = a.price,
+                keyB = b.price;
+
+            if(keyA < keyB) return -1;
+            if(keyA > keyB) return 1;
+
+            return 0;
+        });
+
         $scope.practices = PracticesCollection.displayCollection;
         $scope.thisPractice = {};
         $scope.map.active = true;
@@ -112,9 +124,8 @@ angular.module('doctorpricerWebApp')
     // Fired whenever a new search is made
     $scope.$on('newSearch', function() {
         $scope.map.active = true;
-        ga('send', 'pageview', '/results.php?address=' + SearchModel.address + '&age=' + SearchModel.age);
 
-        // Add the radius options from what the server returned
+        // Add the radius options
         $scope.radiuses = 
         [	
             {
@@ -149,18 +160,26 @@ angular.module('doctorpricerWebApp')
             }
         ];
 
-        // sort into radius buckets
+        // sort into radius buckets (not super happy about any of this fyi)
         for (var i = 0; i < $scope.radiuses.length; i++){
 
             var curr_radius_distance = $scope.radiuses[i].distance;
+
+            // All arrays include previous arrays
+            if (i != 0) $scope.radiuses[i]["practices"].push.apply($scope.radiuses[i]["practices"], $scope.radiuses[i - 1]["practices"]);
 
             for (var j = 0; j < PracticesCollection.collection.length; j++){
                 
                 var practice_distance = PracticesCollection.collection[j].distance;
 
+                // If we're getting too far then go to next radius
                 if (practice_distance > curr_radius_distance) break;
 
+                // Put the practice in it's radius bucket and remove it from the main collection so it's faster
                 $scope.radiuses[i]["practices"].push(PracticesCollection.collection[j]);
+                PracticesCollection.collection.splice(j, 1);
+                j = j - 1;
+
             }
         }
 
