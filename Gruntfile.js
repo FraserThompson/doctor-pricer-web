@@ -297,7 +297,7 @@ module.exports = function (grunt) {
             '*.html',
             'CNAME',
             'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
+            'images/{,*/}*.{png,jpg,gif,svg}',
             'fonts/{,*/}*.*'
           ]
         }, {
