@@ -240,39 +240,17 @@ module.exports = function (grunt) {
         }
       }
     },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
-    imagemin: {
+    uglify: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: {
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '<%= yeoman.dist %>/scripts/scripts.js'
+          ]
+        }
       }
     },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
+    concat: {
+      dist: {}
     },
 
     htmlmin: {
@@ -306,13 +284,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -326,7 +297,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
@@ -338,18 +309,6 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: ['fonts/*.*'],
           dest: '<%= yeoman.dist %>'
-        },
-        {
-          expand: true,
-          cwd: '<%= yeoman.app %>/styles-conditional',
-          src: ['autocomplete-big.css'],
-          dest: '<%= yeoman.dist %>/styles-conditional'
-        },
-        {
-          expand: true,
-          cwd: '<%= yeoman.app %>/styles-conditional',
-          src: ['autocomplete-small.css'],
-          dest: '<%= yeoman.dist %>/styles-conditional'
         },
         {
           expand: true,
@@ -383,9 +342,7 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'copy:styles',
-        'imagemin',
-        'svgmin'
+        'copy:styles'
       ]
     },
   });
@@ -428,7 +385,6 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
