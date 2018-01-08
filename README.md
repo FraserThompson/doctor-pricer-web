@@ -7,8 +7,12 @@ version 0.11.1.
 
 Run `npm run serve` for preview. It'll be served at port `9001`.
 
-If you want to change the API URL to something local then the place to do that is `app/scripts/services/practicescollection.js` at line 82.
+If you want to change the API URL to something local then the place to do that in `app.js` at line 40.
 
-## Production
+## Deploy
 
-Run `npm run build` to build it. Currently we deploy this by checking out gh-pages then committing the dist folder, which is a bit rubbish so we'll look at improving this in the future.
+`npm run build`
+
+Commit and push to master then run:
+
+`git subtree push --prefix dist origin gh-pages`

@@ -1,0 +1,11 @@
+/* Google Autocomplete stuff */
+.pac-container {
+  width: 40%;
+}
+.pac-item {
+  height: 50px !important;
+  font-size: 16px !important;
+}
+.pac-item-query {
+  font-size: 18px !important;
+}
