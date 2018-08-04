@@ -36,7 +36,7 @@ angular
       };
 
       FastClick.attach(document.body);
-      $rootScope.title = "DoctorPricer";
+      $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
       $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
       /* Opens the modal */
       $rootScope.openDialog = function() {
