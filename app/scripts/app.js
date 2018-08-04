@@ -37,7 +37,7 @@ angular
 
       FastClick.attach(document.body);
       $rootScope.title = "DoctorPricer";
-      $rootScope.apiUrl = "https://api2.doctorpricer.co.nz";
+      $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
       /* Opens the modal */
       $rootScope.openDialog = function() {
         ngDialog.open({ template: 'views/info.html'});
