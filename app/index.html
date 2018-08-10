@@ -5,20 +5,6 @@
     <title ng-bind="title">Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer</title>
     <meta name="description" content="Compare GP fees from over 800 practices across New Zealand with this free tool. Compare doctors near you and find the cheapest.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
-    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.css" />
-    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog-theme-default.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
   </head>
 
   <body class="{{autocompleteSize}}">
@@ -57,11 +43,11 @@
         </div>
         <div uib-collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">
           <form class="navbar-form navbar-right" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()" ng-cloak>
-            <div class="form-group" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty }" show-errors='{showSuccess: true}'>
+            <div class="form-group" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
               <label class="sr-only" for="address">Address</label>
               <input name="address" ng-model-options="{ debounce: 250 }" type="text" class="form-control" ng-model="autocomplete" options="options" details="details" placeholder="Address" address-validation required ng-autocomplete></input>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': headerForm.age.$invalid  && headerForm.age.$dirty}" show-errors='{showSuccess: true}'>
+            <div class="form-group" ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }" show-errors='{showSuccess: true}'>
               <label class="sr-only" for="age">Age</label>
               <input name="age" min="0" type="text" class="form-control" ng-model="age" placeholder="Age" size="3" required></input>
             </div>
@@ -88,36 +74,5 @@
 	  ga('send', 'pageview');
 	</script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBWidhaUt-lgKYVmqsjj1BYtoMq3eLr2a0"></script>
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="bower_components/leaflet/dist/leaflet.js"></script>
-    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/fastclick/lib/fastclick.js"></script>
-    <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
-    <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
-    <script src="bower_components/ngDialog/js/ngDialog.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts-thirdparty/Polyline.encoded.js"></script>
-        <script src="scripts-thirdparty/ui-bootstrap-custom-0.14.3.js"></script>
-        <script src="scripts-thirdparty/ui-bootstrap-custom-tpls-0.14.3.js"></script>
-        <script src="scripts/app.js"></script>
-        <script src="scripts/directives.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/result.js"></script>
-        <script src="scripts/controllers/navbar.js"></script>
-        <script src="scripts/controllers/map.js"></script>
-        <script src="scripts/services/practicescollection.js"></script>
-        <script src="scripts/services/searchmodel.js"></script>
-        <!-- endbuild -->
 </body>
 </html>

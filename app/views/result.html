@@ -1,4 +1,4 @@
-<div class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
+<div ng-hide="loading" class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
 	<div class="row row-offcanvas row-offcanvas-left"  ng-class="{'active': sidebar}">
 		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" >
 			<div class="row" style="padding-left: 15px;">
@@ -33,8 +33,8 @@
           	</p>
 			<uib-tabset style="padding-top: 15px;">
 				<uib-tab heading="Map" active="map.active">
-					<div class="animate-expand-down" id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
-						<leaflet id="leaflet_map" paths="paths" height="300px" width="100%" layers="layers"></leaflet>
+					<div id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
+						<leaflet id="leaflet_map" height="300px" width="100%" paths="paths" tiles="tiles"></leaflet>
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
 					<h3 class="text-left no-up-down-padding" ng-show="christchurch"><small>Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></small></h3>
@@ -68,7 +68,7 @@
 							<div class="col-lg-12">
 								<a href="{{thisPractice.google.url}}" target="_blank">Read all reviews on Google Plus</a>
 								<br>
-								<img src="images/powered_by_google_on_white.png">
+								<img src="../images/powered_by_google_on_white.png">
 							</div>
 						</div>
 					</div>
@@ -77,4 +77,8 @@
 		</div>
 		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-show="map.active && !christchurch" ng-click="reportModal()" href="">Incorrect information or missing practices?<a></small></h3>
 	</div>
+</div>
+
+<div ng-show="loading" class="centre-content searching">
+	<h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
 </div>

@@ -1,5 +1,15 @@
 'use strict';
 
+require('angular');
+require('angular-simple-logger'),
+require('ui-leaflet')
+
+// uiRouter needs a special require
+var uiRouter = require('@uirouter/angularjs').default;
+
+// Polyfill for state events which were deprecated
+require('@uirouter/angularjs/release/stateEvents.js');
+
 /**
  * @ngdoc overview
  * @name doctorpricerWebApp
@@ -10,37 +20,26 @@
  */
 angular
   .module('doctorpricerWebApp', [
-    'ngAnimate',
-    'ngResource',
-    'ngRoute',
-    'ngTouch',
-    'ngAutocomplete',
-    'ngDialog',
-    'leaflet-directive',
-    'duScroll',
-    'ui.router',
-    'ui.bootstrap.showErrors',
-    'ui.bootstrap'
+    'ui.router.state.events',
+    uiRouter,
+    'nemLogging',
+    'ui-leaflet',
+    require('angular-ui-bootstrap/src/collapse'),
+    require('angular-ui-bootstrap/src/rating'),
+    require('angular-ui-bootstrap/src/tabs'),
+    require('./scripts-thirdparty/ngAutocomplete.js'),
+    require('angular-animate'),
+    require('angular-resource'),
+    require('angular-route'),
+    require('angular-touch'),
+    require('angular-scroll')
   ])
-  .run(function($rootScope, ngDialog) {
-      var needsClick = FastClick.prototype.needsClick;
-
-      FastClick.prototype.needsClick = function(target) { 
-        if ( (target.className || '').indexOf('pac-item') > -1 ) {
-          return true;
-        } else if ( (target.parentNode.className || '').indexOf('pac-item') > -1) {
-          return true;
-        } else {
-          return needsClick.apply(this, arguments);
-        }
-      };
-
-      FastClick.attach(document.body);
+  .run(function($rootScope) {
       $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
       $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
       /* Opens the modal */
       $rootScope.openDialog = function() {
-        ngDialog.open({ template: 'views/info.html'});
+        // ngDialog.open({ template: 'views/info.html'});
       };
     })
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -61,19 +60,17 @@ angular
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
         resolve: {
-          practices: function($state, $stateParams, PracticesCollection) {
+          error: function($state, $stateParams) {
             if (!isNaN(parseFloat($stateParams.lat)) && !isNaN(parseFloat($stateParams.lng)) && !isNaN(parseInt($stateParams.age))){
-              return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
-            } else {
               return 0;
+            } else {
+              return 1;
             }
           }
         },
         onEnter: function($window, $stateParams, $rootScope, SearchModel, PracticesCollection) {
           // Hide facebook like if we're on mobile
-          if (window.innerWidth <= 481){
-            $rootScope.hideFb = true;
-          }
+          if (window.innerWidth <= 481) $rootScope.hideFb = true;
           SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
           SearchModel.age = $stateParams.age;
           $rootScope.$broadcast('newSearch');

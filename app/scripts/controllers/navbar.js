@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:NavbarCtrl
@@ -9,7 +11,7 @@
  */
 
 angular.module('doctorpricerWebApp')
-  .controller('NavbarCtrl', function ($scope, $rootScope, $location, $state, $timeout, ngDialog, SearchModel) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location, $state, $timeout, SearchModel) {
   	$scope.age = SearchModel.age;
   	$scope.autocomplete = SearchModel.displayAddress;
   	$scope.options = {

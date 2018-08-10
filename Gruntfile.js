@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app:  'app',
     dist: 'dist'
   };
 
@@ -30,8 +30,8 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
-        files: ['bower.json'],
-        tasks: ['wiredep']
+        files: ['package.json'],
+        tasks: ['browserify']
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -74,8 +74,8 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
+                'node_modules/@bower_components',
+                connect.static('./node_modules/@bower_components')
               ),
               connect().use(
                 '/app/styles',
@@ -94,8 +94,8 @@ module.exports = function (grunt) {
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
+                'node_modules/@bower_components',
+                connect.static('./node_modules/@bower_components')
               ),
               connect.static(appConfig.app)
             ];
@@ -172,11 +172,12 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    wiredep: {
+    browserify: {
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
-        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js', 'bower_components/leaflet/dist/leaflet-src.js'],
-        ignorePath:  /\.\.\//
+        src: ['<%= yeoman.app %>/app.js'],
+        exclude: ['node_modules/@bower_components/bootstrap/dist/js/bootstrap.js', 'node_modules/@bower_components/leaflet/dist/leaflet-src.js'],
+        ignorePath:  /\.\.\//,
+        dest: 'bundle.js'
       }
     },
 
@@ -307,20 +308,20 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
+          cwd: 'node_modules/@bower_components/bootstrap/dist',
           src: ['fonts/*.*'],
           dest: '<%= yeoman.dist %>'
         },
         {
           expand: true,
           dot: true,
-          cwd: 'bower_components/font-awesome',
+          cwd: 'node_modules/@bower_components/font-awesome',
           src: ['fonts/*.*'],
           dest: '<%= yeoman.dist %>'
         }, {
           expand: true,
           dot: true,
-          cwd: 'bower_components/Leaflet.awesome-markers/dist',
+          cwd: 'node_modules/@bower_components/Leaflet.awesome-markers/dist',
           src: ['images/*.*'],
           dest: '<%= yeoman.dist %>/styles'
         }]
@@ -356,7 +357,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      'browserify',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -371,7 +372,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'wiredep',
+    'browserify',
     'concurrent:test',
     'autoprefixer',
     'connect:test'
@@ -379,7 +380,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
+    'browserify',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

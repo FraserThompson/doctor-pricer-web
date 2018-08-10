@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.directives:Directives
@@ -42,7 +44,7 @@ angular.module('doctorpricerWebApp')
 		return {
 			replace: 'true',
 			require: '^form',
-			template: '<span><span ng-hide="!isLoading"><i class="fa fa-spinner fa-spin fa-lg"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
+			template: '<span><span ng-hide="!isLoading"><i class="fa fa-spinner fa-spin fa-lg" style="font-size: 24px;"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
 			link: function(scope, elem, attributes, form) {
 				scope.btnSize = attributes.btnSize;
 

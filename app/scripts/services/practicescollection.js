@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.services:PracticesCollection
@@ -80,13 +82,14 @@ angular.module('doctorpricerWebApp')
 			}, 15000)
 
 			$http.get($rootScope.apiUrl + '/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
-				.success(function(data) {
-					self.collection = data;
-					defer.resolve();
-				})
-				.error(function() {
-					defer.reject();
-				});
+				.then(function(response) {
+						self.collection = response.data;
+						defer.resolve();
+					},
+					function(error) {
+						defer.reject();
+					}
+				);
 			return defer.promise;
 		};
 

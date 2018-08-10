@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:MainCtrl

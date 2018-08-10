@@ -1,5 +1,11 @@
 'use strict';
 
+require('angular');
+require('font-awesome-webpack');
+require('polyline-encoded');
+require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
+require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:MapCtrl
@@ -12,6 +18,20 @@ angular.module('doctorpricerWebApp')
 	.controller('MapCtrl', function($scope, $timeout, $rootScope, $window, leafletData, PracticesCollection, SearchModel) {
 		var directionsService = new google.maps.DirectionsService();
 		var markersLayer;
+
+		/* Icons for markers */
+		var localIcons = {
+			markerBlue: L.AwesomeMarkers.icon({
+				prefix: 'glyphicon',
+				icon: 'glyphicon-home',
+				markerColor: 'blue'
+			}),
+			markerRed: L.AwesomeMarkers.icon({
+				prefix: 'fa',
+				icon: 'fa-user-md',
+				markerColor: 'red'
+			})
+		};
 
 		/* Listeners */
 		/* Sets the height of the map when window is resized */
@@ -81,11 +101,11 @@ angular.module('doctorpricerWebApp')
 			var bounds = L.latLngBounds(latLngs);
 			// Wait for animation to finish then get the map and touch it with your magic fingers
 		   	$timeout(function() {
-                leafletData.getMap().then(function(map) {
+                leafletData.getMap('leaflet_map').then(function(map) {
                 	if (markersLayer){map.removeLayer(markersLayer);};
                 	markersLayer = L.featureGroup(markers)
-                	map.addLayer(markersLayer)
-                	map.invalidateSize();
+					map.addLayer(markersLayer)
+					map.invalidateSize();
 					map.fitBounds(bounds, {padding: [80, 80]});
             	});
 	        }, 300);
@@ -93,7 +113,7 @@ angular.module('doctorpricerWebApp')
 
 		/* Fits the maps to specified bounds */
 		var fitBounds = function(callback) {
-			leafletData.getMap().then(function(map) {
+			leafletData.getMap('leaflet_map').then(function(map) {
 				var bounds = L.latLngBounds([PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng],
 					[SearchModel.coords[0], SearchModel.coords[1]]);
 				map.fitBounds(bounds, {padding: [60, 60]});
@@ -139,31 +159,15 @@ angular.module('doctorpricerWebApp')
 			// markers: {},
 	        paths: {},
 	        scrollWheelZoom: false,
-	        layers: {
-	        	baselayers: {
-	        		osm: {
-	        			name: 'MapBox',
-	        			url: 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZnJhc2VydGhvbXBzb24iLCJhIjoiY2llcnF2ZXlhMDF0cncwa21yY2tyZjB5aCJ9.iVxJbdbZiWVfHItWtZfKPQ',
-	        			type: 'xyz',
-	        			layerOptions: {
-	                    	attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-	                    }
-	        		}
-	        	}
+	        tiles: {
+				name: 'MapBox',
+				url: 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token={apikey}',
+				type: 'xyz',
+				options: {
+					attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
+					apikey: 'pk.eyJ1IjoiZnJhc2VydGhvbXBzb24iLCJhIjoiY2llcnF2ZXlhMDF0cncwa21yY2tyZjB5aCJ9.iVxJbdbZiWVfHItWtZfKPQ'
+				}
 	        }
 	    });
 
-	    /* Icons for markers */
-	   	var localIcons = {
-	        markerBlue: L.AwesomeMarkers.icon({
-		  	prefix: 'glyphicon',
-		    icon: 'glyphicon-home',
-		    markerColor: 'blue'
-		  	}),
-	       	markerRed: L.AwesomeMarkers.icon({
-		  	prefix: 'fa',
-		    icon: 'fa-user-md',
-		    markerColor: 'red'
-		  })
-	   	};
 	});
