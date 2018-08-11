@@ -25,23 +25,7 @@ angular.module('doctorpricerWebApp')
     /* Pops up the modal for reporting badthings */
     $scope.reportModal = function() {
         $uibModal.open({ templateUrl: 'views/report.html',
-            controller: ['$scope', "$http",  function($scope, $http) {
-                $scope.status = null;
-                $scope.sending = false;
-                $scope.submitForm = function(){
-                    $scope.sending = true;
-                    $scope.status = "Sending...";
-                    $http.get($rootScope.apiUrl + '/contact', {
-                        'params': $scope.form
-                    })
-                    .then(function(response) {
-                        $scope.status = "Message sent.";
-                    },
-                    function(error) {
-                        $scope.status = "Error sending message, try emailing doctorpricernz@gmail.com instead.";
-                    });
-                }
-            }]
+            size: "sm"
         }).result.then(function () {}, function () {});
     }
 

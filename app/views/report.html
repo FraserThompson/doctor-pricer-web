@@ -1,32 +1,4 @@
 <div class="container-fluid">
-  <form ng-submit="submitForm()">
-    <div class="form-group">
-      <div class="row">
-        <label for="inputEmail">Email address (optional but helpful)</label>
-      </div>
-      <div class="row">
-        <input ng-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <label for="inputEmail">Which practice displays incorrect information?</label>
-      </div>
-      <div class="row">
-        <input ng-model="form.which" type="text" class="form-control" id="inputText" placeholder="Practice Name" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <label for="inputWhich">What's incorrect?</label>
-      </div>
-      <div class="row">
-        <textarea ng-model="form.text" id="inputWhich" cols="40" rows="5" placeholder="Describe the problem..."></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <button ng-hide="sending" type="submit" class="btn btn-default">Submit</button>
-      <h4>{{status}}</h4>
-    </div>
-  </form>
+  <h3>Report an issue</h3>
+  <script type="text/javascript">(function a(d, w, u) {var h = d.getElementsByTagName("head")[0];var s = d.createElement("script");s.type = "text/javascript";s.src = "https://portal.form.io/lib/seamless/seamless.parent.min.js";s.onload = function b() {var f = d.getElementById("formio-form-5b6e4b8d492219d7ffc36f99");if (!f || (typeof w.seamless === u)) {return setTimeout(b, 100);}w.seamless(f, {fallback:false}).receive(function(d, e) {});};h.appendChild(s);})(document, window);</script><iframe id="formio-form-5b6e4b8d492219d7ffc36f99" style="width:100%;border:none;" height="600px" src="https://formview.io/#/arzmbofopxwetkq/reportaproblem?iframe=1&header=0"></iframe>
 </div>

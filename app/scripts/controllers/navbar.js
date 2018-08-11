@@ -46,9 +46,10 @@ angular.module('doctorpricerWebApp')
       // Don't bother validating if nothing is changed
       if ($scope.details.geometry) {
     		$scope.$broadcast('show-errors-check-validity');
-    		if ($scope.headerForm.$invalid) { return; }
+    		if ($scope.headerForm.$invalid) return;
         document.getElementById('practice-list').style.maxHeight = 0;
-      }
+			}
+			$scope.isCollapsed = 1;
       $state.transitionTo('result', {
         'age': $scope.age, 
         'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0], 

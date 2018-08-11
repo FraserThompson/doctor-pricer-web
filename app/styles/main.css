@@ -39,6 +39,10 @@ select:disabled {
   padding: 0.2em 0;
 }
 
+.tagline {
+  padding-bottom: 0px;
+}
+
 html, body {
   overflow-x: hidden;
   padding: 0;
@@ -60,6 +64,11 @@ a, button {
 /* Style the modal */
 .modal-content {
   padding: 20px;
+  max-height: 90vh;
+}
+
+.modal-sm {
+  min-width: 60vw;
 }
 
 /* Get rid of ugly number input spinner in chrome and ff*/
@@ -383,11 +392,14 @@ input[type=number] {
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
   .centre-content {
-    width: 60% !important;
+    width: 80% !important;
   }
   .pac-container {
     width: 100% !important;
     left: 0px !important;
+  }
+  .tagline {
+    padding-bottom: 30px;
   }
   .navbar-brand-centred {
     font-size: 28px;
@@ -395,9 +407,6 @@ input[type=number] {
   }
   .navbar>.container-fluid .navbar-brand-centred {
     margin-left: -80px !important;
-  }
-  h3 {
-    font-size: 20px;
   }
 
   ::-webkit-input-placeholder { font-size: 85%; }

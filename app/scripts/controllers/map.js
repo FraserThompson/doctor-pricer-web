@@ -58,7 +58,6 @@ angular.module('doctorpricerWebApp')
 			fitBounds(function() {
 				PracticesCollection.displayCollection[PracticesCollection.selectedPractice].marker.openPopup(); 
 			});
-			$scope.toggleSidebar();
 		});
 
 		/* Puts route on map when user clicks marker*/
