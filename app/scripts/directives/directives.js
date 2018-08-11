@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.directives:Directives
@@ -28,7 +26,7 @@ angular.module('doctorpricerWebApp')
 			}
 		};
 	})
-	.directive('autoScroll', function(PracticesCollection) {
+	.directive('autoScroll', ['PracticesCollection', function(PracticesCollection) {
 		return {
 			restrict: 'A',
 			link: function(scope, element) {
@@ -39,8 +37,8 @@ angular.module('doctorpricerWebApp')
 				});
 			}
 		};
-	})
-	.directive('loadingButton', function($timeout) {
+	}])
+	.directive('loadingButton', ['$timeout', function($timeout) {
 		return {
 			replace: 'true',
 			require: '^form',
@@ -61,8 +59,8 @@ angular.module('doctorpricerWebApp')
 				});
 			}
 		}
-	})
-	.directive('disableTap', function($timeout) {
+	}])
+	.directive('disableTap', ['$timeout', function($timeout) {
 		return {
 			link: function() {
 				$timeout(function() {
@@ -72,4 +70,4 @@ angular.module('doctorpricerWebApp')
 				},500);
 			}
 		};
-	});
+	}]);

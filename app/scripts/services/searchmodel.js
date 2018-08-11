@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.services:SearchModel
@@ -11,11 +9,11 @@ require('angular');
  */
 
 angular.module('doctorpricerWebApp')
-	.service('SearchModel', function($rootScope) {
+	.service('SearchModel', ['$rootScope', function($rootScope) {
 		var self = this;
 		this.address = 'None';
 		this.displayAddress = 'Address';
-		this.age = 0;
+		this.age = 'Age';
 		this.coords = [];
 
 		this.initalizeModel = function(lat, lng, age, successCallback, failCallback) {
@@ -45,4 +43,4 @@ angular.module('doctorpricerWebApp')
 				}
 			});
 		};
-	});
+	}]);

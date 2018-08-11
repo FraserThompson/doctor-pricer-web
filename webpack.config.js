@@ -1,7 +1,8 @@
-const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -12,6 +13,10 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             template: 'html-loader!./app/index.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'html-loader!./app/404.html',
+            filename: '404.html'
         }),
         new HtmlWebpackPlugin({
             template: 'html-loader!./app/views/main.html',
@@ -28,22 +33,27 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'html-loader!./app/views/info.html',
             filename: 'views/info.html'
-        })
+        }),
+        //new BundleAnalyzerPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin()
     ],
     optimization: {
         splitChunks: {
             chunks: 'all'
-        }
+        },
+        minimizer: [
+            new UglifyJsPlugin({parallel: true})
+        ]
     },
     resolve: {
         alias: {
             leaflet_css: __dirname + "/node_modules/leaflet/dist/leaflet.css",
             leaflet_marker: __dirname + "/node_modules/leaflet/dist/images/marker-icon.png",
             leaflet_marker_2x: __dirname + "/node_modules/leaflet/dist/images/marker-icon-2x.png",
-            leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png"
+            leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",
         }
     },
-    devtool: 'eval-source-map',
+    //devtool: 'eval-source-map',
     output: {
         path: __dirname + "/dist/",
         filename: "[name].bundle.js"
@@ -59,9 +69,11 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                loader: 'file-loader'
+            },
+            {
+                test: /\.(txt|ico)$/,
+                loader: 'file-loader?name=[name].[ext]'
             },
             { 
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
@@ -69,9 +81,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
+                loader: 'file-loader'
             }
         ]
     }

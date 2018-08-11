@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:AboutCtrl
@@ -10,7 +8,7 @@ require('angular');
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', function ($scope, $timeout, $rootScope, $window, $state,  leafletData, error, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', ['$scope', '$timeout', '$rootScope', '$window', '$state', '$uibModal', 'error', 'PracticesCollection', 'SearchModel', function ($scope, $timeout, $rootScope, $window, $state, $uibModal, error, PracticesCollection, SearchModel) {
 
     if (error === 1) $state.go('home');
 
@@ -26,25 +24,25 @@ angular.module('doctorpricerWebApp')
 
     /* Pops up the modal for reporting badthings */
     $scope.reportModal = function() {
-        // ngDialog.open({ template: 'views/report.html',
-        // controller: ['$scope', "$http",  function($scope, $http) {
-        //         $scope.status = null;
-        //         $scope.sending = false;
-        //         $scope.submitForm = function(){
-        //             $scope.sending = true;
-        //             $scope.status = "Sending...";
-        //             $http.get($rootScope.apiUrl + '/contact', {
-        //                 'params': $scope.form
-        //             })
-        //             .then(function(response) {
-        //                 $scope.status = "Message sent.";
-        //             },
-        //             function(error) {
-        //                 $scope.status = "Error sending message, try emailing doctorpricernz@gmail.com instead.";
-        //             });
-        //         }
-        //     }]
-        // });
+        $uibModal.open({ templateUrl: 'views/report.html',
+            controller: ['$scope', "$http",  function($scope, $http) {
+                $scope.status = null;
+                $scope.sending = false;
+                $scope.submitForm = function(){
+                    $scope.sending = true;
+                    $scope.status = "Sending...";
+                    $http.get($rootScope.apiUrl + '/contact', {
+                        'params': $scope.form
+                    })
+                    .then(function(response) {
+                        $scope.status = "Message sent.";
+                    },
+                    function(error) {
+                        $scope.status = "Error sending message, try emailing doctorpricernz@gmail.com instead.";
+                    });
+                }
+            }]
+        }).result.then(function () {}, function () {});
     }
 
     /* Inverses the sidebar variable which determines whether the sidebar is active*/
@@ -225,4 +223,4 @@ angular.module('doctorpricerWebApp')
     // Upon into the view we should do that
     $rootScope.$broadcast('newSearch');
 
-  });
+  }]);

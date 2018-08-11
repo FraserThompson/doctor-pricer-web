@@ -44,7 +44,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<h3>{{thisPractice.name}} <small>{{thisPractice.pho}}</small></h3>
-								<uib-rating ng-show="thisPractice.google.rating" ng-model="thisPractice.google.rating" max="5" data-readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></uib-rating>
+								<span uib-rating ng-show="thisPractice.google.rating" ng-model="thisPractice.google.rating" max="5" data-readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></span>
 								<a ng-hide="thisPractice.google.rating || thisPractice.google.reviews" href="{{thisPractice.google.url}}">Be the first to post a review on Google Plus</a>
 								</p>
 							</div>
@@ -55,7 +55,7 @@
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h4 class="panel-title">{{review.author_name}}
-										<uib-rating style="float: right;" ng-model="review.rating" max="5" data-readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></uib-rating></h4>
+											<span uib-rating style="float: right;" ng-model="review.rating" max="5" data-readonly="true" state-on="'fa-star'" state-off="'fa-star-o'"></span></h4>
 									</div>
 									<div class="panel-body">
 										<span>{{review.text}}</span>
@@ -66,7 +66,7 @@
 						</div>
 						<div class="row" ng-show="thisPractice.google.rating || thisPractice.google.reviews">
 							<div class="col-lg-12">
-								<a href="{{thisPractice.google.url}}" target="_blank">Read all reviews on Google Plus</a>
+								<a href="{{thisPractice.google.url}}" target="_blank">Read all reviews in Google Maps</a>
 								<br>
 								<img src="../images/powered_by_google_on_white.png">
 							</div>
@@ -79,6 +79,8 @@
 	</div>
 </div>
 
-<div ng-show="loading" class="centre-content searching">
-	<h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
+<div class="container-fluid no-left-right-padding" ng-show="loading">
+	<div class="searching centre-content">
+		<h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
+	</div>
 </div>

@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:NavbarCtrl
@@ -11,7 +9,7 @@ require('angular');
  */
 
 angular.module('doctorpricerWebApp')
-  .controller('NavbarCtrl', function ($scope, $rootScope, $location, $state, $timeout, SearchModel) {
+  .controller('NavbarCtrl', ['$scope', '$state', '$timeout', 'SearchModel', function ($scope, $state, $timeout, SearchModel) {
   	$scope.age = SearchModel.age;
   	$scope.autocomplete = SearchModel.displayAddress;
   	$scope.options = {
@@ -57,4 +55,4 @@ angular.module('doctorpricerWebApp')
         'lng': $scope.details.geometry ? $scope.details.geometry.location.lng() : SearchModel.coords[1],
       }, {location: true, inherit: true, notify: false});
     };
-  });
+  }]);

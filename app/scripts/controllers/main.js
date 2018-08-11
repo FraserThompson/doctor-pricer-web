@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.controller:MainCtrl
@@ -10,7 +8,7 @@ require('angular');
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $window, $state, $timeout) {
+  .controller('MainCtrl', ['$scope', '$window', '$state', '$timeout', function ($scope, $window, $state, $timeout) {
   	$scope.options = {
   		country: 'nz'
   	};
@@ -44,4 +42,4 @@ angular.module('doctorpricerWebApp')
         $scope.isLoading = false;
       });
     };
-  });
+  }]);

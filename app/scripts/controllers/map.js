@@ -1,6 +1,5 @@
 'use strict';
 
-require('angular');
 require('font-awesome-webpack');
 require('polyline-encoded');
 require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
@@ -15,7 +14,7 @@ require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-mark
  */
 
 angular.module('doctorpricerWebApp')
-	.controller('MapCtrl', function($scope, $timeout, $rootScope, $window, leafletData, PracticesCollection, SearchModel) {
+	.controller('MapCtrl', ['$scope', '$timeout', '$rootScope', '$window', 'leafletData', 'PracticesCollection', 'SearchModel', function($scope, $timeout, $rootScope, $window, leafletData, PracticesCollection, SearchModel) {
 		var directionsService = new google.maps.DirectionsService();
 		var markersLayer;
 
@@ -170,4 +169,4 @@ angular.module('doctorpricerWebApp')
 	        }
 	    });
 
-	});
+	}]);

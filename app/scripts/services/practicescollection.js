@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular');
-
 /**
  * @ngdoc function
  * @name doctorpricerWebApp.services:PracticesCollection
@@ -11,7 +9,7 @@ require('angular');
  */
 
 angular.module('doctorpricerWebApp')
-	.service('PracticesCollection', function($window, $q, $http, $timeout, $rootScope) {
+	.service('PracticesCollection', ['$q', '$http', '$timeout', '$rootScope', function($q, $http, $timeout, $rootScope) {
 		var service = new google.maps.places.PlacesService(document.createElement('div'));
 		var self = this;
 		this.length = 0;
@@ -100,4 +98,4 @@ angular.module('doctorpricerWebApp')
 			return 0;
 		};
 
-	});
+	}]);
