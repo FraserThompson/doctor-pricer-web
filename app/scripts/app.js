@@ -1,8 +1,9 @@
 'use strict';
 
 require('angular');
-require('angular-simple-logger'),
-require('ui-leaflet')
+require('angular-simple-logger');
+require('ui-leaflet');
+require('angular-bootstrap-show-errors');
 
 // uiRouter needs a special require
 var uiRouter = require('@uirouter/angularjs').default;
@@ -24,6 +25,7 @@ angular
     uiRouter,
     'nemLogging',
     'ui-leaflet',
+    'ui.bootstrap.showErrors',
     require('angular-ui-bootstrap/src/collapse'),
     require('angular-ui-bootstrap/src/rating'),
     require('angular-ui-bootstrap/src/tabs'),

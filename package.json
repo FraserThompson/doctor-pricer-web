@@ -6,7 +6,7 @@
     "Leaflet.awesome-markers": "lvoogdt/Leaflet.awesome-markers#~2.0.2",
     "angular": "1.7.3",
     "angular-animate": "^1.7.3",
-    "angular-bootstrap-show-errors": "paulyoder/angular-bootstrap-show-errors#~2.3.0",
+    "angular-bootstrap-show-errors": "^2.3.0",
     "angular-mocks": "^1.7.3",
     "angular-resource": "^1.7.3",
     "angular-route": "^1.7.3",
@@ -43,7 +43,7 @@
     "yarn": ">= 1.0.0"
   },
   "scripts": {
-    "serve": "webpack-serve --open --content dist --port 9001",
+    "serve": "ENV=dev webpack-serve --config webpack.config.dev.js --open --content dist --port 9001",
     "build": "webpack --run-prod",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   }

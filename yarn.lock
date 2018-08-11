@@ -258,9 +258,9 @@ angular-animate@^1.7.3:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.7.3.tgz#99aa794d3417aa6a794f603c9c27ec0ee4c4b3b4"
 
-angular-bootstrap-show-errors@paulyoder/angular-bootstrap-show-errors#~2.3.0:
+angular-bootstrap-show-errors@^2.3.0:
   version "2.3.0"
-  resolved "https://codeload.github.com/paulyoder/angular-bootstrap-show-errors/tar.gz/23bfa9fadbc5247266261e3f8c6769cef230051a"
+  resolved "https://registry.yarnpkg.com/angular-bootstrap-show-errors/-/angular-bootstrap-show-errors-2.3.0.tgz#b152f63047fa8f97287f07ea022c00dbddd4ef7d"
 
 angular-mocks@^1.7.3:
   version "1.7.3"
@@ -2029,10 +2029,6 @@ ieee754@^1.1.11, ieee754@^1.1.4:
 iferr@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
-
-ignore-loader@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ignore-loader/-/ignore-loader-0.1.2.tgz#d81f240376d0ba4f0d778972c3ad25874117a463"
 
 ignore-walk@^3.0.1:
   version "3.0.1"

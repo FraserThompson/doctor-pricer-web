@@ -46,10 +46,6 @@ angular.module('doctorpricerWebApp')
 			link: function(scope, elem, attributes, form) {
 				scope.btnSize = attributes.btnSize;
 
-				scope.$on('newSearch', function() {
-          			scope.isLoading = false;
-				});
-
 				elem.bind('click', function() {
 				    if(!form.$invalid) {
 				       scope.isLoading = true;

@@ -62,10 +62,20 @@ a, button {
   padding: 0;
 }
 
+/* Make the result view top a bit smaller */
+.nav-tabs > li > a {
+  padding: 7px 15px !important;
+}
+
+.sidebar-toggle {
+  padding: 6px 6px;
+}
+
 /* Style the modal */
 .modal-content {
   padding: 20px;
   max-height: 90vh;
+  overflow: auto;
 }
 
 .modal-sm {
@@ -372,15 +382,14 @@ input[type=number] {
   }
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -90%;
-    width: 80%;
-    margin-left: 30px;
+    left: -90vw;
+    width: 90vw
   }
   .row-offcanvas-right.active {
     right: 50%; 
   }
   .row-offcanvas-left.active {
-    left: 90%; 
+    left: 90vw; 
   }
   .sidebar-offcanvas {
     position: absolute;

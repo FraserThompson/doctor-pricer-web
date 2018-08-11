@@ -1,9 +1,9 @@
 <div ng-hide="loading" class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
 	<div class="row row-offcanvas row-offcanvas-left"  ng-class="{'active': sidebar}">
 		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" >
-			<div class="row" style="padding-left: 15px;">
+			<div class="row">
 				<div class="col-md-12">
-					<h3><small>Found {{practices.length}} practices within
+					<h3 style="margin-top: 0px; padding-left:2px;"><small>Found {{practices.length}} practices within
 						<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedRadius.key)"></select>
 					</small></h3>
 				</div>
@@ -25,13 +25,13 @@
 					</div>
 				</a>
 			</div>
-			<h3 class="no-up-down-padding" style="padding-left: 15px;"><small>Fees are for enrolled patients. <a ng-click="openDialog()" href="">More</a></small></h3>
+			<h3 class="no-up-down-padding" style="padding-left:2px;"><small>Fees are for enrolled patients. <a ng-click="openDialog()" href="">More</a></small></h3>
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" >
-			<p class="pull-left visible-xs" style="padding-top: 15px; margin-bottom: 0px;">
-            	<a type="button" class="btn btn-default btn-lg" ng-click="toggleSidebar()"><span ng-class="(sidebar==1) ? 'glyphicon-menu-right' : 'glyphicon-menu-left'" class="glyphicon"></span></a>
+			<p class="pull-left visible-xs" style="margin-bottom: 0px;">
+            	<a type="button" class="sidebar-toggle btn btn-default btn-lg" ng-click="toggleSidebar()"><span ng-class="(sidebar==1) ? 'glyphicon-menu-right' : 'glyphicon-menu-left'" class="glyphicon"></span></a>
           	</p>
-			<uib-tabset style="padding-top: 15px;">
+			<uib-tabset>
 				<uib-tab heading="Map" active="map.active">
 					<div id="map_canvas" ng-hide="noPractices" ng-controller="MapCtrl">
 						<leaflet id="leaflet_map" height="300px" width="100%" paths="paths" tiles="tiles"></leaflet>

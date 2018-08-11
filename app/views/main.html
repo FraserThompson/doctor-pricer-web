@@ -1,5 +1,5 @@
 <div class="centre-content">
-  <h3 class="tagline">Compare fees from over 800 NZ practices.</h2>
+  <h2 class="tagline">Compare fees from over 800 NZ practices.</h2>
   <form name="form" ng-submit="next()" class="form" novalidate>
     <div class="form-group" ng-class="{ 'has-error': form.address.$invalid && form.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
       <div class="col-md-8 nopadding">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-2 nopadding">
-        <span><button type="submit" class="btn btn-cool btn-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>
+      <loading-button btn-size="btn-lg"></loading-button>
     </div>
   </form>
   <h3>{{error}}</h3>
