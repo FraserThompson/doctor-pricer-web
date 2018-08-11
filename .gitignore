@@ -2,5 +2,3 @@ node_modules
 .tmp
 .sass-cache
 yarn-error.log
-bower_components
-dist
