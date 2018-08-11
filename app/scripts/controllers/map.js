@@ -1,9 +1,8 @@
 'use strict';
 
-require('font-awesome-webpack');
 require('polyline-encoded');
-require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
-require('../../../node_modules/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+require('Leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
+require('Leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
 
 /**
  * @ngdoc function

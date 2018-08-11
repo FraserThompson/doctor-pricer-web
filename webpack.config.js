@@ -81,11 +81,11 @@ module.exports = {
             },
             { 
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "url-loader?limit=10000&mimetype=application/font-woff" 
+                loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]&outputPath=fonts/" 
             },
             {
                 test: /\.(eot|ttf|otf)$/,
-                loader: 'file-loader'
+                loader: 'file-loader?name=[name].[ext]&outputPath=fonts/'
             }
         ]
     }

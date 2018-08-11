@@ -30,6 +30,7 @@ select:disabled {
 
 .fa-star, .fa-star-o {
   color: orange !important;
+  font-family: 'FontAwesome';
 }
 
 .browsehappy {
