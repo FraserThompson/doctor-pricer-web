@@ -82,6 +82,7 @@ angular.module('doctorpricerWebApp')
 			$http.get($rootScope.apiUrl + '/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
 				.then(function(response) {
 						self.collection = response.data;
+						console.log("Got " + response.data.length + " practices from API.");
 						defer.resolve();
 					},
 					function(error) {

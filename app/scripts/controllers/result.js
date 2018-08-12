@@ -34,6 +34,11 @@ angular.module('doctorpricerWebApp')
         $scope.sidebar = !$scope.sidebar;
     };
 
+    /* Cancels the swipe gesture so that moving the map doesn't swipe the page */
+    $scope.cancelSwipe = function($event){
+        $event.stopPropagation();
+    }
+
     /* Changes the radius when user does that */
     $scope.changeRadius = function(index) {
         PracticesCollection.displayCollection = $scope.radiuses[index]["practices"];
@@ -103,12 +108,22 @@ angular.module('doctorpricerWebApp')
         setHeight();
     });
 
+    $rootScope.$on('geolocatedAddress', function() {
+
+        $rootScope.$apply(function() {
+            $rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
+        });
+
+        $scope.christchurch = SearchModel.christchurch;
+        $scope.userAddress = SearchModel.address;
+    });
+
     // Fired whenever the radius is changed to update the displayed count
     $scope.$on('countUpdated', function() {
         $scope.noPractices = PracticesCollection.displayCollection.length === 0 ? 1 : 0;
     });
 
-    // Fired whenever a new search is made
+    // Fired whenever a new search is started
     $scope.$on('newSearch', function() {
 
         $scope.map.active = true;
@@ -177,26 +192,23 @@ angular.module('doctorpricerWebApp')
                 }
             }
 
+            console.log("Sorted the result into buckets.");
+
             // a second for loop to remove empty ones and duplicates (this sucks)
             for (var i = $scope.radiuses.length - 1; i >= 0; i--){
                 if ($scope.radiuses[i].practices.length === 0 || (i > 0 && $scope.radiuses[i].practices.length === $scope.radiuses[i - 1].practices.length)) $scope.radiuses.splice(i, 1);
             }
 
-            $scope.selectedRadius = $scope.radiuses[0];
+            console.log("Removed empties and duplicates.");
 
-            SearchModel.initalizeModel(SearchModel.coords[0], SearchModel.coords[1], SearchModel.age, function() {
-                $scope.changeRadius(0);
-                $rootScope.$apply(function() {
-                    $rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
-                });
-                $scope.christchurch = SearchModel.christchurch;
-                $scope.userAddress = SearchModel.address;
-                setHeight();
-                $scope.loading = false;
-            }, function() {
-                console.log('calculating address failed');
-                // handle this error
-            });
+            $scope.selectedRadius = $scope.radiuses[0];
+            $scope.changeRadius(0);
+
+            setHeight();
+            $scope.loading = false;
+
+            console.log("Finished.");
+
         }, function(response) {
             console.log('Error getting the data:' + response);
             $state.go('home');

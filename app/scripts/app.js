@@ -74,8 +74,16 @@ angular
         onEnter: ['$stateParams', '$rootScope', 'SearchModel', function($stateParams, $rootScope, SearchModel) {
           // Hide facebook like if we're on mobile
           if (window.innerWidth <= 481) $rootScope.hideFb = true;
-          SearchModel.coords = [parseFloat($stateParams.lat), parseFloat($stateParams.lng)];
-          SearchModel.age = $stateParams.age;
+
+          // Take params from URL if they haven't already been initialized
+          if (!SearchModel.coords.length) SearchModel.initalizeModel(
+            parseFloat($stateParams.lat),
+            parseFloat($stateParams.lng),
+            $stateParams.age,
+            null,
+            null
+          )
+  
           $rootScope.$broadcast('newSearch');
           $rootScope.autocompleteSize = "small-autocomplete"; // dynamically load the css to size the Google Autocomplete box
         }]

@@ -8,7 +8,7 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('MainCtrl', ['$scope', '$window', '$state', '$timeout', function ($scope, $window, $state, $timeout) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$state', '$timeout', 'SearchModel', function ($scope, $rootScope, $window, $state, $timeout, SearchModel) {
   	$scope.options = {
   		country: 'nz'
   	};
@@ -29,17 +29,32 @@ angular.module('doctorpricerWebApp')
 
     /* Used for the submit button */
   	$scope.next = function() {
+
       $scope.$broadcast('show-errors-check-validity');
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $scope.error = "";
+
+      // Get the stuff in the search model
+      SearchModel.initalizeModel(
+        $scope.details.geometry.location.lat(),
+        $scope.details.geometry.location.lng(),
+        $scope.age,
+        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name + ', ' + $scope.details.address_components[2].short_name,
+        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
+      );
+
+      $rootScope.$broadcast('geolocatedAddress');
+
       $state.go('result', {
-        'age': $scope.age, 
-        'lat': $scope.details.geometry.location.lat(), 
-        'lng': $scope.details.geometry.location.lng()
+        'age': SearchModel.age, 
+        'lat': SearchModel.coords[0], 
+        'lng': SearchModel.coords[1]
       })
-      .then(function() {}, function() {
+      .then(function() {console.log("Here we are, stuck by this river.")}, function() {
         $scope.error = "Something's broken :( Try again later.";
         $scope.isLoading = false;
       });
+
     };
+
   }]);

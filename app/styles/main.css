@@ -68,18 +68,14 @@ a, button {
 }
 
 .sidebar-toggle {
-  padding: 6px 6px;
+  padding: 6px 8px;
 }
 
 /* Style the modal */
-.modal-content {
-  padding: 20px;
-  max-height: 90vh;
-  overflow: auto;
-}
 
 .modal-sm {
   min-width: 60vw;
+  max-height: 90vh;
 }
 
 /* Get rid of ugly number input spinner in chrome and ff*/
@@ -279,6 +275,7 @@ input[type=number] {
   transition: transform 500ms ease;
   -moz-transition: transform 500ms ease;
   -webkit-transition: transform 500ms ease;
+  -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
   display:block;
@@ -363,11 +360,11 @@ input[type=number] {
   .row-offcanvas {
     position: relative;
     -webkit-transform-style: preserve-3d;
-    -webkit-transition: all .25s ease-out;
-    -moz-transition: all .25s ease-out;
-    -ms-transition: all .25s ease-out;
-    -o-transition: all .25s ease-out;
-    transition: all .25s ease-out;
+    -webkit-transition: left .20s ease-out;
+    -moz-transition: left .20s ease-out;
+    -ms-transition: left .20s ease-out;
+    -o-transition: left .20s ease-out;
+    transition: left .20s ease-out;
   }
   .row-offcanvas-right {
     right: 0;

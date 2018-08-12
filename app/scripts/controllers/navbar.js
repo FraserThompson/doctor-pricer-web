@@ -43,17 +43,32 @@ angular.module('doctorpricerWebApp')
 
   	/* Update searchmodel and addressbar location, don't trigger state change */
   	$scope.next = function() {
+	
       // Don't bother validating if nothing is changed
       if ($scope.details.geometry) {
     		$scope.$broadcast('show-errors-check-validity');
     		if ($scope.headerForm.$invalid) return;
-        document.getElementById('practice-list').style.maxHeight = 0;
+				document.getElementById('practice-list').style.maxHeight = 0;
+					
+				// Get the stuff in the search model
+				SearchModel.initalizeModel(
+					$scope.details.geometry.location.lat(),
+					$scope.details.geometry.location.lng(),
+					$scope.age,
+					$scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name + ', ' + $scope.details.address_components[2].short_name,
+					$scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
+				);
+
+				$scope.$broadcast('geolocatedAddress');
+
 			}
+
 			$scope.isCollapsed = 1;
       $state.transitionTo('result', {
         'age': $scope.age, 
         'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0], 
         'lng': $scope.details.geometry ? $scope.details.geometry.location.lng() : SearchModel.coords[1],
-      }, {location: true, inherit: true, notify: false});
+			}, {location: true, inherit: true, notify: false});
+
     };
   }]);
