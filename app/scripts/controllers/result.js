@@ -94,7 +94,9 @@ angular.module('doctorpricerWebApp')
 
     var setHeight = function() {
         $timeout(function() {
-          var mapHeight = ($window.innerHeight - 128) + 'px';
+          var mapPxHeight = $window.innerHeight - 128;
+          if ($scope.christchurch) mapPxHeight = mapPxHeight - 98;
+          var mapHeight = mapPxHeight + 'px';
           document.getElementById('practice-list').style.maxHeight = mapHeight;
           document.getElementById('reviews').style.maxHeight = mapHeight;
           }, 300);

@@ -211,7 +211,6 @@ input[type=number] {
 }
 #practice-list {
   overflow: auto;
-
 }
 #map_canvas {
   overflow: hidden;
@@ -395,11 +394,18 @@ input[type=number] {
   }
 }
 
+.fa-window-close {
+  cursor: pointer;
+}
 
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
   .centre-content {
     width: 80% !important;
+  }
+  .modal-content {
+    max-height: 96vh;
+    overflow: auto;
   }
   .pac-container {
     width: 100% !important;

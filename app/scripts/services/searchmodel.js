@@ -65,7 +65,7 @@ angular.module('doctorpricerWebApp')
 			} else {
 				this.address = address;
 				this.displayAddress = displayAddress;
-	
+
 				if (address.indexOf("Christchurch") > -1) {
 					this.christchurch = true;
 				} else {

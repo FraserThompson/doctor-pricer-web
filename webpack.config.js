@@ -4,6 +4,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+var PROD = process.env.ENV == 'production ';
+
 module.exports = {
     entry: {
         app: "./app/index.js",
@@ -37,14 +39,14 @@ module.exports = {
         //new BundleAnalyzerPlugin(),
         new webpack.optimize.ModuleConcatenationPlugin()
     ],
-    optimization: {
+    optimization: PROD ? {
         splitChunks: {
             chunks: 'all'
         },
         minimizer: [
             new UglifyJsPlugin({parallel: true})
         ]
-    },
+    } : {},
     resolve: {
         alias: {
             leaflet_css: __dirname + "/node_modules/leaflet/dist/leaflet.css",
@@ -53,7 +55,7 @@ module.exports = {
             leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",
         }
     },
-    //devtool: 'eval-source-map',
+    devtool: !PROD ? 'eval-source-map' : '',
     output: {
         path: __dirname + "/dist/",
         filename: "[name].[hash].bundle.js"

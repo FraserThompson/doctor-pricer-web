@@ -6,6 +6,7 @@
 					<h3 style="margin-top: 0px; padding-left:2px;"><small>Found {{practices.length}} practices within
 						<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = radiuses[0]" ng-options="r.name for r in radiuses" ng-change="changeRadius(selectedRadius.key)"></select>
 					</small></h3>
+					<h3 ng-show="christchurch"><small><i class="fa fa-exclamation-triangle"></i> Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></small></h3>
 				</div>
 			</div>
 			<div class="list-group nopadding animate-expand-down" id="practice-list" auto-scroll>
@@ -37,7 +38,6 @@
 						<leaflet id="leaflet_map" height="300px" width="100%" paths="paths" tiles="tiles"></leaflet>
 					</div>
 					<h4 class="text-left" ng-show="noPractices">No practices found near you.</h4>
-					<h3 class="text-left no-up-down-padding" ng-show="christchurch"><small>Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></small></h3>
 				</uib-tab>
 				<uib-tab heading="Reviews {{thisPractice.reviewCount}}" ng-show="thisPractice.name" deselect="reloadMap()" class="animate-show">
 					<div id="reviews" style="padding: 0px 15px 15px 15px; overflow-y: auto;">
