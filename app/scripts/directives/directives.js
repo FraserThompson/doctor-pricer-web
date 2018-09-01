@@ -60,6 +60,29 @@ angular.module('doctorpricerWebApp')
 			}
 		}
 	}])
+	.directive('stupidAd', ['$timeout', function($timeout) {
+		return {
+			replace: 'true',
+			template: '<div class="stupid-ad"> \
+						<ins class="adsbygoogle" \
+						style="display:block" \
+						data-ad-client="ca-pub-2527917281752489" \
+						data-ad-slot="1395256542" \
+						data-ad-format="auto" \
+						data-full-width-responsive="true"> \
+						</ins> \
+						</div>',
+			link: function() {
+				$timeout(function() {
+					try {
+						(window["adsbygoogle"] = window["adsbygoogle"] || []).push({});
+					} catch (e) {
+						console.error(e);
+					}
+				}, 2000);
+			}
+		}
+	}])
 	.directive('disableTap', ['$timeout', function($timeout) {
 		return {
 			link: function() {
