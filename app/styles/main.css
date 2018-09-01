@@ -398,6 +398,15 @@ input[type=number] {
   cursor: pointer;
 }
 
+.stupid-ad .adsbygoogle {
+  width: 60vw;
+  height: 10vh;
+  position: absolute;
+  bottom: 50px;
+  transform: translate(-50%, 0%);
+  left: 50%;
+}
+
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
   .centre-content {
