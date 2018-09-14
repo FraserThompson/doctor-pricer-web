@@ -55,6 +55,7 @@ angular
         controller: 'MainCtrl',
         onEnter: ['$rootScope', function($rootScope) {
           $rootScope.hideFb = false;
+          $rootScope.loaded = true;
           $rootScope.autocompleteSize = "big-autocomplete"; // dynamically load the css to size the Google Autocomplete box
         }]
       })

@@ -398,30 +398,34 @@ input[type=number] {
   cursor: pointer;
 }
 
-.stupid-ad .adsbygoogle {
-  width: 60vw;
-  height: 10vh;
+.stupid-ad {
   position: absolute;
-  bottom: 50px;
-  transform: translate(-50%, 0%);
-  left: 50%;
+  width: 100%;
+  bottom: 2px;
+  left: 0px;
+}
+
+.stupid-ad .adsbygoogle {
+  margin: 40px auto 40px auto;
+  display: flex;
+  width: 50vw;
+  height: 8vh;
 }
 
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 481px) {
+
   .stupid-ad .adsbygoogle {
     width: 93vw;
-    height: 10vh;
-    position: absolute;
-    bottom: 50px;
-    left: auto;
     transform: none;
+    margin: auto auto 50px auto;
   }
+
   .centre-content {
     width: 80% !important;
   }
-  .modal-content {
-    max-height: 96vh;
+  .modal-body {
+    max-height: 80vh;
     overflow: auto;
   }
   .pac-container {
