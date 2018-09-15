@@ -73,6 +73,7 @@ angular
           }]
         },
         onEnter: ['$stateParams', '$rootScope', 'SearchModel', function($stateParams, $rootScope, SearchModel) {
+          $rootScope.loaded = true;
           // Hide facebook like if we're on mobile
           if (window.innerWidth <= 481) $rootScope.hideFb = true;
 

@@ -39,7 +39,7 @@ angular.module('doctorpricerWebApp')
         $scope.details.geometry.location.lat(),
         $scope.details.geometry.location.lng(),
         $scope.age,
-        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name + ', ' + $scope.details.address_components[2].short_name,
+        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name + ', ' + $scope.details.address_components[2].short_name + ', ' + $scope.details.address_components[3].short_name,
         $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
       );
 

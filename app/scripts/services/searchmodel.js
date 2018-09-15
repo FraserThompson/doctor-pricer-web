@@ -16,6 +16,14 @@ angular.module('doctorpricerWebApp')
 		this.age = 'Age';
 		this.coords = [];
 
+		this.checkForChristchurch = function(string) {
+			if (string.indexOf("Christchurch") > -1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		/**
 		 * Initializes the search model with a new search. Should be called each time a search is done.
 		 * 
@@ -41,11 +49,7 @@ angular.module('doctorpricerWebApp')
 				var geocoderProper = geocoder.geocode({'latLng': coordsObj}, function (results, status) {
 
 					if (status === google.maps.GeocoderStatus.OK) {
-						if (results[0].formatted_address.indexOf("Christchurch") > -1) {
-							self.christchurch = true;
-						} else {
-							self.christchurch = false;
-						}
+						self.christchurch = self.checkForChristchurch(results[0].formatted_address);
 						self.address = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name + ', ' + results[0].address_components[2].short_name;
 						self.displayAddress = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name;
 
@@ -65,12 +69,7 @@ angular.module('doctorpricerWebApp')
 			} else {
 				this.address = address;
 				this.displayAddress = displayAddress;
-
-				if (address.indexOf("Christchurch") > -1) {
-					this.christchurch = true;
-				} else {
-					this.christchurch = false;
-				}	
+				this.christchurch = this.checkForChristchurch(address);
 			}
 
 		}
