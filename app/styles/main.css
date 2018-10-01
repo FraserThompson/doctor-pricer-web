@@ -419,7 +419,7 @@ input[type=number] {
     width: 93vw;
     transform: none;
     margin: auto auto 50px auto;
-    max-height: 25vh;
+    height: 80px;
   }
 
   .centre-content {
