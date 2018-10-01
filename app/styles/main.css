@@ -413,13 +413,12 @@ input[type=number] {
 }
 
 /* Font size and autocomplete size on really small screens*/
-@media screen and (max-width: 481px) {
+@media screen and (max-width: 420px) {
 
   .stupid-ad .adsbygoogle {
     width: 93vw;
     transform: none;
     margin: auto auto 50px auto;
-    height: 80px;
   }
 
   .centre-content {
