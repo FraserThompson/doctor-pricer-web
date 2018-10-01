@@ -34,12 +34,14 @@ angular.module('doctorpricerWebApp')
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $scope.error = "";
 
+      console.log($scope.details);
+
       // Get the stuff in the search model
       SearchModel.initalizeModel(
         $scope.details.geometry.location.lat(),
         $scope.details.geometry.location.lng(),
         $scope.age,
-        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name + ', ' + $scope.details.address_components[2].short_name + ', ' + $scope.details.address_components[3].short_name,
+        $scope.details.formatted_address,
         $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
       );
 

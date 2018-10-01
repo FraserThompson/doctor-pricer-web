@@ -15,4 +15,4 @@ If you want to change the API URL to something local then the place to do that i
 
 Commit and push to master then run:
 
-`git subtree push --prefix dist origin gh-pages`
+`npm run deploy`

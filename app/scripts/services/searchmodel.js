@@ -49,9 +49,10 @@ angular.module('doctorpricerWebApp')
 				var geocoderProper = geocoder.geocode({'latLng': coordsObj}, function (results, status) {
 
 					if (status === google.maps.GeocoderStatus.OK) {
+						console.log(results[0]);
 						self.christchurch = self.checkForChristchurch(results[0].formatted_address);
-						self.address = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name + ', ' + results[0].address_components[2].short_name;
 						self.displayAddress = results[0].address_components[0].short_name + ' ' + results[0].address_components[1].short_name;
+						self.address = results[0].formatted_address;
 
 						$rootScope.$broadcast('geolocatedAddress');
 
