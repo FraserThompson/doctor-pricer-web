@@ -123,11 +123,11 @@ input[type=number] {
   box-sizing: border-box;
 }
 
-.stupid-ad {
+.stupid-adsbygoogle {
   position: absolute;
   bottom: 40px;
-  height: 20vh;
-  width: 60%;
+  height: 30vh;
+  width: 60vw;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -432,12 +432,12 @@ input[type=number] {
 /* Font size and autocomplete size on really small screens*/
 @media screen and (max-width: 420px) {
 
-  .centre-content, .stupid-ad {
-    width: 80% !important;
+  .centre-content, .stupid-adsbygoogle {
+    width: 80vw;
   }
 
   .stupid-adsbygoogle {
-    max-height: 100px;
+    height: 120px;
   }
 
   .modal-body {

@@ -69,6 +69,7 @@ angular.module('doctorpricerWebApp')
 						data-ad-client="ca-pub-2527917281752489" \
 						data-ad-slot="1395256542" \
 						data-ad-format="auto" \
+						data-full-width-responsive="false" \
 						</ins> \
 						</div>',
 			link: function() {
