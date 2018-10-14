@@ -436,7 +436,7 @@ input[type=number] {
     width: 80% !important;
   }
 
-  .stupid-ad {
+  .stupid-ad .adsbygoogle {
     max-height: 100px;
   }
 
