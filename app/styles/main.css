@@ -436,8 +436,8 @@ input[type=number] {
     width: 80% !important;
   }
 
-  .stupid-ad .adsbygoogle {
-    height: 100px;
+  .stupid-ad {
+    max-height: 100px;
   }
 
   .modal-body {
