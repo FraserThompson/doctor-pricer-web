@@ -68,7 +68,7 @@ angular.module('doctorpricerWebApp')
 						style="display:block" \
 						data-ad-client="ca-pub-2527917281752489" \
 						data-ad-slot="1395256542" \
-						data-ad-format="auto" \
+						data-ad-format="auto,horizontal" \
 						data-full-width-responsive="true" \
 						</ins> \
 						</div>',
