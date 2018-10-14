@@ -436,6 +436,10 @@ input[type=number] {
     width: 80% !important;
   }
 
+  .stupid-ad {
+    height: 100px;
+  }
+
   .modal-body {
     max-height: 80vh;
     overflow: auto;
