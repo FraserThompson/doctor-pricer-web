@@ -437,7 +437,7 @@ input[type=number] {
   }
 
   .stupid-adsbygoogle {
-    height: 100px;
+    height: 100px !important;
     max-height: 100px;
   }
 
