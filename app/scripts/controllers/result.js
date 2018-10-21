@@ -8,7 +8,7 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', ['$scope', '$timeout', '$rootScope', '$window', '$state', '$stateParams', '$uibModal', 'error', 'sortedPractices', 'PracticesCollection', 'SearchModel', function ($scope, $timeout, $rootScope, $window, $state, $stateParams, $uibModal, error, sortedPractices, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', ['$scope', '$timeout', '$rootScope', '$window', '$state', '$transitions', '$stateParams', '$uibModal', 'error', 'sortedPractices', 'PracticesCollection', 'SearchModel', function ($scope, $timeout, $rootScope, $window, $state, $transitions, $stateParams, $uibModal, error, sortedPractices, PracticesCollection, SearchModel) {
 
     if (error === 1) $state.go('home');
 
@@ -27,6 +27,13 @@ angular.module('doctorpricerWebApp')
     $scope.map = {'active': true};
     $scope.loading = false;
 
+    // Handle the back button (doesn't seem to trigger $stateparams change)
+    $transitions.onSuccess({}, function(transition) {
+        var params = transition.params();
+        var menu = params['#'];
+        $scope.sidebar = menu == "map" ? 0 : 1;
+    });
+
     $scope.$watch('$viewContentLoaded', function(){
         $rootScope.results_loading = false;
     });
@@ -41,7 +48,7 @@ angular.module('doctorpricerWebApp')
     /* Inverses the sidebar variable which determines whether the sidebar is active*/
     $scope.toggleSidebar = function() {
         $scope.sidebar = !$scope.sidebar;
-        $state.go('result', {'#': $scope.sidebar == 0 ? 'map' : 'list'}, {'location': 'replace', 'inherit': true, 'notify': false});
+        $state.go('result', {'#': $scope.sidebar == 0 ? 'map' : 'list'}, {'inherit': true, 'notify': false});
     };
 
     /* Cancels the swipe gesture so that moving the map doesn't swipe the page */
