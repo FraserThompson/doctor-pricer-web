@@ -77,7 +77,7 @@ angular
             console.log("[RESOLVE] Checking for errors in URL...");
 
             $rootScope.app_loaded = true;
-            $rootScope.results_loading = true;
+            $rootScope.resultsLoading = true;
 
             var defer = $q.defer();
 
@@ -103,14 +103,16 @@ angular
             );
 
           }],
-          fetchedPractices: ['$state', '$stateParams', 'PracticesCollection', function($state, $stateParams, PracticesCollection) {
+          fetchedPractices: ['$stateParams', 'PracticesCollection', function($stateParams, PracticesCollection) {
 
               console.log("[RESOLVE] Fetching practices...");
 
               return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
 
           }],
-          sortedPractices: ['fetchedPractices', 'PracticesCollection', function(fetchedPractices, PracticesCollection) {
+          sortedPractices: ['$rootScope', 'fetchedPractices', 'PracticesCollection', function($rootScope, fetchedPractices, PracticesCollection) {
+
+            $rootScope.resultsLoadingMessage = "Found " + fetchedPractices.length + " practices...";
             
             console.log("[RESOLVE] Sorting practices...");
 

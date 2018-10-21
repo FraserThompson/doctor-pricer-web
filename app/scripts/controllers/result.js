@@ -35,7 +35,7 @@ angular.module('doctorpricerWebApp')
     });
 
     $scope.$watch('$viewContentLoaded', function(){
-        $rootScope.results_loading = false;
+        $rootScope.resultsLoading = false;
     });
 
     /* Pops up the modal for reporting badthings */

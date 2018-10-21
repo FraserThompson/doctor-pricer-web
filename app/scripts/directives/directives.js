@@ -60,6 +60,12 @@ angular.module('doctorpricerWebApp')
 			}
 		}
 	}])
+	.directive('loadingMessage', ['$rootScope', '$compile', function($rootScope, $compile) {
+		return {
+			replace: 'true',
+			template: '<div class="centre-container" ng-show="resultsLoading" ng-cloak><div class="searching centre-content"><h3><i class="fa fa-spinner fa-spin fa-lg"></i> {{resultsLoadingMessage || "Finding nearby practices..."}}</h3></div></div>'
+		}
+	}])
 	.directive('stupidAd', ['$timeout', function($timeout) {
 		return {
 			replace: 'true',

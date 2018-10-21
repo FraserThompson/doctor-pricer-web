@@ -64,11 +64,7 @@
 
       <div class="view-animate" ui-view>
         
-        <div class="centre-container" ng-show="results_loading" ng-cloak>
-          <div class="searching centre-content">
-            <h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
-          </div>
-        </div>
+        <loading-message></loading-message>
   
         <div class="centre-container" ng-hide="app_loaded">
           <div class="centre-content">

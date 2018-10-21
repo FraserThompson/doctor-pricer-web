@@ -65,6 +65,15 @@ a, button {
 /* Make the result view top a bit smaller */
 .nav-tabs > li > a {
   padding: 7px 15px !important;
+  margin-right: 0px;
+}
+
+.nav-tabs li {
+  float: right;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border-bottom-color: rgb(221, 221, 221);
 }
 
 .sidebar-toggle {
@@ -396,42 +405,45 @@ input[type=number] {
     top: auto;
     bottom: 15px;
   }
-  .row-offcanvas {
-    position: relative;
+  .sidebar-offcanvas {
+    position: absolute;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: left .20s ease-out;
     -moz-transition: left .20s ease-out;
     -ms-transition: left .20s ease-out;
     -o-transition: left .20s ease-out;
     transition: left .20s ease-out;
+    box-shadow: 2px 0px 10px #888888;
+    margin-top: 1px;
   }
-  .row-offcanvas-right {
+
+  .sidebar-offcanvas.right {
     right: 0;
   }
 
-  .row-offcanvas-left {
+  .sidebar-offcanvas.left {
     left: 0;
   }
-  .row-offcanvas-right
-  .sidebar-offcanvas {
+
+  .sidebar-offcanvas.right {
     right: -50%;
   }
-  .row-offcanvas-left
-  .sidebar-offcanvas {
+  .sidebar-offcanvas.left {
     left: -90vw;
-    width: 90vw
   }
-  .row-offcanvas-right.active {
+  .sidebar-offcanvas.right.active {
     right: 50%; 
   }
-  .row-offcanvas-left.active {
-    left: 90vw; 
+  .sidebar-offcanvas.left.active {
+    left: 0vw; 
   }
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 50%;
-  }
+}
+
+.sidebar-offcanvas {
+  z-index: 1000;
+  width: 90vw;
+  height: 100vh;
+  background-color: white;
 }
 
 .fa-window-close {

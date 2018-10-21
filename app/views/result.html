@@ -1,11 +1,14 @@
-<div ng-hide="results_loading" class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
-	<div class="row row-offcanvas row-offcanvas-left"  ng-class="{'active': sidebar}">
-		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas" id="sidebar" >
+<div ng-hide="resultsLoading" class="container-fluid no-left-right-padding" id="result-page" ng-swipe-left="toggleSidebar()" ng-swipe-right="toggleSidebar()">
+	<div class="row">
+		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas left" id="sidebar" ng-class="{'active': sidebar}">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 style="margin-top: 0px; padding-left:2px;"><small>Found {{practices.length}} practices within
-						<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = '0'" ng-options="key as value.name for (key, value) in radiuses" ng-change="changeRadius(selectedRadius)"></select>
-					</small></h3>
+					<h3 style="margin-top: 0px; padding-left:2px;">
+						<small>Found {{practices.length}} practices within
+							<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = '0'" ng-options="key as value.name for (key, value) in radiuses" ng-change="changeRadius(selectedRadius)"></select>
+						</small>
+						<a type="button" class="sidebar-toggle btn btn-default btn-lg pull-right visible-xs" style="margin-bottom: 0px;" ng-click="toggleSidebar()"><span ng-class="(sidebar==1) ? 'glyphicon-menu-right' : 'glyphicon-menu-left'" class="glyphicon"></span></a>
+					</h3>
 					<h3 ng-show="christchurch"><small><i class="fa fa-exclamation-triangle"></i> Limited fee data available for Christchurch. For a more complete list of Christchurch practices visit <a href="http://www.pegasus.health.nz/gp-locator" target="_blank">Pegasus Health</a></small></h3>
 				</div>
 			</div>
@@ -28,10 +31,7 @@
 			</div>
 			<h3 class="no-up-down-padding" style="padding-left:2px;"><small>Fees are for enrolled patients. <a ng-click="openDialog()" href="">More</a></small></h3>
 		</div>
-		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" >
-			<p class="pull-left visible-xs" style="margin-bottom: 0px;">
-            	<a type="button" class="sidebar-toggle btn btn-default btn-lg" ng-click="toggleSidebar()"><span ng-class="(sidebar==1) ? 'glyphicon-menu-right' : 'glyphicon-menu-left'" class="glyphicon"></span></a>
-          	</p>
+		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" id="map_view">
 			<uib-tabset>
 				<uib-tab heading="Map" active="map.active">
 					<div id="map_canvas" ng-hide="noPractices()" ng-controller="MapCtrl" ng-swipe-right="cancelSwipe($event)" ng-swipe-left="cancelSwipe($event)">
@@ -78,8 +78,4 @@
 		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-show="map.active && !christchurch" ng-click="reportModal()" href="">Incorrect information or missing practices?<a></small></h3>
 	</div>
 </div>
-<div class="centre-container" ng-show="results_loading" ng-cloak>
-	<div class="searching centre-content">
-		<h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
-	</div>
-</div>
+<loading-message></loading-message>

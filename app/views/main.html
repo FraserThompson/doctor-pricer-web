@@ -1,4 +1,4 @@
-<div class="centre-container" ng-hide="results_loading">
+<div class="centre-container" ng-hide="resultsLoading">
   <div class="centre-content">
     <h3 class="tagline">Compare fees from over 800 NZ practices.</h3>
     <form name="form" ng-submit="next()" class="form" novalidate>
@@ -22,9 +22,5 @@
     <!-- <h1>DoctorPricer is currently offline for maintenance. Check back in a couple of hours.</h1> -->
   </div>
 </div>
-<div class="centre-container" ng-show="results_loading" ng-cloak>
-	<div class="searching centre-content">
-		<h3><i class="fa fa-spinner fa-spin fa-lg"></i> Finding nearby practices...</h3>
-	</div>
-</div>
+<loading-message></loading-message>
 <stupid-ad></stupid-ad>
