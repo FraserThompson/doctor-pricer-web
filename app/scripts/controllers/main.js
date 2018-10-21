@@ -20,12 +20,24 @@ angular.module('doctorpricerWebApp')
     } else {
       $scope.addressPlaceholder = "Address"
     }
+
     /* Associate the details found with the text submitted so input validation is easier */
     $scope.$watch('details', function() {
       $timeout(function() {
         $scope.details.autocomplete = $scope.autocomplete;
       }, 200);
     });
+
+    /* On mobile the ad gets pushed up with the keyboard so we just hide it when the form elements are focused */
+    $scope.hideAd = function() {
+      var element = document.getElementsByClassName('adsbygoogle');
+      if (element[0] && $window.outerWidth < 545) element[0].style.display = "none";
+    }
+
+    $scope.showAd = function() {
+      var element = document.getElementsByClassName('adsbygoogle');
+      if (element[0] && $window.outerWidth < 545) element[0].style.display = "block";
+    }
 
     /* Used for the submit button */
   	$scope.next = function() {
