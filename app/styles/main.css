@@ -188,9 +188,16 @@ input[type=number] {
 .navbar>.container-fluid .navbar-brand-centred {
   margin-left: -105px !important;
 }
-.navbar-default .navbar-toggle .icon-bar {
+.navbar-default .navbar-toggle span {
+  color: #0089CC;
+}
+
+.navbar-toggle {
+  padding: 3px 6px;
+  margin-right: 10px;
   background-color: white;
 }
+
 .navbar-collapse, .navbar-form {
   border-style: none;
   box-shadow: none;
