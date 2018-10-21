@@ -56,6 +56,12 @@ module.exports = {
         }
     },
     devtool: !PROD ? 'eval-source-map' : '',
+    devServer: {
+        contentBase: 'dist',
+        compress: false,
+        port: 9001,
+        historyApiFallback: true
+    },
     output: {
         path: __dirname + "/dist/",
         filename: "[name].[hash].bundle.js"

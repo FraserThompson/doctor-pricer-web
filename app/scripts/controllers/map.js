@@ -36,9 +36,15 @@ angular.module('doctorpricerWebApp')
 		var w = angular.element($window)
 		var setHeight = function() {
 			 $timeout(function() {
-		        var mapHeight = ($window.innerHeight - 128) + 'px';
-		        document.getElementById('leaflet_map').style.height = mapHeight;
-		        document.getElementById('map_canvas').style.maxHeight = mapHeight;
+				var mapElement = document.getElementById('leaflet_map');
+				var mapCanvasElement = document.getElementById('map_canvas');
+
+				if (mapElement){
+					var mapHeight = ($window.innerHeight - 128) + 'px';
+					mapElement.style.height = mapHeight;
+					mapCanvasElement.style.maxHeight = mapHeight;
+				}
+
 		     }, 300);
 		};
 
@@ -46,8 +52,12 @@ angular.module('doctorpricerWebApp')
 			setHeight();
 		});
 
+		$scope.$watch('$viewContentLoaded', function(){
+			initializeMap();
+		 });
+
 		/* When there are new practices to put on the map */
-	   	$scope.$on('countUpdated', function() {
+	   	$rootScope.$on('countUpdated', function() {
 			initializeMap();
 		});
 

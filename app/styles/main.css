@@ -291,6 +291,14 @@ input[type=number] {
   padding: 0;
   margin: 0;
 }
+#info-button {
+  width: 30px;
+}
+
+#info-button a {
+  padding: 15px 10px;
+}
+
 .navbar-form.ng-hide {
   opacity: 0;
   line-height: 0;
@@ -359,12 +367,6 @@ input[type=number] {
 }
 .animate-expand.ng-hide-add {
   line-height: 25px;
-}
-
-@media screen and (max-width: 1050px) {
- .navbar-nav {
-    margin-left: 3px;
-  }
 }
 
 /*

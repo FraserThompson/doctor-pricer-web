@@ -9,7 +9,7 @@
  */
 
 angular.module('doctorpricerWebApp')
-  .controller('NavbarCtrl', ['$scope', '$state', '$timeout', 'SearchModel', function ($scope, $state, $timeout, SearchModel) {
+  .controller('NavbarCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'SearchModel', function ($scope, $rootScope, $state, $timeout, SearchModel) {
   	$scope.age = SearchModel.age;
   	$scope.autocomplete = SearchModel.displayAddress;
   	$scope.options = {
@@ -21,7 +21,10 @@ angular.module('doctorpricerWebApp')
     /* Used to decide whether navbarThings should be displayed based on the state*/
   	$scope.$on('$stateChangeSuccess', function(event, next) {
   		if (next.name === 'result') {
-  			$scope.navbarThings = 1;
+				$scope.navbarThings = 1;
+				$scope.age = SearchModel.age;
+				$scope.autocomplete = SearchModel.displayAddress;
+				$scope.details.autocomplete = $scope.autocomplete;
   		} else {
   			$scope.navbarThings = 0;
   		}
@@ -33,15 +36,8 @@ angular.module('doctorpricerWebApp')
         $scope.details.autocomplete = $scope.autocomplete;
       }, 200);
     });
-  	
-  	/* When there's a new search update the values in the search box */
-  	$scope.$on('geolocatedAddress', function() {
-  		$scope.age = SearchModel.age;
-  		$scope.autocomplete = SearchModel.displayAddress;
-  		$scope.details.autocomplete = $scope.autocomplete;
-  	});
 
-  	/* Update searchmodel and addressbar location, don't trigger state change */
+  	/* Update searchmodel and addressbar location */
   	$scope.next = function() {
 	
       // Don't bother validating if nothing is changed
@@ -49,26 +45,30 @@ angular.module('doctorpricerWebApp')
     		$scope.$broadcast('show-errors-check-validity');
     		if ($scope.headerForm.$invalid) return;
 				document.getElementById('practice-list').style.maxHeight = 0;
-					
-				// Get the stuff in the search model
-				SearchModel.initalizeModel(
-					$scope.details.geometry.location.lat(),
-					$scope.details.geometry.location.lng(),
-					$scope.age,
-					$scope.details.formatted_address,
-					$scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name,
-				);
-
-				$scope.$broadcast('geolocatedAddress');
-
+			} else {
+				console.log("[NAVBAR] No new search so doing nothing.");
+				return;
 			}
 
 			$scope.isCollapsed = 1;
-      $state.transitionTo('result', {
+      $state.go('result', {
         'age': $scope.age, 
-        'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0], 
-        'lng': $scope.details.geometry ? $scope.details.geometry.location.lng() : SearchModel.coords[1],
-			}, {location: true, inherit: true, notify: false});
+        'lat': $scope.details.geometry.location.lat(), 
+				'lng': $scope.details.geometry.location.lng(),
+				'address': $scope.details.formatted_address,
+				'#': 'list',
+				'display_address': $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
+			})
+			.then(
+        function() {
+					console.log("Here we are, stuck by this river.")
+					$scope.isLoading = false;
+        }, 
+        function() {
+          $scope.error = "Something's broken :( Try again later.";
+          $scope.isLoading = false;
+        }
+      );
 
     };
   }]);

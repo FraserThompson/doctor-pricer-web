@@ -45,8 +45,10 @@ angular
         $uibModal.open({ templateUrl: 'views/info.html'}).result.then(function () {}, function () {});
       };
     }])
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
     $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true);
 
     $stateProvider
       .state('home', {
@@ -55,39 +57,75 @@ angular
         controller: 'MainCtrl',
         onEnter: ['$rootScope', function($rootScope) {
           $rootScope.hideFb = false;
-          $rootScope.loaded = true;
+          $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
+          $rootScope.app_loaded = true;
           $rootScope.autocompleteSize = "big-autocomplete"; // dynamically load the css to size the Google Autocomplete box
         }]
       })
       .state('result', {
-        url: '/:lat,:lng/:age/',
+        url: '/:lat,:lng/:age',
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
+        reloadOnSearch: false,
+        params: {
+          address: null,
+          display_address: null
+        },
         resolve: {
-          error: ['$state', '$stateParams', function($state, $stateParams) {
+          error: ['$stateParams', '$q', '$rootScope', function($stateParams, $q, $rootScope) {
+
+            console.log("[RESOLVE] Checking for errors in URL...");
+
+            $rootScope.app_loaded = true;
+            $rootScope.results_loading = true;
+
+            var defer = $q.defer();
+
             if (!isNaN(parseFloat($stateParams.lat)) && !isNaN(parseFloat($stateParams.lng)) && !isNaN(parseInt($stateParams.age))){
-              return 0;
+              defer.resolve();
             } else {
-              return 1;
+              defer.reject('URL params are somehow not right');
             }
+          
+            return defer.promise;
+
+          }],
+          initializeSearchModel: ['SearchModel', '$stateParams',  function(SearchModel, $stateParams,) {
+
+            console.log("[RESOLVE] Initializing search model...");
+    
+            return SearchModel.initalizeModel(
+              $stateParams.lat,
+              $stateParams.lng,
+              $stateParams.age,
+              $stateParams.address,
+              $stateParams.display_address
+            );
+
+          }],
+          fetchedPractices: ['$state', '$stateParams', 'PracticesCollection', function($state, $stateParams, PracticesCollection) {
+
+              console.log("[RESOLVE] Fetching practices...");
+
+              return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
+
+          }],
+          sortedPractices: ['fetchedPractices', 'PracticesCollection', function(fetchedPractices, PracticesCollection) {
+            
+            console.log("[RESOLVE] Sorting practices...");
+
+            return PracticesCollection.sortData(fetchedPractices);
+
           }]
         },
-        onEnter: ['$stateParams', '$rootScope', 'SearchModel', function($stateParams, $rootScope, SearchModel) {
-          $rootScope.loaded = true;
+        onEnter: ['$rootScope', '$timeout', '$window', 'SearchModel', function($rootScope, $timeout, $window, SearchModel) {
+
           // Hide facebook like if we're on mobile
           if (window.innerWidth <= 481) $rootScope.hideFb = true;
 
-          // Take params from URL if they haven't already been initialized
-          if (!SearchModel.coords.length) SearchModel.initalizeModel(
-            parseFloat($stateParams.lat),
-            parseFloat($stateParams.lng),
-            $stateParams.age,
-            null,
-            null
-          )
-  
-          $rootScope.$broadcast('newSearch');
           $rootScope.autocompleteSize = "small-autocomplete"; // dynamically load the css to size the Google Autocomplete box
+          $rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
+
         }]
       });
   }]);

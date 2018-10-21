@@ -34,28 +34,23 @@ angular.module('doctorpricerWebApp')
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $scope.error = "";
 
-      console.log($scope.details);
-
-      // Get the stuff in the search model
-      SearchModel.initalizeModel(
-        $scope.details.geometry.location.lat(),
-        $scope.details.geometry.location.lng(),
-        $scope.age,
-        $scope.details.formatted_address,
-        $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
-      );
-
-      $rootScope.$broadcast('geolocatedAddress');
-
       $state.go('result', {
-        'age': SearchModel.age, 
-        'lat': SearchModel.coords[0], 
-        'lng': SearchModel.coords[1]
+        'age': $scope.age, 
+        'lat': $scope.details.geometry.location.lat(), 
+        'lng': $scope.details.geometry.location.lng(),
+        'address': $scope.details.formatted_address,
+        '#': 'list',
+        'display_address': $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
       })
-      .then(function() {console.log("Here we are, stuck by this river.")}, function() {
-        $scope.error = "Something's broken :( Try again later.";
-        $scope.isLoading = false;
-      });
+      .then(
+        function() {
+          console.log("Here we are, stuck by this river.")
+        }, 
+        function() {
+          $scope.error = "Something's broken :( Try again later.";
+          $scope.isLoading = false;
+        }
+      );
 
     };
 
