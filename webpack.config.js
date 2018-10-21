@@ -17,7 +17,7 @@ module.exports = {
             template: 'html-loader!./app/index.html'
         }),
         new HtmlWebpackPlugin({
-            template: 'html-loader!./app/404.html',
+            template: 'html-loader!./app/index.html',
             filename: '404.html'
         }),
         new HtmlWebpackPlugin({

@@ -8,7 +8,7 @@
  * Controller of the doctorpricerWebApp
  */
 angular.module('doctorpricerWebApp')
-  .controller('ResultCtrl', ['$scope', '$timeout', '$rootScope', '$window', '$state', '$stateParams', '$uibModal', 'error', 'fetchedPractices', 'sortedPractices', 'PracticesCollection', 'SearchModel', function ($scope, $timeout, $rootScope, $window, $state, $stateParams, $uibModal, error, sortedPractices, PracticesCollection, SearchModel) {
+  .controller('ResultCtrl', ['$scope', '$timeout', '$rootScope', '$window', '$state', '$stateParams', '$uibModal', 'error', 'sortedPractices', 'PracticesCollection', 'SearchModel', function ($scope, $timeout, $rootScope, $window, $state, $stateParams, $uibModal, error, sortedPractices, PracticesCollection, SearchModel) {
 
     if (error === 1) $state.go('home');
 
