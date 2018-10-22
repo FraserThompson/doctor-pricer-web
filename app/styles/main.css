@@ -46,6 +46,7 @@ select:disabled {
 
 html, body {
   overflow-x: hidden;
+  overflow-y: hidden;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -163,7 +164,7 @@ input[type=number] {
 .navbar-default {
   font-size: 18px;
   margin-bottom: 0px;
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   width: 100%;
 }
@@ -236,6 +237,10 @@ input[type=number] {
 .btn-cool:focus {
   background-color: #118945;
   color: white;
+}
+
+#map_view {
+  overflow-y: hidden;
 }
 
 /* Expand down the list and canvas */
@@ -385,6 +390,14 @@ input[type=number] {
   line-height: 25px;
 }
 
+.sidebar-offcanvas {
+  transform: none;
+}
+
+#overlay { 
+  display: none;
+}
+
 /*
  * Off Canvas
  * --------------------------------------------------
@@ -408,42 +421,35 @@ input[type=number] {
   .sidebar-offcanvas {
     position: absolute;
     -webkit-transform-style: preserve-3d;
-    -webkit-transition: left .20s ease-out;
-    -moz-transition: left .20s ease-out;
-    -ms-transition: left .20s ease-out;
-    -o-transition: left .20s ease-out;
-    transition: left .20s ease-out;
+    -webkit-transition: -webkit-transform .20s ease-out;
+    -moz-transition: -moz-transform .20s ease-out;
+    -ms-transition: -ms-transform .20s ease-out;
+    -o-transition: -o-transform .20s ease-out;
+    transition: transform .20s ease-out;
     box-shadow: 2px 0px 10px #888888;
     margin-top: 1px;
+    z-index: 8;
+    width: 90vw;
+    background-color: white;
   }
 
-  .sidebar-offcanvas.right {
-    right: 0;
+  #overlay {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: opacity .20s ease-out;
+    -moz-transition: opacity .20s ease-out;
+    -ms-transition: opacity.20s ease-out;
+    -o-transition: opacity .20s ease-out;
+    transition: opacity .20s ease-out;
+    background-color: black;
+    position: absolute;
+    opacity: 0.4;
+    height: 100vh;
+    width: 100vw;
+    z-index: 7;
+    display: initial;
+    overflow-y: hidden;
   }
 
-  .sidebar-offcanvas.left {
-    left: 0;
-  }
-
-  .sidebar-offcanvas.right {
-    right: -50%;
-  }
-  .sidebar-offcanvas.left {
-    left: -90vw;
-  }
-  .sidebar-offcanvas.right.active {
-    right: 50%; 
-  }
-  .sidebar-offcanvas.left.active {
-    left: 0vw; 
-  }
-}
-
-.sidebar-offcanvas {
-  z-index: 1000;
-  width: 90vw;
-  height: 100vh;
-  background-color: white;
 }
 
 .fa-window-close {

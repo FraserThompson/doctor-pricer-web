@@ -34,7 +34,6 @@ angular
     require('angular-animate'),
     require('angular-resource'),
     require('angular-route'),
-    require('angular-touch'),
     require('angular-scroll')
   ])
   .run(['$rootScope', '$uibModal', function($rootScope, $uibModal) {

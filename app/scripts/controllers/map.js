@@ -40,7 +40,7 @@ angular.module('doctorpricerWebApp')
 				var mapCanvasElement = document.getElementById('map_canvas');
 
 				if (mapElement){
-					var mapHeight = ($window.innerHeight - 128) + 'px';
+					var mapHeight = ($window.innerHeight - 115) + 'px';
 					mapElement.style.height = mapHeight;
 					mapCanvasElement.style.maxHeight = mapHeight;
 				}
@@ -99,7 +99,7 @@ angular.module('doctorpricerWebApp')
 					'title': value.name,
 					'icon': localIcons.markerRed
 				});
-				marker.bindPopup('<h5><a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.pho + '</small></h5>')
+				marker.bindPopup('<h5>$' + value.price + ': <a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.pho + '</small></h5>')
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);
