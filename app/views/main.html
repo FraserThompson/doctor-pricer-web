@@ -5,13 +5,13 @@
       <div class="form-group" ng-class="{ 'has-error': form.address.$invalid && form.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
         <div class="col-md-8 nopadding">
           <label class="sr-only" for="address">Address</label>
-          <input name="address" id="addressInput" ng-focus="hideAd()" ng-blur="showAd()" ng-model-options="{ debounce: 250 }" type="text" class="form-control input-lg" ng-model="autocomplete" options="options" details="details" placeholder="{{addressPlaceholder}}" address-validation disable-tap required ng-autocomplete/>
+          <input name="address" id="addressInput" ng-focus="hideAd()" ng-model-options="{ debounce: 250 }" type="text" class="form-control input-lg" ng-model="autocomplete" options="options" details="details" placeholder="{{addressPlaceholder}}" address-validation disable-tap required ng-autocomplete/>
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }" show-errors='{showSuccess: true}'>
         <div class="col-md-2 nopadding">
           <label class="sr-only" for="age">Age</label>
-          <input ng-focus="hideAd()" ng-blur="showAd()" name="age" min="0" type="number" class="form-control input-lg" ng-model="age" placeholder="Age" required/>
+          <input ng-focus="hideAd()" name="age" min="0" type="number" class="form-control input-lg" ng-model="age" placeholder="Age" required/>
         </div>
       </div>
       <div class="col-md-2 nopadding">

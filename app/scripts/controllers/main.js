@@ -46,6 +46,8 @@ angular.module('doctorpricerWebApp')
       if (!$scope.details.geometry || $scope.form.$invalid) { $scope.isLoading = false; return;}
       $scope.error = "";
 
+      $scope.showAd();
+
       $state.go('result', {
         'age': $scope.age, 
         'lat': $scope.details.geometry.location.lat(), 
