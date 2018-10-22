@@ -184,7 +184,6 @@ angular.module('doctorpricerWebApp')
     // Sets the height of the list when window is resized
     var w = angular.element($window)
     w.bind('resize', function() {
-        console.log('Resize triggered.');
         PracticesCollection.screenHeight = $window.innerHeight;
         setHeight();
         sidebarElement.style.transform = "translateX(" + 0 + "px)";
