@@ -85,7 +85,7 @@ angular.module('doctorpricerWebApp')
 					} catch (e) {
 						console.error(e);
 					}
-				}, 1000);
+				}, 500);
 			}
 		}
 	}])

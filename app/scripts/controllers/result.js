@@ -33,30 +33,23 @@ angular.module('doctorpricerWebApp')
     var overlayElement = document.getElementById('overlay');
     var listElement = document.getElementById('practice-list');
     var offcanvas_position = ($window.innerWidth * 0.90);
-    var openThreshold = -(offcanvas_position * 0.90);
-    var closeThreshold = -(offcanvas_position * 0.10);
-
-    $scope.sidebar_open = true;
+    var closeThreshold = -(offcanvas_position * 0.20);
 
     $scope.closeSidebar = function() {
         if ($window.innerWidth <= 767) {
-            $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
-            $scope.sidebar_open = false;
-
             sidebarElement.style.transform = "translateX(" + -(offcanvas_position) + "px)";
             overlayElement.style.opacity = 0;
             overlayElement.style.display = "none";
+            $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
         }
     }
 
     $scope.openSidebar = function() {
         if ($window.innerWidth <= 767) {
-            $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
-            $scope.sidebar_open = true;
-
             sidebarElement.style.transform = "translateX(" + 0 + "px)";
             overlayElement.style.opacity = 0.4;
             overlayElement.style.display = "initial";
+            $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
         }
     }
     
@@ -91,12 +84,7 @@ angular.module('doctorpricerWebApp')
         mcSidebar.on("panend pancancel", function(ev) {
 
             var sidebarLocation = sidebarElement.getBoundingClientRect();
-
-            if ($scope.sidebar_open) {
-                sidebarLocation.left <= closeThreshold ? $scope.closeSidebar() : $scope.openSidebar();
-            } else {
-                sidebarLocation.left >= openThreshold ? $scope.openSidebar() : $scope.closeSidebar();
-            }
+            sidebarLocation.left <= closeThreshold ? $scope.closeSidebar() : $scope.openSidebar();
 
         });
 
