@@ -33,12 +33,16 @@ angular.module('doctorpricerWebApp')
     var overlayElement = document.getElementById('overlay');
     var listElement = document.getElementById('practice-list');
     var offcanvas_position = ($window.innerWidth * 0.90);
-    var openThreshold = -(offcanvas_position * 0.60);
-    var closeThreshold = -(offcanvas_position * 0.60);
+    var openThreshold = -(offcanvas_position * 0.90);
+    var closeThreshold = -(offcanvas_position * 0.10);
+
+    $scope.sidebar_open = true;
 
     $scope.closeSidebar = function() {
         if ($window.innerWidth <= 767) {
             $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
+            $scope.sidebar_open = false;
+
             sidebarElement.style.transform = "translateX(" + -(offcanvas_position) + "px)";
             overlayElement.style.opacity = 0;
             overlayElement.style.display = "none";
@@ -48,6 +52,8 @@ angular.module('doctorpricerWebApp')
     $scope.openSidebar = function() {
         if ($window.innerWidth <= 767) {
             $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+            $scope.sidebar_open = true;
+
             sidebarElement.style.transform = "translateX(" + 0 + "px)";
             overlayElement.style.opacity = 0.4;
             overlayElement.style.display = "initial";
@@ -73,8 +79,7 @@ angular.module('doctorpricerWebApp')
 
             if (ev.center.x === 0 && ev.center.y === 0) return
         
-            var sidebarLocation = sidebarElement.getBoundingClientRect();
-            var sidebarLeft = sidebarLocation.left + ev.deltaX;
+            var sidebarLeft = sidebarElement.offsetLeft + ev.deltaX;
             var sidebarLocationNew = clamp(sidebarLeft, -(offcanvas_position), 0);
 
             sidebarElement.style.transform = "translateX(" + sidebarLocationNew + "px)";
@@ -87,10 +92,10 @@ angular.module('doctorpricerWebApp')
 
             var sidebarLocation = sidebarElement.getBoundingClientRect();
 
-            if (sidebarLocation.left <= closeThreshold) {
-                $scope.closeSidebar();
-            } else if (sidebarLocation.left >= openThreshold) {
-                $scope.openSidebar();
+            if ($scope.sidebar_open) {
+                sidebarLocation.left <= closeThreshold ? $scope.closeSidebar() : $scope.openSidebar();
+            } else {
+                sidebarLocation.left >= openThreshold ? $scope.openSidebar() : $scope.closeSidebar();
             }
 
         });
