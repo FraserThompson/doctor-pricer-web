@@ -255,7 +255,8 @@ input[type=number] {
   transition: max-height 0.5s;
 }
 #practice-list {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #map_canvas {
   overflow: hidden;
