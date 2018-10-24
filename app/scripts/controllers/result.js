@@ -38,7 +38,7 @@ angular.module('doctorpricerWebApp')
 
     $scope.sidebarState = $stateParams['#'];
 
-    $scope.closeSidebar = function() {
+    $scope.closeSidebarAction = function() {
         if ($window.innerWidth <= 767) {
             sidebarElement.style.transform = "translateX(" + -(offcanvas_position) + "px)";
             overlayElement.style.zIndex = "-1";
@@ -46,7 +46,7 @@ angular.module('doctorpricerWebApp')
         }
     }
 
-    $scope.openSidebar = function() {
+    $scope.openSidebarAction = function() {
         if ($window.innerWidth <= 767) {
             sidebarElement.style.transform = "translateX(" + 0 + "px)";
             overlayElement.style.zIndex  = "7";
@@ -54,11 +54,19 @@ angular.module('doctorpricerWebApp')
         }
     }
 
+    $scope.closeSidebar = function() {
+        $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
+    }
+
+    $scope.openSidebar = function() {
+        $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+    }
+
     $scope.toggleSidebar = function() {
         if ($scope.sidebarState == "map") {
-            $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+            $scope.openSidebar();
         } else {
-            $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
+            $scope.closeSidebar();
         }
     }
     
@@ -95,15 +103,15 @@ angular.module('doctorpricerWebApp')
             var sidebarLocation = sidebarElement.getBoundingClientRect();
             if ($scope.sidebarState == "list") {
                 if (sidebarLocation.left <= closeThreshold) { 
-                    $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
+                    $scope.closeSidebar();
                 } else {
-                    $scope.openSidebar();
+                    $scope.openSidebarAction();
                 }
             } else {
                 if (sidebarLocation.left >= openThreshold) {
-                    $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+                    $scope.openSidebar();
                 } else {
-                    $scope.closeSidebar();
+                    $scope.closeSidebarAction();
                 }
             }
 
@@ -121,7 +129,7 @@ angular.module('doctorpricerWebApp')
     $transitions.onSuccess({}, function(transition) {
         var params = transition.params();
         $scope.sidebarState = params['#'];
-        $scope.sidebarState == "map" ? $scope.closeSidebar() : $scope.openSidebar();
+        $scope.sidebarState == "map" ? $scope.closeSidebarAction() : $scope.openSidebarAction();
     });
 
     $scope.$watch('$viewContentLoaded', function(){
@@ -209,6 +217,6 @@ angular.module('doctorpricerWebApp')
     });
 
     setHeight();
-    $scope.sidebarState == "map" ? $scope.closeSidebar() : $scope.openSidebar();
+    $scope.sidebarState == "map" ? $scope.closeSidebarAction() : $scope.openSidebarAction();
     
   }]);
