@@ -34,22 +34,31 @@ angular.module('doctorpricerWebApp')
     var listElement = document.getElementById('practice-list');
     var offcanvas_position = ($window.innerWidth * 0.90);
     var closeThreshold = -(offcanvas_position * 0.20);
+    var openThreshold = -(offcanvas_position * 0.80);
+
+    $scope.sidebarState = $stateParams['#'];
 
     $scope.closeSidebar = function() {
         if ($window.innerWidth <= 767) {
             sidebarElement.style.transform = "translateX(" + -(offcanvas_position) + "px)";
+            overlayElement.style.zIndex = "-1";
             overlayElement.style.opacity = 0;
-            overlayElement.style.display = "none";
-            $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
         }
     }
 
     $scope.openSidebar = function() {
         if ($window.innerWidth <= 767) {
             sidebarElement.style.transform = "translateX(" + 0 + "px)";
+            overlayElement.style.zIndex  = "7";
             overlayElement.style.opacity = 0.4;
-            overlayElement.style.display = "initial";
+        }
+    }
+
+    $scope.toggleSidebar = function() {
+        if ($scope.sidebarState == "map") {
             $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+        } else {
+            $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
         }
     }
     
@@ -84,7 +93,19 @@ angular.module('doctorpricerWebApp')
         mcSidebar.on("panend pancancel", function(ev) {
 
             var sidebarLocation = sidebarElement.getBoundingClientRect();
-            sidebarLocation.left <= closeThreshold ? $scope.closeSidebar() : $scope.openSidebar();
+            if ($scope.sidebarState == "list") {
+                if (sidebarLocation.left <= closeThreshold) { 
+                    $state.go('result', {'#': 'map'}, {'inherit': true, 'notify': false});
+                } else {
+                    $scope.openSidebar();
+                }
+            } else {
+                if (sidebarLocation.left >= openThreshold) {
+                    $state.go('result', {'#': 'list'}, {'inherit': true, 'notify': false});
+                } else {
+                    $scope.closeSidebar();
+                }
+            }
 
         });
 
@@ -99,8 +120,8 @@ angular.module('doctorpricerWebApp')
     // Handle the back button (doesn't seem to trigger $stateparams change)
     $transitions.onSuccess({}, function(transition) {
         var params = transition.params();
-        var menu = params['#'];
-        menu == "map" ? $scope.closeSidebar() : $scope.openSidebar();
+        $scope.sidebarState = params['#'];
+        $scope.sidebarState == "map" ? $scope.closeSidebar() : $scope.openSidebar();
     });
 
     $scope.$watch('$viewContentLoaded', function(){
@@ -188,5 +209,6 @@ angular.module('doctorpricerWebApp')
     });
 
     setHeight();
+    $scope.sidebarState == "map" ? $scope.closeSidebar() : $scope.openSidebar();
     
   }]);

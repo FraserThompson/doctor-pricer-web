@@ -1,4 +1,7 @@
 <div ng-hide="resultsLoading" class="container-fluid no-left-right-padding" id="result-page">
+	<button class="btn btn-default visible-xs" ng-class="{'active': sidebarState == 'list'}" style="position: absolute; top: 8px; z-index: 10; color: #0089CC;" type="button" ng-click="toggleSidebar()">
+		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+	</button>
 	<div class="row">
 		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas left" id="sidebar">
 			<div class="row">
@@ -32,9 +35,6 @@
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" id="map_view">
 			<div id="overlay"></div>
-			<button class="btn btn-default visible-xs" style="position: absolute; top: 1px;" type="button" ng-click="openSidebar()">
-				<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-			</button>
 			<uib-tabset>
 				<uib-tab heading="Map" active="map.active">
 					<div id="map_canvas" ng-hide="noPractices()" ng-controller="MapCtrl">

@@ -414,9 +414,9 @@ input[type=number] {
   }
 
   .fb-like{
-    left: 10px !important;
+    left: 2px !important;
     top: auto;
-    bottom: 15px;
+    bottom: 5px;
   }
   .sidebar-offcanvas {
     position: absolute;
