@@ -45,19 +45,16 @@ angular.module('doctorpricerWebApp')
     		$scope.$broadcast('show-errors-check-validity');
     		if ($scope.headerForm.$invalid) return;
 				document.getElementById('practice-list').style.maxHeight = 0;
-			} else {
-				console.log("[NAVBAR] No new search so doing nothing.");
-				return;
 			}
 
 			$scope.isCollapsed = 1;
       $state.go('result', {
         'age': $scope.age, 
-        'lat': $scope.details.geometry.location.lat(), 
-				'lng': $scope.details.geometry.location.lng(),
-				'address': $scope.details.formatted_address,
-				'#': 'list',
-				'display_address': $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name
+        'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0], 
+				'lng': $scope.details.geometry ? $scope.details.geometry.location.lng() : SearchModel.coords[1],
+				'address': $scope.details.formatted_address ? $scope.details.formatted_address : SearchModel.address,
+				'display_address': $scope.details.address_components ? $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name : SearchModel.displayAddress,
+				'#': 'list'
 			})
 			.then(
         function() {

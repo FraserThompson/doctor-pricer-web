@@ -33,13 +33,13 @@
     <nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
       <div class="container-fluid">
         <div class="navbar-header" style="margin-left: -15px;">
-          <a role="button" type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed" data-target="#navbar-brand-centred" ng-show="navbarThings" ng-cloak>
+          <a role="button" type="button" class="navbar-toggle collapsed" ng-mousedown="isCollapsed = !isCollapsed" data-target="#navbar-brand-centred" ng-show="navbarThings" ng-cloak>
             <span class="sr-only">Toggle navigation</span>
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           </a>
           <a class="navbar-brand navbar-brand-centred" href="/">DoctorPricer</a>
           <ul class="nav navbar-nav">
-            <li id="info-button" style="width:30px;" ng-class="{'hidden-xs': navbarThings}" ng-cloak><a href="" ng-click="openDialog()" ng-class="{'active': !isCollapsed}"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+            <li id="info-button" style="width:30px;" ng-class="{'hidden-xs': navbarThings}" ng-cloak><a href="" ng-mousedown="openDialog()" ng-class="{'active': !isCollapsed}"><span class="glyphicon glyphicon-info-sign"></span></a></li>
           </ul>
         </div>
         <div uib-collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">

@@ -239,6 +239,16 @@ input[type=number] {
   color: white;
 }
 
+.map-icon-practice {
+  padding-top: 8px;
+}
+
+.map-icon-text {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: white;
+}
+
 #map_view {
   overflow-y: hidden;
 }

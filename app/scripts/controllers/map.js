@@ -17,19 +17,19 @@ angular.module('doctorpricerWebApp')
 		var directionsService = new google.maps.DirectionsService();
 		var markersLayer;
 
-		/* Icons for markers */
-		var localIcons = {
-			markerBlue: L.AwesomeMarkers.icon({
-				prefix: 'glyphicon',
-				icon: 'glyphicon-home',
-				markerColor: 'blue'
-			}),
-			markerRed: L.AwesomeMarkers.icon({
-				prefix: 'fa',
-				icon: 'fa-user-md',
-				markerColor: 'red'
-			})
-		};
+		var getPracticeMarker = function(price) {
+			return new L.DivIcon({
+				iconSize: [35, 45],
+				iconAnchor:   [17, 42],
+				popupAnchor: [1, -32],
+				shadowAnchor: [10, 12],
+				shadowSize: [36, 16],
+				className: 'awesome-marker awesome-marker-icon-red leaflet-zoom-animated leaflet-interactive map-icon-practice',
+				markerColor: 'red',
+				iconColor: 'white',
+				html: '<span class="map-icon-text">$' + price + '</span>'
+			});
+		}
 
 		/* Listeners */
 		/* Sets the height of the map when window is resized */
@@ -86,7 +86,11 @@ angular.module('doctorpricerWebApp')
 			var markers = [];
 			var start = L.marker([SearchModel.coords[0], SearchModel.coords[1]], {
             	'title': 'You',
-            	'icon': localIcons.markerBlue
+            	'icon': L.AwesomeMarkers.icon({
+					prefix: 'glyphicon',
+					icon: 'glyphicon-home',
+					markerColor: 'blue'
+				})
             });
 
 			markers.push(start);
@@ -97,9 +101,9 @@ angular.module('doctorpricerWebApp')
 				latLngs.push([value.lat, value.lng]);
 				var marker = L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
 					'title': value.name,
-					'icon': localIcons.markerRed
+					'icon': getPracticeMarker(value.price)
 				});
-				marker.bindPopup('<h5>$' + value.price + ': <a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.pho + '</small></h5>')
+				marker.bindPopup('<h5><a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.phone + '</small><br><small>' + value.pho + '</small></h5>')
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);

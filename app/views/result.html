@@ -1,5 +1,5 @@
 <div ng-hide="resultsLoading" class="container-fluid no-left-right-padding" id="result-page">
-	<button class="btn btn-default visible-xs" ng-class="{'active': sidebarState == 'list'}" style="position: absolute; top: 8px; z-index: 10; color: #0089CC;" type="button" ng-click="toggleSidebar()">
+	<button class="btn btn-default visible-xs" ng-class="{'active': sidebarState == 'list'}" style="position: absolute; top: 8px; z-index: 10; color: #0089CC;" type="button" ng-mousedown="toggleSidebar()">
 		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 	</button>
 	<div class="row">
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="list-group nopadding animate-expand-down" id="practice-list" auto-scroll>
-				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-click="navPractice($index, true)" ng-repeat="practice in practices track by $index" id="practice_{{$index}}">
+				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-mousedown="navPractice($index, true)" ng-repeat="practice in practices track by $index" id="practice_{{$index}}">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
 							<h4 ng-if="practice.price < 999"><strong>${{practice.price | number: 2}}</strong></h4>
@@ -31,7 +31,7 @@
 					</div>
 				</a>
 			</div>
-			<h3 class="no-up-down-padding" style="padding-left:2px;"><small>Fees are for enrolled patients. <a ng-click="openDialog()" href="">More</a></small></h3>
+			<h3 class="no-up-down-padding" style="padding-left:2px;"><small>Fees are for enrolled patients. <a ng-mousedown="openDialog()" href="">More</a></small></h3>
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 no-left-right-padding" id="map_view">
 			<div id="overlay"></div>
@@ -78,7 +78,7 @@
 				</uib-tab>
 			</uib-tabset>
 		</div>
-		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-show="map.active && !christchurch" ng-click="reportModal()" href="">Incorrect information or missing practices?<a></small></h3>
+		<h3 class="no-up-down-padding" style="padding-right: 15px; float: right;"><small><a ng-show="map.active && !christchurch" ng-mousedown="reportModal()" href="">Incorrect information or missing practices?<a></small></h3>
 	</div>
 </div>
 <loading-message></loading-message>
