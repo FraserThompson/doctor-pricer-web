@@ -3,6 +3,7 @@ require('./styles/bootstrap.css');
 require('./styles/main.css');
 require('./favicon.ico')
 require('./robots.txt')
+require('./ads.txt')
 require('./CNAME')
 
 require("leaflet_css");
