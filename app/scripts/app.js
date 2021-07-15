@@ -85,14 +85,14 @@ angular
             } else {
               defer.reject('URL params are somehow not right');
             }
-          
+
             return defer.promise;
 
           }],
           initializeSearchModel: ['SearchModel', '$stateParams',  function(SearchModel, $stateParams,) {
 
             console.log("[RESOLVE] Initializing search model...");
-    
+
             return SearchModel.initalizeModel(
               $stateParams.lat,
               $stateParams.lng,
@@ -112,7 +112,7 @@ angular
           sortedPractices: ['$rootScope', 'fetchedPractices', 'PracticesCollection', function($rootScope, fetchedPractices, PracticesCollection) {
 
             $rootScope.resultsLoadingMessage = "Found " + fetchedPractices.length + " practices...";
-            
+
             console.log("[RESOLVE] Sorting practices...");
 
             return PracticesCollection.sortData(fetchedPractices);
