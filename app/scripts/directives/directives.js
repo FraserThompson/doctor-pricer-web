@@ -42,7 +42,7 @@ angular.module('doctorpricerWebApp')
 		return {
 			replace: 'true',
 			require: '^form',
-			template: '<span><span ng-hide="!isLoading"><i class="fa fa-spinner fa-spin fa-lg" style="font-size: 24px;"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
+			template: '<span><span ng-hide="!isLoading"><i class="fa-spinner glyphicon glyphicon-refresh fa-lg" style="font-size: 24px;"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
 			link: function(scope, elem, attributes, form) {
 				scope.btnSize = attributes.btnSize;
 
@@ -63,7 +63,7 @@ angular.module('doctorpricerWebApp')
 	.directive('loadingMessage', ['$rootScope', '$compile', function($rootScope, $compile) {
 		return {
 			replace: 'true',
-			template: '<div class="centre-container" ng-show="resultsLoading" ng-cloak><div class="searching centre-content"><h3><i class="fa fa-spinner fa-spin fa-lg"></i> {{resultsLoadingMessage || "Finding nearby practices..."}}</h3></div></div>'
+			template: '<div class="centre-container" ng-show="resultsLoading" ng-cloak><div class="searching centre-content"><h3><i class="glyphicon glyphicon-refresh fa-spin fa-lg"></i> {{resultsLoadingMessage || "Finding nearby practices..."}}</h3></div></div>'
 		}
 	}])
 	.directive('stupidAd', ['$timeout', function($timeout) {

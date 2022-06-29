@@ -26,8 +26,8 @@ angular.module('doctorpricerWebApp')
 				var name = self.displayCollection[id]['name'];
 				var lat = self.displayCollection[id]['lat'];
 				var lng = self.displayCollection[id]['lng'];
-				var request = 	
-				{	
+				var request =
+				{
 					'query': name,
 					'radius': 0.5,
 					'location': new google.maps.LatLng(lat, lng)
@@ -66,7 +66,7 @@ angular.module('doctorpricerWebApp')
 						}
 					});
 				});
-			
+
 			return defer.promise;
 		}
 
@@ -96,28 +96,28 @@ angular.module('doctorpricerWebApp')
 			// The radiuses supported. This is used to sort the practices into buckets.
 			var sortedPractices = [
 				{
-					"name": "2km", 
-					"distance": 2000, 
+					"name": "2km",
+					"distance": 2000,
 					"practices": []
 				},
-				{	
-					"name": "5km", 
-					"distance": 5000, 
-					"practices":[]
-				}, 
 				{
-					"name": "10km", 
-					"distance": 10000, 
+					"name": "5km",
+					"distance": 5000,
+					"practices":[]
+				},
+				{
+					"name": "10km",
+					"distance": 10000,
 					"practices": []
-				}, 
-				{	
-					"name": "30km", 
-					"distance": 30000, 
+				},
+				{
+					"name": "30km",
+					"distance": 30000,
 					"practices": []
-				}, 
-				{	
-					"name": "60km", 
-					"distance": 60000, 
+				},
+				{
+					"name": "60km",
+					"distance": 60000,
 					"practices": []
 				}
 			];
@@ -131,7 +131,7 @@ angular.module('doctorpricerWebApp')
                 if (i != 0) sortedPractices[i]["practices"].push.apply(sortedPractices[i]["practices"], sortedPractices[i - 1]["practices"]);
 
                 for (var j = 0; j < data.length; j++){
-                    
+
                     var practice_distance = data[j].distance;
 
                     // If we're getting too far then go to next radius
@@ -157,9 +157,9 @@ angular.module('doctorpricerWebApp')
 			console.log("[PRACTICESCOLLECTION] Removed empties and duplicates.");
 
 			this.sortedPractices = sortedPractices;
-			
+
 			this.changeRadius(0);
-			
+
 			this.selectedPractice = undefined;
 
 			return sortedPractices;

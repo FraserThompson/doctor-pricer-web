@@ -100,11 +100,11 @@ input[type=number] {
 
 /* Fade hiding animation in ng-repeat*/
 .repeat-animate.ng-enter
-{ 
+{
  -webkit-transition: opacity cubic-bezier(0.250, 0.250, 0.750, 0.750) 0.1s;
   transition: opacity cubic-bezier(0.250, 0.250, 0.750, 0.750) 0.1s;
   opacity: 0;
-} 
+}
 
 .repeat-animate.ng-enter-active {
     opacity: 1;
@@ -212,7 +212,7 @@ input[type=number] {
   border-style: none;
   box-shadow: none;
 }
-.navbar>.container .navbar-brand-centred, 
+.navbar>.container .navbar-brand-centred,
 .navbar>.container-fluid .navbar-brand-centred {
     margin-left: -125px;
 }
@@ -244,7 +244,7 @@ input[type=number] {
 }
 
 .map-icon-text {
-  font-size: 1.1em;
+  font-size: 12px;
   font-weight: bold;
   color: white;
 }
@@ -405,7 +405,7 @@ input[type=number] {
   transform: none;
 }
 
-#overlay { 
+#overlay {
   display: none;
 }
 

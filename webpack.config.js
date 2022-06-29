@@ -1,100 +1,104 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require("webpack");
+const path = require("path");
 
-var PROD = process.env.ENV == 'production ';
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
-module.exports = {
+module.exports = (env, argv) => {
+  return {
     entry: {
-        app: "./app/index.js",
-        scripts: "./app/scripts/index.js",
+      app: "./app/index.js"
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/index.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/index.html',
-            filename: '404.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/views/main.html',
-            filename: 'views/main.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/views/report.html',
-            filename: 'views/report.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/views/result.html',
-            filename: 'views/result.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: 'html-loader!./app/views/info.html',
-            filename: 'views/info.html'
-        }),
-        //new BundleAnalyzerPlugin(),
-        new webpack.optimize.ModuleConcatenationPlugin()
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/index.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/index.html",
+        filename: "404.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/views/main.html",
+        filename: "views/main.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/views/report.html",
+        filename: "views/report.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/views/result.html",
+        filename: "views/result.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/views/info.html",
+        filename: "views/info.html",
+      })
     ],
-    optimization: PROD ? {
-        splitChunks: {
-            chunks: 'all'
-        },
-        minimizer: [
-            new UglifyJsPlugin({parallel: true})
-        ]
-    } : {},
-    resolve: {
-        alias: {
-            leaflet_css: __dirname + "/node_modules/leaflet/dist/leaflet.css",
-            leaflet_marker: __dirname + "/node_modules/leaflet/dist/images/marker-icon.png",
-            leaflet_marker_2x: __dirname + "/node_modules/leaflet/dist/images/marker-icon-2x.png",
-            leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",
+    optimization: argv.mode === 'production'
+      ? {
+          splitChunks: {
+            chunks: "all",
+          },
+          minimize: true,
+          minimizer: [
+            new TerserPlugin({
+              test: /\.js(\?.*)?$/i,
+            }),
+          ],
         }
+      : {},
+    resolve: {
+      modules: [
+        "node_modules", // The default
+        "src",
+      ]
     },
-    devtool: !PROD ? 'eval-source-map' : '',
+    devtool: argv.mode === 'development' ? "source-map" : false,
     devServer: {
-        contentBase: 'dist',
-        compress: false,
-        port: 9001,
-        historyApiFallback: true
+      static: [path.join(__dirname, "dist")],
+      compress: false,
+      port: 9001,
+      historyApiFallback: true,
     },
     output: {
-        path: __dirname + "/dist/",
-        filename: "[name].[hash].bundle.js"
+      path: path.join(__dirname, "dist"),
+      filename: "[name].[chunkhash].bundle.js",
     },
     module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                loader: 'file-loader'
-            },
-            {
-                test: /\.(txt|ico)$/,
-                loader: 'file-loader?name=[name].[ext]'
-            },
-            {
-                test: /CNAME$/,
-                loader: 'file-loader?name=[name]'
-            },
-            { 
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]&outputPath=fonts/" 
-            },
-            {
-                test: /\.(eot|ttf|otf)$/,
-                loader: 'file-loader?name=[name].[ext]&outputPath=fonts/'
-            }
-        ]
-    }
+      rules: [
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
+        {
+          test: [/\.jpg$/, /\.png$/, /\.gif$/],
+          type: "asset/resource",
+        },
+        {
+          test: /\.(txt|ico)$/,
+          type: "asset/resource",
+          generator: {
+            filename: "[name][ext]"
+          }
+        },
+        {
+          test: /CNAME$/,
+          type: "asset/resource",
+          generator: {
+            filename: "[name]",
+          },
+        },
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          type: "asset/inline",
+        },
+        {
+          test: /\.(eot|ttf|otf)$/,
+          type: "asset/resource",
+        },
+      ],
+    },
+  };
 };

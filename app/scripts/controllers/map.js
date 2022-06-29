@@ -1,8 +1,9 @@
 'use strict';
 
+require('font-awesome/css/font-awesome.css');
 require('polyline-encoded');
-require('Leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
-require('Leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+require('drmonty-leaflet-awesome-markers/js/leaflet.awesome-markers.js');
+require('drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css');
 
 /**
  * @ngdoc function
@@ -65,7 +66,7 @@ angular.module('doctorpricerWebApp')
 		$scope.$on('changePractice', function() {
 			setDirections();
 			fitBounds(function() {
-				PracticesCollection.displayCollection[PracticesCollection.selectedPractice].marker.openPopup(); 
+				PracticesCollection.displayCollection[PracticesCollection.selectedPractice].marker.openPopup();
 			});
 		});
 
@@ -148,7 +149,7 @@ angular.module('doctorpricerWebApp')
 	            if (status === google.maps.DirectionsStatus.OK) {
 	            	var latlngs = L.Polyline.fromEncoded(response.routes[0].overview_polyline).getLatLngs();
 	            	$scope.paths.p1 = {
-	            		color: '#387ef5', 
+	            		color: '#387ef5',
 	            		weight: 6,
 	            		latlngs: latlngs,
 	            		type: 'polyline'

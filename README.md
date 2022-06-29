@@ -1,18 +1,19 @@
 # doctorpricer-web
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1 about a million years ago and then migrated over to Webpack.
+This is the frontend for DoctorPricer. It's an AngularJS app written a million years ago and adapted over to Webpack at some point.
+
+AngularJS is deprecated. One day if I ever have time I might migrate it to the latest Angular, or rewrite it in something else.
 
 ## Dev
 
-Run `yarn run serve` for preview. It'll be served at port `9001`.
+Run `npm start`. It'll be served at port `9001`.
 
-If you want to change the API URL to something local then the place to do that in `app.js` at line 40.
+If you want to change the API URL to something local, do that in `app.js` at line 40.
 
 ## Deploy
 
-`yarn run build`
+`npm run build`
 
 Commit and push to master then run:
 
-`yarn run deploy`
+`npm run deploy`
