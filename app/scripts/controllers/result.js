@@ -16,6 +16,7 @@ angular.module('doctorpricerWebApp')
 
     /* $scope variables */
     $scope.userAddress = SearchModel.address;
+    $scope.csc = SearchModel.csc;
     $scope.christchurch =  SearchModel.christchurch;
     $scope.practices = PracticesCollection.displayCollection;
     $scope.noPractices = function () { return PracticesCollection.displayCollection.length === 0 ? 1 : 0; };
@@ -69,7 +70,7 @@ angular.module('doctorpricerWebApp')
             $scope.closeSidebar();
         }
     }
-    
+
     var clamp = function(number, min, max) {
         if (number >= max) return max;
         if (number <= min) return min;
@@ -88,7 +89,7 @@ angular.module('doctorpricerWebApp')
         mcSidebar.on("panleft panright", function(ev) {
 
             if (ev.center.x === 0 && ev.center.y === 0) return
-        
+
             var sidebarLeft = sidebarElement.offsetLeft + ev.deltaX;
             var sidebarLocationNew = clamp(sidebarLeft, -(offcanvas_position), 0);
 
@@ -102,7 +103,7 @@ angular.module('doctorpricerWebApp')
 
             var sidebarLocation = sidebarElement.getBoundingClientRect();
             if ($scope.sidebarState == "list") {
-                if (sidebarLocation.left <= closeThreshold) { 
+                if (sidebarLocation.left <= closeThreshold) {
                     $scope.closeSidebar();
                 } else {
                     $scope.openSidebarAction();
@@ -218,5 +219,5 @@ angular.module('doctorpricerWebApp')
 
     setHeight();
     $scope.sidebarState == "map" ? $scope.closeSidebarAction() : $scope.openSidebarAction();
-    
+
   }]);

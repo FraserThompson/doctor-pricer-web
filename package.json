@@ -36,7 +36,7 @@
     "webpack-dev-server": "^4.9.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode=production",
+    "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
     "deploy": "gh-pages -d dist"
   }

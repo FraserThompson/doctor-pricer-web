@@ -42,7 +42,7 @@ angular.module('doctorpricerWebApp')
 		return {
 			replace: 'true',
 			require: '^form',
-			template: '<span><span ng-hide="!isLoading"><i class="fa-spinner glyphicon glyphicon-refresh fa-lg" style="font-size: 24px;"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></span>',
+			template: '<div class="loading-button"><span ng-hide="!isLoading"><i class="fa-spinner glyphicon glyphicon-refresh fa-lg" style="font-size: 24px;"></i></span><button ng-hide="isLoading" type="submit" class="btn btn-cool {{btnSize}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button></div>',
 			link: function(scope, elem, attributes, form) {
 				scope.btnSize = attributes.btnSize;
 

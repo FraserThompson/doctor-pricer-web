@@ -71,14 +71,14 @@ angular.module('doctorpricerWebApp')
 		}
 
 		/* Fetches the data from the JSON via a promise*/
-		this.fetchData = function(lat, lng, age) {
+		this.fetchData = function(lat, lng, age, csc) {
 			var defer = $q.defer();
 
 			$timeout(function() {
 				defer.reject('Timeout getting practices from API, maybe it is broken.');
 			}, 15000)
 
-			$http.get($rootScope.apiUrl + '/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&sort=1')
+			$http.get($rootScope.apiUrl + '/dp/api/practices?lat=' + lat + '&lng=' + lng + '&age=' + age + '&csc=' + csc + '&sort=1')
 				.then(function(response) {
 						self.collection = response.data;
 						console.log("[PRACTICESCOLLECTION] Got " + response.data.length + " practices from API.");

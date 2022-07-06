@@ -32,25 +32,52 @@
 
     <nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
       <div class="container-fluid">
-        <div class="navbar-header" style="margin-left: -15px;">
-          <a role="button" type="button" class="navbar-toggle collapsed" ng-mousedown="isCollapsed = !isCollapsed" data-target="#navbar-brand-centred" ng-show="navbarThings" ng-cloak>
-            <span class="sr-only">Toggle navigation</span>
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-          </a>
-          <a class="navbar-brand navbar-brand-centred" href="/">DoctorPricer</a>
+        <div class="navbar-header" style="margin-left: -15px; height: 50px; display: flex; float: none;">
           <ul class="nav navbar-nav">
             <li id="info-button" style="width:30px;" ng-class="{'hidden-xs': navbarThings}" ng-cloak><a href="" ng-mousedown="openDialog()" ng-class="{'active': !isCollapsed}"><span class="glyphicon glyphicon-info-sign"></span></a></li>
           </ul>
+          <a class="navbar-brand navbar-brand-centred" href="/">DoctorPricer</a>
+          <a role="button" type="button" class="btn btn-default" ng-mousedown="isCollapsed = !isCollapsed" data-target="#navbar-brand-centred" ng-show="navbarThings" ng-cloak style="margin-left: auto; margin-top: 8px; margin-bottom: 8px; margin-right: 15px; margin-right: 8px">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </a>
         </div>
-        <div uib-collapse="isCollapsed" class="collapse navbar-collapse" id="navbar-brand-centred">
-          <form class="navbar-form navbar-right" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()" ng-cloak>
-            <div class="form-group" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
-              <label class="sr-only" for="address">Address</label>
-              <input name="address" ng-model-options="{ debounce: 250 }" type="text" class="form-control" ng-model="autocomplete" options="options" details="details" placeholder="Address" address-validation required ng-autocomplete></input>
+        <div uib-collapse="isCollapsed" class="collapse" id="navbar-brand-centred">
+          <form class="navbar-form" name="headerForm" role="search" ng-show="navbarThings" ng-submit="next()" ng-cloak>
+            <div class="form-group block" ng-class="{ 'has-error': headerForm.address.$invalid && headerForm.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
+              <label for="address">Address</label>
+              <input name="address" ng-model-options="{ debounce: 250 }" type="text" class="form-control block" style="width:100%;" ng-model="autocomplete" options="options" details="details" placeholder="Address" address-validation required ng-autocomplete></input>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }" show-errors='{showSuccess: true}'>
-              <label class="sr-only" for="age">Age</label>
-              <input name="age" min="0" type="text" class="form-control" ng-model="age" placeholder="Age" size="3" required></input>
+            <div class="form-group block" style="width:100%;" ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }" show-errors='{showSuccess: true}'>
+              <label for="age">Age</label>
+              <input name="age" min="0" type="text" style="width:100%;" class="form-control block" ng-model="age" placeholder="Age" size="3" required></input>
+            </div>
+            <div class="form-group block" style="display: inline-flex; align-items: center; margin-bottom: 5px;">
+              <h4><strong>Do you have a <a href="https://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html" target="_blank">Community Services Card?</a></strong></h4>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    name="csc"
+                    type="radio"
+                    class="form-check-input"
+                    value="1"
+                    id="cscYes"
+                    ng-model="csc"
+                  />
+                  <label class="form-check-label" style="font-weight: normal;" for="cscYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    name="csc"
+                    type="radio"
+                    class="form-check-input"
+                    value="0"
+                    ng-model="csc"
+                    id="cscNo"
+                  />
+                  <label class="form-check-label" style="font-weight: normal;" for="cscNo">No</label>
+                </div>
+              </div>
             </div>
             <loading-button btnSize="btn-normal"></loading-button>
           </form>
@@ -62,7 +89,7 @@
 
     <div class="container-fluid main-container">
 
-      <div class="view-animate" ui-view>
+      <!-- <div class="view-animate" ui-view>
 
         <loading-message></loading-message>
 
@@ -72,12 +99,12 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
 
-      <!-- <div class="centre-container">
+      <div class="centre-container">
         <h1>🚧🚧🚧👷👷👷😍😍😍</h1>
         <h3>💁 DoctorPricer is undergoing some changes, check back in a bit 💁</h3>
-      </div> -->
+      </div>
 
       <noscript class="centre-container">
         <div class="centre-content">

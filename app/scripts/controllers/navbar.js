@@ -10,8 +10,9 @@
 
 angular.module('doctorpricerWebApp')
   .controller('NavbarCtrl', ['$scope', '$rootScope', '$state', '$timeout', 'SearchModel', function ($scope, $rootScope, $state, $timeout, SearchModel) {
-  	$scope.age = SearchModel.age;
-  	$scope.autocomplete = SearchModel.displayAddress;
+  	$scope.age = 'SearchModel.age';
+    $scope.csc = SearchModel.csc;
+  	$scope.autocomplete = 'SearchModel.displayAddress';
   	$scope.options = {
   		country: 'nz'
   	};
@@ -23,6 +24,7 @@ angular.module('doctorpricerWebApp')
   		if (next.name === 'result') {
 				$scope.navbarThings = 1;
 				$scope.age = SearchModel.age;
+        $scope.csc = SearchModel.csc;
 				$scope.autocomplete = SearchModel.displayAddress;
 				$scope.details.autocomplete = $scope.autocomplete;
   		} else {
@@ -39,7 +41,7 @@ angular.module('doctorpricerWebApp')
 
   	/* Update searchmodel and addressbar location */
   	$scope.next = function() {
-	
+
       // Don't bother validating if nothing is changed
       if ($scope.details.geometry) {
     		$scope.$broadcast('show-errors-check-validity');
@@ -49,8 +51,9 @@ angular.module('doctorpricerWebApp')
 
 			$scope.isCollapsed = 1;
       $state.go('result', {
-        'age': $scope.age, 
-        'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0], 
+        'age': $scope.age,
+        'csc': $scope.csc,
+        'lat': $scope.details.geometry ? $scope.details.geometry.location.lat() : SearchModel.coords[0],
 				'lng': $scope.details.geometry ? $scope.details.geometry.location.lng() : SearchModel.coords[1],
 				'address': $scope.details.formatted_address ? $scope.details.formatted_address : SearchModel.address,
 				'display_address': $scope.details.address_components ? $scope.details.address_components[0].short_name + ' ' + $scope.details.address_components[1].short_name : SearchModel.displayAddress,
@@ -60,7 +63,7 @@ angular.module('doctorpricerWebApp')
         function() {
 					console.log("Here we are, stuck by this river.")
 					$scope.isLoading = false;
-        }, 
+        },
         function() {
           $scope.error = "Something's broken :( Try again later.";
           $scope.isLoading = false;

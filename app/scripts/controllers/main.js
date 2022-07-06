@@ -13,8 +13,9 @@ angular.module('doctorpricerWebApp')
   		country: 'nz'
   	};
     $scope.error = "";
+    $scope.csc = "0";
     $scope.details = {};
-    
+
     if ($window.outerWidth > 545) {
       $scope.addressPlaceholder = "Start typing an address"
     } else {
@@ -49,8 +50,9 @@ angular.module('doctorpricerWebApp')
       $scope.showAd();
 
       $state.go('result', {
-        'age': $scope.age, 
-        'lat': $scope.details.geometry.location.lat(), 
+        'age': $scope.age,
+        'csc': $scope.csc,
+        'lat': $scope.details.geometry.location.lat(),
         'lng': $scope.details.geometry.location.lng(),
         'address': $scope.details.formatted_address,
         '#': 'list',
@@ -59,7 +61,7 @@ angular.module('doctorpricerWebApp')
       .then(
         function() {
           console.log("Here we are, stuck by this river.")
-        }, 
+        },
         function() {
           $scope.error = "Something's broken :( Try again later.";
           $scope.isLoading = false;

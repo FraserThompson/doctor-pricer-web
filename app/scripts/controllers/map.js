@@ -15,7 +15,7 @@ require('drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css');
 
 angular.module('doctorpricerWebApp')
 	.controller('MapCtrl', ['$scope', '$timeout', '$rootScope', '$window', 'leafletData', 'PracticesCollection', 'SearchModel', function($scope, $timeout, $rootScope, $window, leafletData, PracticesCollection, SearchModel) {
-		var directionsService = new google.maps.DirectionsService();
+		//var directionsService = new google.maps.DirectionsService();
 		var markersLayer;
 
 		var getPracticeMarker = function(price) {
@@ -28,7 +28,7 @@ angular.module('doctorpricerWebApp')
 				className: 'awesome-marker awesome-marker-icon-red leaflet-zoom-animated leaflet-interactive map-icon-practice',
 				markerColor: 'red',
 				iconColor: 'white',
-				html: '<span class="map-icon-text">$' + price + '</span>'
+				html: '<span class="map-icon-text">' + (price != "1000" ? "$" + price : "?") + '</span>'
 			});
 		}
 
@@ -135,30 +135,31 @@ angular.module('doctorpricerWebApp')
 
 	    /* Puts the route on the map */
 		var setDirections = function () {
-			var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng);
-			var origin = new google.maps.LatLng(SearchModel.coords[0], SearchModel.coords[1]);
-	        var request = {
-	            origin: origin,
-	            destination: destination,
-	            travelMode: google.maps.TravelMode.DRIVING,
-	            unitSystem: google.maps.UnitSystem.METRIC,
-	            optimizeWaypoints: true
-	        };
+      // Commented out because it's expensive
+			// var destination = new google.maps.LatLng(PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lat, PracticesCollection.displayCollection[PracticesCollection.selectedPractice].lng);
+			// var origin = new google.maps.LatLng(SearchModel.coords[0], SearchModel.coords[1]);
+	    //     var request = {
+	    //         origin: origin,
+	    //         destination: destination,
+	    //         travelMode: google.maps.TravelMode.DRIVING,
+	    //         unitSystem: google.maps.UnitSystem.METRIC,
+	    //         optimizeWaypoints: true
+	    //     };
 
-	        directionsService.route(request, function (response, status) {
-	            if (status === google.maps.DirectionsStatus.OK) {
-	            	var latlngs = L.Polyline.fromEncoded(response.routes[0].overview_polyline).getLatLngs();
-	            	$scope.paths.p1 = {
-	            		color: '#387ef5',
-	            		weight: 6,
-	            		latlngs: latlngs,
-	            		type: 'polyline'
-	            	};
-	            } else {
-	            	// Handle this error
-	            	console.log('Error when fetching route: ' + status);
-	            }
-	        });
+	    //     directionsService.route(request, function (response, status) {
+	    //         if (status === google.maps.DirectionsStatus.OK) {
+	    //         	var latlngs = L.Polyline.fromEncoded(response.routes[0].overview_polyline).getLatLngs();
+	    //         	$scope.paths.p1 = {
+	    //         		color: '#387ef5',
+	    //         		weight: 6,
+	    //         		latlngs: latlngs,
+	    //         		type: 'polyline'
+	    //         	};
+	    //         } else {
+	    //         	// Handle this error
+	    //         	console.log('Error when fetching route: ' + status);
+	    //         }
+	    //     });
 	    };
 
 	    /* Stuff to initialize the map with */

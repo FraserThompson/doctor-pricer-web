@@ -16,6 +16,7 @@ angular.module('doctorpricerWebApp')
 		this.address = 'None';
 		this.displayAddress = 'Address';
 		this.age = 'Age';
+    this.csc = 0;
 		this.coords = undefined;
 
 		this.checkForChristchurch = function(string) {
@@ -28,16 +29,17 @@ angular.module('doctorpricerWebApp')
 
 		/**
 		 * Initializes the search model with a new search. Should be called each time a search is done.
-		 * 
-		 * @param {decimal} lat 
-		 * @param {decimal} lng 
-		 * @param {int} age 
+		 *
+		 * @param {decimal} lat
+		 * @param {decimal} lng
+		 * @param {int} age
+     * @param {boolean} csc
 		 * @param {string} address (optional)
 		 * @param {string} displayAddress (optional)
 		 * @param {function} successCallback (optional)
 		 * @param {function} failCallback (optional)
 		 */
-		this.initalizeModel = function(lat, lng, age, address, displayAddress) {
+		this.initalizeModel = function(lat, lng, age, csc, address, displayAddress) {
 			var defer = $q.defer();
 
 			if (typeof lat == "string" || typeof lng == "string") {
@@ -47,6 +49,7 @@ angular.module('doctorpricerWebApp')
 			}
 
 			this.age = age;
+      this.csc = csc;
 
 			// If we don't have an address eg if we're just coming from the URL
 			if (!address || !displayAddress) {

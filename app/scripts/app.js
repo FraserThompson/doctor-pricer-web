@@ -38,10 +38,13 @@ angular
   ])
   .run(['$rootScope', '$uibModal', function($rootScope, $uibModal) {
       $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
-      $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
+      $rootScope.apiUrl = "https://localhost:8443";
       /* Opens the modal */
       $rootScope.openDialog = function() {
         $uibModal.open({ templateUrl: 'views/info.html'}).result.then(function () {}, function () {});
+      };
+      $rootScope.openChchDialog = function() {
+        $uibModal.open({ templateUrl: 'views/info-chch.html'}).result.then(function () {}, function () {});
       };
     }])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -62,7 +65,7 @@ angular
         }]
       })
       .state('result', {
-        url: '/:lat,:lng/:age',
+        url: '/:lat,:lng/:age,:csc',
         templateUrl: 'views/result.html',
         controller: 'ResultCtrl',
         reloadOnSearch: false,
@@ -97,6 +100,7 @@ angular
               $stateParams.lat,
               $stateParams.lng,
               $stateParams.age,
+              $stateParams.csc,
               $stateParams.address,
               $stateParams.display_address
             );
@@ -106,7 +110,7 @@ angular
 
               console.log("[RESOLVE] Fetching practices...");
 
-              return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age);
+              return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age, $stateParams.csc);
 
           }],
           sortedPractices: ['$rootScope', 'fetchedPractices', 'PracticesCollection', function($rootScope, fetchedPractices, PracticesCollection) {

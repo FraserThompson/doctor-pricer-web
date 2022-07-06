@@ -135,7 +135,7 @@ input[type=number] {
 
 .stupid-adsbygoogle {
   position: absolute;
-  bottom: 40px;
+  bottom: 0px;
   height: 30vh;
   width: 60vw;
   left: 0;
@@ -310,6 +310,10 @@ input[type=number] {
   }
 }
 
+.block {
+  display: block !important;
+}
+
 /* Navbar search stuff */
 .navbar-form.ng-hide-add.ng-hide-add-active,
 .navbar-form.ng-hide-remove.ng-hide-remove-active {
@@ -329,6 +333,12 @@ input[type=number] {
 
 #info-button a {
   padding: 15px 10px;
+}
+
+.navbar-form {
+  max-width: 450px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .navbar-form.ng-hide {
@@ -407,6 +417,40 @@ input[type=number] {
 
 #overlay {
   display: none;
+}
+
+.form-check-inline {
+  padding-left: 5px;
+}
+.form-check-inline, .form-check-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.form-check-label {
+  margin-bottom: 0px;
+}
+
+.form-check-label span {
+  padding-left: 5px;
+}
+
+.form-check-inline input {
+  margin: 0px;
+}
+
+.csc-boxes {
+  text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .csc-boxes {
+    text-align: right;
+  }
+}
+
+.navbar-form .loading-button {
+  display: block;
 }
 
 /*

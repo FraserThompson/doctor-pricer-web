@@ -2,19 +2,93 @@
   <div class="centre-content">
     <h3 class="tagline">Compare fees from over 800 NZ practices.</h3>
     <form name="form" ng-submit="next()" class="form" novalidate>
-      <div class="form-group" ng-class="{ 'has-error': form.address.$invalid && form.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }" show-errors='{showSuccess: true}'>
-        <div class="col-md-8 nopadding">
+      <div
+        class="form-group"
+        ng-class="{ 'has-error': form.address.$invalid && form.address.$dirty, 'has-success': !form.address.$invalid  && form.address.$dirty }"
+        show-errors="{showSuccess: true}"
+      >
+        <div class="col-md-10 nopadding">
           <label class="sr-only" for="address">Address</label>
-          <input name="address" id="addressInput" ng-focus="hideAd()" ng-model-options="{ debounce: 250 }" type="text" class="form-control input-lg" ng-model="autocomplete" options="options" details="details" placeholder="{{addressPlaceholder}}" address-validation disable-tap required ng-autocomplete/>
+          <input
+            name="address"
+            id="addressInput"
+            ng-focus="hideAd()"
+            ng-model-options="{ debounce: 250 }"
+            type="text"
+            class="form-control input-lg"
+            ng-model="autocomplete"
+            options="options"
+            details="details"
+            placeholder="{{addressPlaceholder}}"
+            address-validation
+            disable-tap
+            required
+            ng-autocomplete
+          />
         </div>
       </div>
-      <div class="form-group" ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }" show-errors='{showSuccess: true}'>
+      <div
+        class="form-group"
+        ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }"
+        show-errors="{showSuccess: true}"
+      >
         <div class="col-md-2 nopadding">
           <label class="sr-only" for="age">Age</label>
-          <input ng-focus="hideAd()" name="age" min="0" type="number" class="form-control input-lg" ng-model="age" placeholder="Age" required/>
+          <input
+            ng-focus="hideAd()"
+            name="age"
+            min="0"
+            type="number"
+            class="form-control input-lg"
+            ng-model="age"
+            placeholder="Age"
+            required
+          />
         </div>
       </div>
-      <div class="col-md-2 nopadding">
+      <div
+        class="form-group"
+        ng-class="{ 'has-error': form.age.$invalid  && form.age.$dirty, 'has-success': !form.age.$invalid  && form.age.$dirty }"
+        show-errors="{showSuccess: true}"
+      >
+        <div class="col-xs-12 nopadding">
+          <div class="col-xs-12 col-lg-9 nopadding" style="text-align: left;">
+            <h4 style="margin-bottom: 0px;">Do you have a <a href="https://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html" target="_blank">Community Services Card?</a></h4>
+          </div>
+          <div class="col-xs-12 col-lg-3 nopadding csc-boxes form-group">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input
+                  ng-focus="hideAd()"
+                  name="csc"
+                  type="radio"
+                  class="form-check-input input-lg"
+                  value="1"
+                  id="cscYes"
+                  ng-model="csc"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input
+                  ng-focus="hideAd()"
+                  name="csc"
+                  type="radio"
+                  class="form-check-input input-lg"
+                  value="0"
+                  ng-model="csc"
+                  id="cscNo"
+                  checked
+                />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12  nopadding">
         <loading-button btn-size="btn-lg"></loading-button>
       </div>
     </form>
