@@ -38,7 +38,7 @@ angular
   ])
   .run(['$rootScope', '$uibModal', function($rootScope, $uibModal) {
       $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
-      $rootScope.apiUrl = "https://localhost:8443";
+      $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
       /* Opens the modal */
       $rootScope.openDialog = function() {
         $uibModal.open({ templateUrl: 'views/info.html'}).result.then(function () {}, function () {});
