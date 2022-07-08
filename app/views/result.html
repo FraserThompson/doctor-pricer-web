@@ -27,6 +27,7 @@
 							<h4 ng-if="practice.price < 999"><strong>${{practice.price | number: 2}}</strong></h4>
 							<h5 ng-if="practice.price == 1000"><strong>No price info</strong></h5>
 							<h5 ng-if="practice.price == 999"><strong>Ineligible</strong></h5>
+              <h5 ng-if="!practice.active"><strong>Not enrolling</strong></h5>
 							<p class="list-group-item-text">{{practice.distance/1000 | number : 1}}km away</p>
 					  	</div>
 					  	<div class="col-md-9 col-xs-9">

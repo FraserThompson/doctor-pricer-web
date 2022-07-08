@@ -18,14 +18,18 @@ angular.module('doctorpricerWebApp')
 		//var directionsService = new google.maps.DirectionsService();
 		var markersLayer;
 
-		var getPracticeMarker = function(price) {
+    var getMarkerColor = function(active) {
+      return active ? "green" : "darkred";
+    }
+
+		var getPracticeMarker = function(price, active) {
 			return new L.DivIcon({
 				iconSize: [35, 45],
 				iconAnchor:   [17, 42],
 				popupAnchor: [1, -32],
 				shadowAnchor: [10, 12],
 				shadowSize: [36, 16],
-				className: 'awesome-marker awesome-marker-icon-red leaflet-zoom-animated leaflet-interactive map-icon-practice',
+				className: 'awesome-marker awesome-marker-icon-' + getMarkerColor(active) + ' leaflet-zoom-animated leaflet-interactive map-icon-practice',
 				markerColor: 'red',
 				iconColor: 'white',
 				html: '<span class="map-icon-text">' + (price != "1000" ? "$" + price : "?") + '</span>'
@@ -98,13 +102,13 @@ angular.module('doctorpricerWebApp')
 		   	latLngs.push([SearchModel.coords[0], SearchModel.coords[1]]);
 
 		   // Make a marker for each practice
-	        angular.forEach(PracticesCollection.displayCollection, function(value, key) {
-				latLngs.push([value.lat, value.lng]);
-				var marker = L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
-					'title': value.name,
-					'icon': getPracticeMarker(value.price)
+	        angular.forEach(PracticesCollection.displayCollection, function(practice, key) {
+				latLngs.push([practice.lat, practice.lng]);
+				var marker = L.marker([parseFloat(practice.lat), parseFloat(practice.lng)], {
+					'title': practice.name,
+					'icon': getPracticeMarker(practice.price, practice.active)
 				});
-				marker.bindPopup('<h5><a href="' + value.url + '" target="_blank">' + value.name + '</a><br><small>' + value.phone + '</small><br><small>' + value.pho + '</small></h5>')
+				marker.bindPopup('<h5><a href="' + practice.url + '" target="_blank">' + practice.name + '</a><br><small>' + practice.phone + '</small><br><small>' + practice.pho + '</small></h5>')
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);
