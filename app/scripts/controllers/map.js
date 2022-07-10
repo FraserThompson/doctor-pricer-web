@@ -108,7 +108,7 @@ angular.module('doctorpricerWebApp')
 					'title': practice.name,
 					'icon': getPracticeMarker(practice.price, practice.active)
 				});
-				marker.bindPopup('<h5><a href="' + practice.url + '" target="_blank">' + practice.name + '</a><br><small>' + practice.phone + '</small><br><small>' + practice.pho + '</small></h5>')
+				marker.bindPopup('<h5><a href="' + practice.url + '" target="_blank">' + practice.name + '</a><br>' + (!practice.active ? '<small>Not Enrolling</small><br>' : '') + '<small>Phone: ' + practice.phone + '</small><br><small>' + practice.pho + '</small></h5>')
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);
