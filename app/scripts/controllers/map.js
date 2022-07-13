@@ -19,7 +19,17 @@ angular.module('doctorpricerWebApp')
 		var markersLayer;
 
     var getMarkerColor = function(active) {
-      return active ? "green" : "darkred";
+      return active ? "green" : "gray transparent";
+    }
+
+    var getMarkerLabel = function(price) {
+      if (price == "1000") {
+        return "?"
+      } else if (price == "999") {
+        return "X"
+      } else {
+        return "$" + price.toFixed(2).replace(".00", "") //probably a better way of doing this lol
+      }
     }
 
 		var getPracticeMarker = function(price, active) {
@@ -32,7 +42,7 @@ angular.module('doctorpricerWebApp')
 				className: 'awesome-marker awesome-marker-icon-' + getMarkerColor(active) + ' leaflet-zoom-animated leaflet-interactive map-icon-practice',
 				markerColor: 'red',
 				iconColor: 'white',
-				html: '<span class="map-icon-text">' + (price != "1000" ? "$" + price : "?") + '</span>'
+				html: '<span class="map-icon-text">' + getMarkerLabel(price) + '</span>'
 			});
 		}
 
@@ -108,7 +118,15 @@ angular.module('doctorpricerWebApp')
 					'title': practice.name,
 					'icon': getPracticeMarker(practice.price, practice.active)
 				});
-				marker.bindPopup('<h5><a href="' + practice.url + '" target="_blank">' + practice.name + '</a><br>' + (!practice.active ? '<small>Not Enrolling</small><br>' : '') + '<small>Phone: ' + practice.phone + '</small><br><small>' + practice.pho + '</small></h5>')
+        var markerContent = `
+          <h5>
+            <a href="${practice.url}" target="_blank">${practice.name}</a><br>
+            ${!practice.active ? '<small><strong>Not Enrolling Patients</strong></small><br>' : ''}
+            <small>Phone: ${practice.phone}</small><br>
+            <small>${practice.pho}</small>
+          </h5>
+        `
+				marker.bindPopup(markerContent)
 				marker.on('click', function(e) { markerClick(marker, key); });
 				PracticesCollection.displayCollection[key]['marker'] = marker;
 				markers.push(marker);

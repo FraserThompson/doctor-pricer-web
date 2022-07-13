@@ -23,6 +23,7 @@ angular.module('doctorpricerWebApp')
     $scope.radiuses = sortedPractices;
 
     $scope.selectedRadius = $scope.radiuses[0];
+    $scope.filtered = false;
     $scope.thisPractice = {};
 
     $scope.reviewCount = 0;
@@ -150,9 +151,8 @@ angular.module('doctorpricerWebApp')
     }
 
     /* Changes the radius when user does that */
-    $scope.changeRadius = function(selected) {
-        PracticesCollection.changeRadius(selected);
-
+    $scope.changeFilter = function() {
+        PracticesCollection.changeRadius($scope.selectedRadius, $scope.filtered);
         $scope.practices = PracticesCollection.displayCollection;
         $scope.thisPractice = {};
         $scope.map.active = true;

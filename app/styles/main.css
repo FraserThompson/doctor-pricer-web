@@ -249,6 +249,15 @@ input[type=number] {
   color: white;
 }
 
+.transparent {
+  opacity: 0.5;
+  z-index: 0 !important;
+}
+
+.awesome-marker {
+  z-index: 1;
+}
+
 #map_view {
   overflow-y: hidden;
 }

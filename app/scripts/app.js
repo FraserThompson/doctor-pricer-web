@@ -106,21 +106,9 @@ angular
             );
 
           }],
-          fetchedPractices: ['$stateParams', 'PracticesCollection', function($stateParams, PracticesCollection) {
-
+          sortedPractices: ['$stateParams', 'PracticesCollection', function($stateParams, PracticesCollection) {
               console.log("[RESOLVE] Fetching practices...");
-
               return PracticesCollection.fetchData($stateParams.lat, $stateParams.lng, $stateParams.age, $stateParams.csc);
-
-          }],
-          sortedPractices: ['$rootScope', 'fetchedPractices', 'PracticesCollection', function($rootScope, fetchedPractices, PracticesCollection) {
-
-            $rootScope.resultsLoadingMessage = "Found " + fetchedPractices.length + " practices...";
-
-            console.log("[RESOLVE] Sorting practices...");
-
-            return PracticesCollection.sortData(fetchedPractices);
-
           }]
         },
         onEnter: ['$rootScope', '$timeout', '$window', 'SearchModel', function($rootScope, $timeout, $window, SearchModel) {

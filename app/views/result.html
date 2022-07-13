@@ -6,25 +6,27 @@
 		<div class="col-sm-4 col-md-4 col-lg-3 no-left-right-padding sidebar-offcanvas left" id="sidebar">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 style="margin: 5px; padding-left:2px;">
+					<h3 style="margin: 0px; padding-left: 7px;">
 						<small>Found {{practices.length}} practices within
-							<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = '0'" ng-options="key as value.name for (key, value) in radiuses" ng-change="changeRadius(selectedRadius)"></select>
+							<select ng-disabled="radiuses.practices.length === 0" ng-model="selectedRadius" ng-init="selectedRadius = '0'" ng-options="key as value.name for (key, value) in radiuses" ng-change="changeFilter()"></select>
 						</small>
-            </h3>
-            <h3 style="margin: 5px; padding-left:2px;">
-              <small ng-if="csc == 1">
-                <strong>Prices with a <a href="https://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html" target="_blank">CSC</a></strong>
-              </small>
-            </h3>
+          </h3>
+          <h3 style="margin: 0px; padding-left: 7px;">
+            <small ng-if="csc == 1">
+              <strong>Prices with a <a href="https://www.workandincome.govt.nz/products/a-z-benefits/community-services-card.html" target="_blank">CSC</a></strong>
+            </small>
+          </h3>
+          <h3 style="margin: 0px; padding-left: 7px;">
+            <small><label style="font-weight: normal;"><input ng-model="filtered" ng-change="changeFilter()" type="checkbox"> Hide practices not currently enrolling</label></small>
+          </h3>
 					<h3 ng-show="christchurch"><small><i class="fa fa-exclamation-triangle"></i> <strong>Limited fee data available for Christchurch. <a href="" ng-mousedown="openChchDialog()">Why?</a></strong></h3>
-
         </div>
 			</div>
 			<div class="list-group nopadding animate-expand-down" id="practice-list" auto-scroll>
 				<a href="" class="list-group-item"  ng-class="{'active': isActive($index)}" ng-mousedown="navPractice($index, true)" ng-repeat="practice in practices track by $index" id="practice_{{$index}}">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
-							<h4 ng-if="practice.price < 999"><strong>${{practice.price | number: 2}}</strong></h4>
+							<h4 ng-if="practice.price < 999" style="margin-top: 0px;"><strong>${{practice.price | number: 2}}</strong></h4>
 							<h5 ng-if="practice.price == 1000"><strong>No price info</strong></h5>
 							<h5 ng-if="practice.price == 999"><strong>Ineligible</strong></h5>
               <h5 ng-if="!practice.active"><strong>Not enrolling</strong></h5>
