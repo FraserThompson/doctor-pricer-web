@@ -466,7 +466,7 @@ input[type=number] {
 
 .blog-container {
   max-width: 740px;
-  height: 90vh;
+  height: 90dvh;
   overflow-y: auto;
 }
 
