@@ -437,6 +437,8 @@ input[type=number] {
 }
 
 .form-check-label {
+  font-size: 18px;
+  font-weight: normal;
   margin-bottom: 0px;
 }
 
@@ -460,6 +462,32 @@ input[type=number] {
 
 .navbar-form .loading-button {
   display: block;
+}
+
+.blog-container {
+  max-width: 740px;
+  height: 90vh;
+  overflow-y: auto;
+}
+
+.blog-container p {
+  font-size: 16px;
+}
+
+.blog-container h2, .blog-container h3 {
+  margin-top: 40px;
+}
+
+.blog-container li {
+  font-size: 16px;
+}
+
+.blog-container td, .blog-container th {
+  font-size: 16px;
+}
+
+.image-container img {
+  max-width: 100%;
 }
 
 /*
@@ -521,7 +549,7 @@ input[type=number] {
 }
 
 /* Font size and autocomplete size on really small screens*/
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 450px) {
 
   .centre-content, .stupid-adsbygoogle {
     width: 80vw;
@@ -555,7 +583,7 @@ input[type=number] {
   :-ms-input-placeholder { font-size: 85%; }
   input:-moz-placeholder { font-size: 85%; }
 
-  h4 {
+  h4, .form-check-label {
     font-size: 16px;
   }
 }

@@ -38,6 +38,7 @@ angular
   ])
   .run(['$rootScope', '$uibModal', function($rootScope, $uibModal) {
       $rootScope.title = "Doctor price comparison NZ | Find the cheapest doctor | DoctorPricer";
+      $rootScope.metadescription = "Compare GP fees from 1000+ practices across New Zealand with this free easy-to-use tool. Compare doctors near you and find the cheapest price. Don't pay more than you need to for a doctors visit! Find a GP which meets your budget."
       $rootScope.apiUrl = "https://api.doctorpricer.co.nz";
       /* Opens the modal */
       $rootScope.openDialog = function() {
@@ -119,6 +120,15 @@ angular
           $rootScope.autocompleteSize = "small-autocomplete"; // dynamically load the css to size the Google Autocomplete box
           $rootScope.title = 'DoctorPricer - ' + SearchModel.displayAddress;
 
+        }]
+      })
+      .state('fees-report', {
+        url: '/fees-report',
+        templateUrl: 'views/fees-report.html',
+        onEnter: ['$rootScope', function($rootScope) {
+          $rootScope.hideFb = false;
+          $rootScope.title = "2024 GP Fees Report | DoctorPricer";
+          $rootScope.metadescription = "In the last two years the cost of seeing a GP has increased significantly.";
         }]
       });
   }]);

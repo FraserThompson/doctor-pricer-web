@@ -38,6 +38,10 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: "html-loader!./app/views/info-chch.html",
         filename: "views/info-chch.html",
+      }),
+      new HtmlWebpackPlugin({
+        template: "html-loader!./app/views/fees-report.html",
+        filename: "views/fees-report.html",
       })
     ],
     optimization: argv.mode === 'production'
